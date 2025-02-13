@@ -10,7 +10,7 @@ const Page = () => {
 
   useEffect(() => {
     const container: any = document.getElementById('bridge-container')
-    if (container) {+
+    if (container) {
       wormholeConnectHosted(container, {
         theme: {
           mode: 'light',
