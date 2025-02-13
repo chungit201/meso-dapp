@@ -1,41 +1,41 @@
-import React, { useEffect, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import { getDataLeaderBoard } from '@/common/services/points'
-import { Col, Pagination, PaginationProps, Row, Skeleton, Tooltip } from 'antd'
-import { copyToClipboard, ellipseAddress, formatNumberBalance } from '@/utils'
-import { CopyIcon } from '@/common/components/Icons'
+import { CopyIcon } from '@/common/components/Icons';
+import { getDataLeaderBoard } from '@/common/services/points';
+import { copyToClipboard, ellipseAddress, formatNumberBalance } from '@/utils';
+import { useQuery } from '@tanstack/react-query';
+import { Col, Pagination, PaginationProps, Row, Skeleton, Tooltip } from 'antd';
+import React, { useEffect, useState } from 'react';
 
 export const MesoPointLeaderboard: React.FunctionComponent = () => {
-  const [current, setCurrent] = useState(1)
-  const [totalItem, setTotalItem] = React.useState(0)
-  const [copyText, setCopyText] = useState('Copy')
+  const [current, setCurrent] = useState(1);
+  const [totalItem, setTotalItem] = React.useState(0);
+  const [copyText, setCopyText] = useState('Copy');
 
   const { data: { total = 0, data = [] } = {}, isFetching } = useQuery({
     queryKey: ['leaderboard', current],
     queryFn: async () => {
-      const { data } = await getDataLeaderBoard(current - 1)
-      return { total: data.total, data: data.datas }
+      const { data } = await getDataLeaderBoard(current - 1);
+      return { total: data.total, data: data.datas };
     },
-  })
+  });
 
   useEffect(() => {
     if (total > 0) {
-      setTotalItem(total)
+      setTotalItem(total);
     }
-  }, [total])
+  }, [total]);
 
   const onChange: PaginationProps['onChange'] = (page) => {
-    console.log(page)
-    setCurrent(page)
-  }
+    console.log(page);
+    setCurrent(page);
+  };
 
   const handleCopy = (value: string) => {
-    setCopyText('Copied!')
+    setCopyText('Copied!');
     setTimeout(() => {
-      setCopyText('Copy')
-    }, 1000)
-    copyToClipboard(value)
-  }
+      setCopyText('Copy');
+    }, 1000);
+    copyToClipboard(value);
+  };
 
   return (
     <div>
@@ -70,7 +70,7 @@ export const MesoPointLeaderboard: React.FunctionComponent = () => {
                         <Skeleton.Button />
                       </Col>
                     </Row>
-                  )
+                  );
                 })}
               </>
             )}
@@ -92,7 +92,7 @@ export const MesoPointLeaderboard: React.FunctionComponent = () => {
                       </Col>
                       <Col span={4}>{formatNumberBalance(item.point, 0)}</Col>
                     </Row>
-                  )
+                  );
                 })}
               </>
             )}
@@ -110,5 +110,5 @@ export const MesoPointLeaderboard: React.FunctionComponent = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};

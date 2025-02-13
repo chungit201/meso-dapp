@@ -5,7 +5,7 @@ export const TwitterIcon = () => (
       fill="#313547"
     />
   </svg>
-)
+);
 
 export const DisCord = () => (
   <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -14,7 +14,7 @@ export const DisCord = () => (
       fill="#313547"
     />
   </svg>
-)
+);
 
 export const Telegram = () => (
   <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,4 +25,4 @@ export const Telegram = () => (
       fill="#313547"
     />
   </svg>
-)
+);

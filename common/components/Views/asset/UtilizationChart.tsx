@@ -1,14 +1,14 @@
-import React from 'react'
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Dot } from 'recharts'
-import { isINT } from '@/utils'
+import { isINT } from '@/utils';
+import React from 'react';
+import { Area, AreaChart, CartesianGrid, Dot, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 interface Props {
-  data: any[]
-  currentUtilization: number
+  data: any[];
+  currentUtilization: number;
 }
 
 interface Props {
-  asset: PoolAsset
+  asset: PoolAsset;
 }
 
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -36,15 +36,15 @@ const CustomTooltip = ({ active, payload, label }: any) => {
           ))}
         </div>
       </div>
-    )
+    );
   }
-  return null
-}
+  return null;
+};
 
 export const UtilizationChart: React.FunctionComponent<Props> = ({ data, asset, currentUtilization }) => {
-  const currentBorrowRate = asset.borrowApy
+  const currentBorrowRate = asset.borrowApy;
   const CustomizedDot = ({ props, currentBorrowRate }: any) => {
-    const { cx, cy, stroke, payload, value } = props
+    const { cx, cy, stroke, payload, value } = props;
     if (payload.utilization / 100 === currentUtilization) {
       return (
         <svg
@@ -59,12 +59,12 @@ export const UtilizationChart: React.FunctionComponent<Props> = ({ data, asset, 
           <circle cx="11" cy="11" r="6" fill="#714DD9" />
           <circle cx="11" cy="11" r="8.5" stroke="#C2ADFF" strokeOpacity="0.5" strokeWidth="5" />
         </svg>
-      )
+      );
     }
-  }
+  };
 
   function formatYAxis(value: number) {
-    return `${value}%`
+    return `${value}%`;
   }
 
   return (
@@ -116,5 +116,5 @@ export const UtilizationChart: React.FunctionComponent<Props> = ({ data, asset, 
         </AreaChart>
       </ResponsiveContainer>
     </div>
-  )
-}
+  );
+};

@@ -1,10 +1,10 @@
-import React from 'react'
-import { Typography } from 'antd'
-import { SwapIcon } from '@/common/components/Icons'
-import { Strategy } from '@/utils/stategies'
+import { SwapIcon } from '@/common/components/Icons';
+import { Strategy } from '@/utils/stategies';
+import { Typography } from 'antd';
+import React from 'react';
 
 interface Props {
-  pair: Strategy
+  pair: Strategy;
 }
 
 export const PairInfo: React.FunctionComponent<Props> = ({ pair }) => {
@@ -32,5 +32,5 @@ export const PairInfo: React.FunctionComponent<Props> = ({ pair }) => {
         <Typography.Text>{pair.asset1.token.symbol}</Typography.Text>
       </div>
     </div>
-  )
-}
+  );
+};

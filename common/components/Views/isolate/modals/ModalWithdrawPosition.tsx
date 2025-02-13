@@ -1,20 +1,20 @@
-import React, { useEffect, useMemo } from 'react'
-import { Button, Modal, notification, Typography } from 'antd'
-import InputCurrency from '@/common/components/InputCurrentcy'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import BigNumber from 'bignumber.js'
-import { CloseIcon } from '@/common/components/Icons'
-import { ISOLATE_ADDRESS, MAX_u64 } from '@/common/consts'
-import useContract from '@/common/hooks/useContract'
-import { useIsolatePools } from '@/common/hooks/useIsolatePools'
-import { CoinType } from '@/common/hooks/useBalanceToken'
-import { roundDown } from '@/utils'
+import { CloseIcon } from '@/common/components/Icons';
+import InputCurrency from '@/common/components/InputCurrentcy';
+import { ISOLATE_ADDRESS, MAX_u64 } from '@/common/consts';
+import { CoinType } from '@/common/hooks/useBalanceToken';
+import useContract from '@/common/hooks/useContract';
+import { useIsolatePools } from '@/common/hooks/useIsolatePools';
+import { roundDown } from '@/utils';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { Button, Modal, Typography, notification } from 'antd';
+import BigNumber from 'bignumber.js';
+import React, { useEffect, useMemo } from 'react';
 
 interface Props {
-  isModalOpen: boolean
-  handleClose: () => void
-  asset: PoolAsset
-  isolatePool: IsolatePools
+  isModalOpen: boolean;
+  handleClose: () => void;
+  asset: PoolAsset;
+  isolatePool: IsolatePools;
 }
 
 export const ModalWithdrawPosition: React.FunctionComponent<Props> = ({
@@ -23,16 +23,16 @@ export const ModalWithdrawPosition: React.FunctionComponent<Props> = ({
   asset,
   isolatePool,
 }) => {
-  const [amount, setAmount] = React.useState(0)
-  const { view, run } = useContract()
-  const { refetchUserPosition } = useIsolatePools()
+  const [amount, setAmount] = React.useState(0);
+  const { view, run } = useContract();
+  const { refetchUserPosition } = useIsolatePools();
 
   useEffect(() => {
-    refetchUserPosition()
-    setAmount(0)
-  }, [isModalOpen])
+    refetchUserPosition();
+    setAmount(0);
+  }, [isModalOpen]);
 
-  const position = useMemo(() => isolatePool.position, [isolatePool])
+  const position = useMemo(() => isolatePool.position, [isolatePool]);
 
   const { data: totalReserves = 0 } = useQuery({
     queryKey: ['totalReserves', asset],
@@ -48,34 +48,34 @@ export const ModalWithdrawPosition: React.FunctionComponent<Props> = ({
           typeArguments: [],
           functionArguments: [asset.poolAddress],
         }),
-      ])
-      const totalSupply = BigNumber(Number(data[0][0])).div(BigNumber(10).pow(asset.token.decimals)).toNumber()
-      const totalBorrow = BigNumber(Number(data[1][0])).div(BigNumber(10).pow(asset.token.decimals)).toNumber()
-      return roundDown(totalSupply - totalBorrow, asset.token.decimals)
+      ]);
+      const totalSupply = BigNumber(Number(data[0][0])).div(BigNumber(10).pow(asset.token.decimals)).toNumber();
+      const totalBorrow = BigNumber(Number(data[1][0])).div(BigNumber(10).pow(asset.token.decimals)).toNumber();
+      return roundDown(totalSupply - totalBorrow, asset.token.decimals);
     },
     enabled: !!asset,
-  })
+  });
 
   const { data: totalWithdrawAvailable = 0, refetch: refetchWithdrawAmount } = useQuery({
     queryKey: ['WithdrawAvailable', asset, position, isModalOpen],
     queryFn: async () => {
       if (!asset) {
-        return 0
+        return 0;
       }
       const res: any = await view({
         function: `${ISOLATE_ADDRESS}::lending_pool::remaining_withdrawable_amount`,
         typeArguments: [],
         functionArguments: [position, asset.poolAddress],
-      })
-      console.log('res', res)
-      return BigNumber(Number(res[0])).div(BigNumber(10).pow(asset.token.decimals)).toNumber()
+      });
+      console.log('res', res);
+      return BigNumber(Number(res[0])).div(BigNumber(10).pow(asset.token.decimals)).toNumber();
     },
     enabled: !!position && !!asset,
-  })
+  });
 
   const isMax = useMemo(() => {
-    return amount === totalWithdrawAvailable
-  }, [totalWithdrawAvailable, amount])
+    return amount === totalWithdrawAvailable;
+  }, [totalWithdrawAvailable, amount]);
 
   const withdraw = async () => {
     if (asset.token.type === CoinType.COIN) {
@@ -87,7 +87,7 @@ export const ModalWithdrawPosition: React.FunctionComponent<Props> = ({
           asset.poolAddress,
           isMax ? MAX_u64 : BigNumber(amount).times(BigNumber(10).pow(asset.token.decimals)).toString(),
         ],
-      })
+      });
     } else {
       return await run({
         function: `${ISOLATE_ADDRESS}::isolated::withdraw`,
@@ -97,32 +97,32 @@ export const ModalWithdrawPosition: React.FunctionComponent<Props> = ({
           asset.poolAddress,
           isMax ? MAX_u64 : BigNumber(amount).times(BigNumber(10).pow(asset.token.decimals)).toString(),
         ],
-      })
+      });
     }
-  }
+  };
 
   const { isPending, mutate: remove } = useMutation({
     mutationFn: async () => withdraw(),
     onSuccess: (res: any) => {
-      refetchWithdrawAmount()
-      refetchUserPosition()
-      handleClose()
-      notification.success({ message: 'Transaction created.' })
+      refetchWithdrawAmount();
+      refetchUserPosition();
+      handleClose();
+      notification.success({ message: 'Transaction created.' });
     },
     onError: (error: any) => {
-      notification.error({ message: error?.message || 'Something went wrong.' })
+      notification.error({ message: error?.message || 'Something went wrong.' });
     },
-  })
+  });
 
   const handleChange = (value: number) => {
-    setAmount(value)
-  }
+    setAmount(value);
+  };
 
   return (
     <Modal
       centered
       onCancel={() => {
-        handleClose()
+        handleClose();
       }}
       open={isModalOpen}
       footer={false}
@@ -162,5 +162,5 @@ export const ModalWithdrawPosition: React.FunctionComponent<Props> = ({
         </Button>
       </div>
     </Modal>
-  )
-}
+  );
+};

@@ -1,34 +1,34 @@
-import React from 'react'
-import { Button, Col, Row } from 'antd'
-import { PairInfo } from '@/common/components/Views/strategies/PairInfo'
-import { Computer } from '@/common/components/Icons'
-import { Strategy, StrategyType } from '@/utils/stategies'
-import { formatNumberBalance, nFormatter } from '@/utils'
-import { ModalLoop } from '@/common/hooks/strategies/ModalLoop'
-import { useModal } from '@/common/hooks/useModal'
-import appActions from '@/modules/app/actions'
-import { useDispatch } from 'react-redux'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import { useDashboard } from '@/common/hooks/dashboard/useDashboard'
+import { Computer } from '@/common/components/Icons';
+import { PairInfo } from '@/common/components/Views/strategies/PairInfo';
+import { useDashboard } from '@/common/hooks/dashboard/useDashboard';
+import { ModalLoop } from '@/common/hooks/strategies/ModalLoop';
+import { useModal } from '@/common/hooks/useModal';
+import appActions from '@/modules/app/actions';
+import { formatNumberBalance, nFormatter } from '@/utils';
+import { Strategy, StrategyType } from '@/utils/stategies';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { Button, Col, Row } from 'antd';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
 interface Props {
-  pair: Strategy
+  pair: Strategy;
 }
 
 export const StrategiesRowItem: React.FunctionComponent<Props> = ({ pair }) => {
-  const { show, setShow, toggle } = useModal()
-  const { connected } = useWallet()
-  const { netApr } = useDashboard()
+  const { show, setShow, toggle } = useModal();
+  const { connected } = useWallet();
+  const { netApr } = useDashboard();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const showModalLoop = () => {
     if (!connected) {
-      dispatch(appActions.SET_SHOW_CONNECT(true))
-      return
+      dispatch(appActions.SET_SHOW_CONNECT(true));
+      return;
     }
-    setShow(true)
-  }
+    setShow(true);
+  };
 
   return (
     <>
@@ -108,5 +108,5 @@ export const StrategiesRowItem: React.FunctionComponent<Props> = ({ pair }) => {
       </Row>
       {show && <ModalLoop pair={pair} isModalOpen={show} handleClose={toggle} />}
     </>
-  )
-}
+  );
+};

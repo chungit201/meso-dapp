@@ -1,9 +1,9 @@
-import React from 'react'
-import { BoostIcon } from '@/common/components/Icons'
-import { Popover } from 'antd'
+import { BoostIcon } from '@/common/components/Icons';
+import { Popover } from 'antd';
+import React from 'react';
 
 interface Props {
-  asset: PoolAsset
+  asset: PoolAsset;
 }
 
 export const PoolBorrowApr: React.FunctionComponent<Props> = ({ asset }) => {
@@ -56,5 +56,5 @@ export const PoolBorrowApr: React.FunctionComponent<Props> = ({ asset }) => {
         </span>
       </div>
     </Popover>
-  )
-}
+  );
+};

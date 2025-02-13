@@ -1,31 +1,31 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Modal, Typography } from 'antd'
-import Image from 'next/image'
-import { BlueTickIcon, CloseIcon } from '@/common/components/Icons'
+import { BlueTickIcon, CloseIcon } from '@/common/components/Icons';
+import { Button, Modal, Typography } from 'antd';
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
 
 interface Props {
-  type: any
-  isModalOpen: boolean
-  handleClose: () => void
-  handleCompleteTask: (type: any) => Promise<void>
+  type: any;
+  isModalOpen: boolean;
+  handleClose: () => void;
+  handleCompleteTask: (type: any) => Promise<void>;
 }
 
 const ModalDoTask: React.FunctionComponent<Props> = ({ type, isModalOpen, handleClose, handleCompleteTask }) => {
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
 
   useEffect(() => {
     switch (type) {
       case 'FOLLOW_TWITTER':
-        setTitle('Follow Meso Finance Twitter')
-        setDescription('Open X (Twitter) and Follow Meso Finance')
-        break
+        setTitle('Follow Meso Finance Twitter');
+        setDescription('Open X (Twitter) and Follow Meso Finance');
+        break;
       case 'JOIN_DISCORD':
-        setTitle('Join Meso Finance Discord')
-        setDescription('Open Discord and Join Meso Finance')
-        break
+        setTitle('Join Meso Finance Discord');
+        setDescription('Open Discord and Join Meso Finance');
+        break;
     }
-  }, [type])
+  }, [type]);
 
   return (
     <Modal
@@ -84,9 +84,9 @@ const ModalDoTask: React.FunctionComponent<Props> = ({ type, isModalOpen, handle
         <Button
           onClick={() => {
             if (type == 'FOLLOW_TWITTER') {
-              window.open('https://x.com/Meso_Finance', '_blank')
+              window.open('https://x.com/Meso_Finance', '_blank');
             } else {
-              window.open('https://meso.finance/discord', '_blank')
+              window.open('https://meso.finance/discord', '_blank');
             }
           }}
           style={{
@@ -99,7 +99,7 @@ const ModalDoTask: React.FunctionComponent<Props> = ({ type, isModalOpen, handle
         </Button>
       </div>
     </Modal>
-  )
-}
+  );
+};
 
-export default ModalDoTask
+export default ModalDoTask;

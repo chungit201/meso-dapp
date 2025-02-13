@@ -1,8 +1,8 @@
-import React from 'react'
-import Link from 'next/link'
-import { DisCord, Telegram, TwitterIcon } from '@/common/components/Icons/social'
-import { OtterSec } from '@/common/components/Icons'
-import Image from 'next/image'
+import { OtterSec } from '@/common/components/Icons';
+import { DisCord, Telegram, TwitterIcon } from '@/common/components/Icons/social';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
 export const Footer: React.FunctionComponent = () => {
   return (
@@ -63,6 +63,6 @@ export const Footer: React.FunctionComponent = () => {
         </div>
       </div>
     </div>
-  )
-}
-export default Footer
+  );
+};
+export default Footer;

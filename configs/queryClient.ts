@@ -1,4 +1,4 @@
-import { QueryClient } from '@tanstack/react-query'
+import { QueryClient } from '@tanstack/react-query';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -9,11 +9,11 @@ const queryClient = new QueryClient({
     },
     mutations: {
       onError: (error) => {
-        console.log('error', error)
+        console.log('error', error);
         // const message = getErrorMessage(error);
       },
     },
   },
-})
+});
 
-export default queryClient
+export default queryClient;

@@ -1,21 +1,21 @@
-import React, { useContext } from 'react'
-import { Button, Card, Col, Typography } from 'antd'
-import { useRewards } from '@/common/hooks/assets/useRewards'
-import { formatNumberBalance } from '@/utils'
-import useTransactionCallback from '@/common/hooks/assets/useTransactionCallback'
-import { AssetsContext } from '@/common/context'
-import { MESO_ADDRESS } from '@/common/consts'
+import { MESO_ADDRESS } from '@/common/consts';
+import { AssetsContext } from '@/common/context';
+import { useRewards } from '@/common/hooks/assets/useRewards';
+import useTransactionCallback from '@/common/hooks/assets/useTransactionCallback';
+import { formatNumberBalance } from '@/utils';
+import { Button, Card, Col, Typography } from 'antd';
+import React, { useContext } from 'react';
 
 export const AssetRewards: React.FunctionComponent = () => {
-  const { totalRewards } = useRewards()
-  const transactionCallback = useTransactionCallback()
-  const { allAssetsData } = useContext(AssetsContext)
+  const { totalRewards } = useRewards();
+  const transactionCallback = useTransactionCallback();
+  const { allAssetsData } = useContext(AssetsContext);
 
   const handleClaim = () => {
     try {
-      const pools = []
+      const pools = [];
       for (const item of allAssetsData) {
-        pools.push(item.token.address)
+        pools.push(item.token.address);
       }
       transactionCallback({
         payload: {
@@ -24,13 +24,13 @@ export const AssetRewards: React.FunctionComponent = () => {
           functionArguments: [pools as any],
         },
         onSuccess(hash: string) {
-          console.log('hash', hash)
+          console.log('hash', hash);
         },
-      })
+      });
     } catch (e) {
-      console.log('e', e)
+      console.log('e', e);
     }
-  }
+  };
 
   return (
     <Col xs={24} xl={8}>
@@ -54,5 +54,5 @@ export const AssetRewards: React.FunctionComponent = () => {
         </div>
       </Card>
     </Col>
-  )
-}
+  );
+};

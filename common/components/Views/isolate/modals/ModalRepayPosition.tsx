@@ -1,22 +1,22 @@
-import React, { useEffect, useMemo } from 'react'
-import { Button, Modal, notification, Typography } from 'antd'
-import InputCurrency from '@/common/components/InputCurrentcy'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import BigNumber from 'bignumber.js'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import useBalanceToken, { CoinType } from '@/common/hooks/useBalanceToken'
-import { CloseIcon, LeftToRightIcon } from '@/common/components/Icons'
-import { useIsolatePools } from '@/common/hooks/useIsolatePools'
-import useContract from '@/common/hooks/useContract'
-import { ISOLATE_ADDRESS, MAX_u64 } from '@/common/consts'
-import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets'
-import { formatNumberBalance, getRiskFactorColor } from '@/utils'
+import { CloseIcon, LeftToRightIcon } from '@/common/components/Icons';
+import InputCurrency from '@/common/components/InputCurrentcy';
+import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets';
+import { ISOLATE_ADDRESS, MAX_u64 } from '@/common/consts';
+import useBalanceToken, { CoinType } from '@/common/hooks/useBalanceToken';
+import useContract from '@/common/hooks/useContract';
+import { useIsolatePools } from '@/common/hooks/useIsolatePools';
+import { formatNumberBalance, getRiskFactorColor } from '@/utils';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { Button, Modal, Typography, notification } from 'antd';
+import BigNumber from 'bignumber.js';
+import React, { useEffect, useMemo } from 'react';
 
 interface Props {
-  isModalOpen: boolean
-  handleClose: () => void
-  collateral: PoolAsset
-  isolatePool: IsolatePools
+  isModalOpen: boolean;
+  handleClose: () => void;
+  collateral: PoolAsset;
+  isolatePool: IsolatePools;
 }
 
 export const ModalRepayPosition: React.FunctionComponent<Props> = ({
@@ -25,22 +25,22 @@ export const ModalRepayPosition: React.FunctionComponent<Props> = ({
   collateral,
   isolatePool,
 }) => {
-  const [amount, setAmount] = React.useState(0)
-  const { account } = useWallet()
-  const { getBalanceCoin } = useBalanceToken()
-  const { refetchUserPosition, getRiskFactor, assetsAmounts, assetsDebts, calculatorPosition } = useIsolatePools()
-  const { view, run } = useContract()
+  const [amount, setAmount] = React.useState(0);
+  const { account } = useWallet();
+  const { getBalanceCoin } = useBalanceToken();
+  const { refetchUserPosition, getRiskFactor, assetsAmounts, assetsDebts, calculatorPosition } = useIsolatePools();
+  const { view, run } = useContract();
 
   useEffect(() => {
-    refetchUserPosition()
-    setAmount(0)
-  }, [isModalOpen])
+    refetchUserPosition();
+    setAmount(0);
+  }, [isModalOpen]);
 
-  const position = useMemo(() => isolatePool.position, [isolatePool])
+  const position = useMemo(() => isolatePool.position, [isolatePool]);
 
   const riskFactor = useMemo(() => {
-    return getRiskFactor(assetsAmounts, assetsDebts, isolatePool)
-  }, [assetsAmounts, assetsDebts, isolatePool])
+    return getRiskFactor(assetsAmounts, assetsDebts, isolatePool);
+  }, [assetsAmounts, assetsDebts, isolatePool]);
 
   const calculator = useMemo(() => {
     return calculatorPosition(
@@ -50,8 +50,8 @@ export const ModalRepayPosition: React.FunctionComponent<Props> = ({
       assetsAmounts,
       assetsDebts,
       isolatePool,
-    )
-  }, [assetsAmounts, assetsDebts, amount, collateral])
+    );
+  }, [assetsAmounts, assetsDebts, amount, collateral]);
 
   const { data: totalRepay = 0, refetch: refetchBorrowAmount } = useQuery({
     queryKey: ['TotalRepay', position, collateral],
@@ -60,37 +60,37 @@ export const ModalRepayPosition: React.FunctionComponent<Props> = ({
         function: `${ISOLATE_ADDRESS}::lending_pool::debt_amounts`,
         typeArguments: [],
         functionArguments: [position],
-      })
-      const data = res[0].data
-      const val = data.find((x: any) => x.key.inner === collateral.poolAddress)
-      if (!val) return 0
-      return BigNumber(Number(val.value)).div(BigNumber(10).pow(collateral.token.decimals)).toNumber()
+      });
+      const data = res[0].data;
+      const val = data.find((x: any) => x.key.inner === collateral.poolAddress);
+      if (!val) return 0;
+      return BigNumber(Number(val.value)).div(BigNumber(10).pow(collateral.token.decimals)).toNumber();
     },
     enabled: !!position && !!collateral,
     refetchIntervalInBackground: true,
     refetchOnReconnect: true,
     refetchOnMount: true,
     refetchOnWindowFocus: true,
-  })
+  });
 
   const { data: balanceAsset = 0, refetch } = useQuery({
     queryKey: ['getBalanceAssets', collateral, account],
     queryFn: async () => {
-      const balance = await getBalanceCoin(collateral.token, account?.address as string)
+      const balance = await getBalanceCoin(collateral.token, account?.address as string);
       return BigNumber(balance)
         .div(BigNumber(10).pow(collateral.token.decimals ?? 8))
-        .toNumber()
+        .toNumber();
     },
     enabled: !!collateral && !!account,
     refetchIntervalInBackground: true,
     refetchOnReconnect: 'always',
     refetchOnMount: 'always',
     refetchOnWindowFocus: 'always',
-  })
+  });
 
   const isMax = useMemo(() => {
-    return amount === totalRepay
-  }, [totalRepay, amount])
+    return amount === totalRepay;
+  }, [totalRepay, amount]);
 
   const repay = async () => {
     if (collateral.token.type === CoinType.COIN) {
@@ -102,7 +102,7 @@ export const ModalRepayPosition: React.FunctionComponent<Props> = ({
           position,
           isMax ? MAX_u64 : BigNumber(amount).times(BigNumber(10).pow(collateral.token.decimals)).toString(),
         ],
-      })
+      });
     } else {
       return await run({
         function: `${ISOLATE_ADDRESS}::isolated::repay`,
@@ -112,33 +112,33 @@ export const ModalRepayPosition: React.FunctionComponent<Props> = ({
           position,
           isMax ? MAX_u64 : BigNumber(amount).times(BigNumber(10).pow(collateral.token.decimals)).toString(),
         ],
-      })
+      });
     }
-  }
+  };
 
   const { isPending, mutate: handleRepay } = useMutation({
     mutationFn: async () => repay(),
     onSuccess: (res: any) => {
-      refetchBorrowAmount()
-      refetchUserPosition()
-      setAmount(0)
-      handleClose()
-      notification.success({ message: 'Transaction created.' })
+      refetchBorrowAmount();
+      refetchUserPosition();
+      setAmount(0);
+      handleClose();
+      notification.success({ message: 'Transaction created.' });
     },
     onError: (error: any) => {
-      notification.error({ message: error?.message || 'Something went wrong.' })
+      notification.error({ message: error?.message || 'Something went wrong.' });
     },
-  })
+  });
 
   const handleChange = (value: number) => {
-    setAmount(value)
-  }
+    setAmount(value);
+  };
 
   return (
     <Modal
       centered
       onCancel={() => {
-        handleClose()
+        handleClose();
       }}
       open={isModalOpen}
       footer={false}
@@ -202,5 +202,5 @@ export const ModalRepayPosition: React.FunctionComponent<Props> = ({
         </Button>
       </div>
     </Modal>
-  )
-}
+  );
+};

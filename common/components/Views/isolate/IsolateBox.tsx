@@ -1,135 +1,137 @@
-import React, { useEffect, useState } from 'react'
-import { Card, Row, Typography } from 'antd'
-import { IsolateCollateral } from '@/common/components/Views/isolate/IsolateCollateral'
-import { IsolateLiability } from '@/common/components/Views/isolate/IsolateLiability'
-import { useQuery } from '@tanstack/react-query'
-import { useIsolatePools } from '@/common/hooks/useIsolatePools'
-import { formatNumberBalance, getRiskFactorColor } from '@/utils'
-import BigNumber from 'bignumber.js'
+import { IsolateCollateral } from '@/common/components/Views/isolate/IsolateCollateral';
+import { IsolateLiability } from '@/common/components/Views/isolate/IsolateLiability';
+import { useIsolatePools } from '@/common/hooks/useIsolatePools';
+import { formatNumberBalance, getRiskFactorColor } from '@/utils';
+import { useQuery } from '@tanstack/react-query';
+import { Card, Row, Typography } from 'antd';
+import BigNumber from 'bignumber.js';
+import React, { useEffect, useState } from 'react';
 
 interface Props {
-  pool: IsolatePools
+  pool: IsolatePools;
 }
 
 export const IsolateBox: React.FunctionComponent<Props> = ({ pool }) => {
-  const [netBalance, setNetBalance] = useState(0)
-  const [netApr, setNetApr] = useState(0)
-  const { assetsAmounts, assetsDebts } = useIsolatePools()
+  const [netBalance, setNetBalance] = useState(0);
+  const [netApr, setNetApr] = useState(0);
+  const { assetsAmounts, assetsDebts } = useIsolatePools();
 
   useEffect(() => {
-    let totalSupplyBalance = 0
-    let totalBorrowBalance = 0
-    let totalSupplyAprBalance = 0
-    let totalBorrowAprBalance = 0
+    let totalSupplyBalance = 0;
+    let totalBorrowBalance = 0;
+    let totalSupplyAprBalance = 0;
+    let totalBorrowAprBalance = 0;
 
-    if (assetsAmounts.length == 0) return
+    if (assetsAmounts.length == 0) return;
 
-    const assetsDeposit = []
-    const assetsBorrow = []
+    const assetsDeposit = [];
+    const assetsBorrow = [];
 
     for (const item of assetsAmounts) {
       const poolSupplyCollateral = pool.collateral.find(
         (x) => x.poolAddress === item.poolAddress && pool.position === item.position,
-      ) as PoolAsset
+      ) as PoolAsset;
       const poolSupplyLiability = pool.liability.find(
         (x) => x.poolAddress === item.poolAddress && pool.position === item.position,
-      ) as PoolAsset
+      ) as PoolAsset;
 
       if (poolSupplyCollateral) {
         assetsDeposit.push({
           ...poolSupplyCollateral,
           value: BigNumber(Number(item.value)).div(BigNumber(10).pow(poolSupplyCollateral.token.decimals)).toNumber(),
-        })
+        });
       }
       if (poolSupplyLiability) {
         assetsDeposit.push({
           ...poolSupplyLiability,
           value: BigNumber(Number(item.value)).div(BigNumber(10).pow(poolSupplyLiability.token.decimals)).toNumber(),
-        })
+        });
       }
     }
 
     for (const item of assetsDebts) {
       const poolData = pool.liability.find(
         (x) => x.poolAddress === item.poolAddress && pool.position === item.position,
-      ) as PoolAsset
+      ) as PoolAsset;
       if (poolData) {
         assetsBorrow.push({
           ...poolData,
-          value: BigNumber(Number(item.value)).div(BigNumber(10).pow(poolData?.token?.decimals)).toNumber(),
-        })
+          value: BigNumber(Number(item.value))
+            .div(BigNumber(10).pow(poolData?.token?.decimals))
+            .toNumber(),
+        });
       }
     }
 
     for (const item of assetsDeposit) {
       if (item.value && item) {
-        totalSupplyBalance += item.value * item?.token?.price
+        totalSupplyBalance += item.value * item?.token?.price;
         totalSupplyAprBalance +=
-          item.value * item?.token.price * ((item.supplyApy + item.stakingApr + item.incentiveSupplyApy) / 100)
+          item.value * item?.token.price * ((item.supplyApy + item.stakingApr + item.incentiveSupplyApy) / 100);
       }
     }
 
     for (const item of assetsBorrow) {
       if (item.value) {
-        totalBorrowBalance += item.value * item?.token?.price
-        totalBorrowAprBalance += item.value * item?.token?.price * ((item.borrowApy - item.incentiveBorrowApy) / 100)
+        totalBorrowBalance += item.value * item?.token?.price;
+        totalBorrowAprBalance += item.value * item?.token?.price * ((item.borrowApy - item.incentiveBorrowApy) / 100);
       }
     }
 
-    setNetBalance(totalSupplyBalance - totalBorrowBalance)
-    const apr = ((totalSupplyAprBalance - totalBorrowAprBalance) / (totalSupplyBalance - totalBorrowBalance)) * 100
-    setNetApr(!isNaN(apr) ? apr : 0)
-  }, [assetsDebts, assetsAmounts, pool])
+    setNetBalance(totalSupplyBalance - totalBorrowBalance);
+    const apr = ((totalSupplyAprBalance - totalBorrowAprBalance) / (totalSupplyBalance - totalBorrowBalance)) * 100;
+    setNetApr(!isNaN(apr) ? apr : 0);
+  }, [assetsDebts, assetsAmounts, pool]);
 
   const { data: riskFactor = 0 } = useQuery({
     queryKey: ['riskFactor', assetsDebts, assetsAmounts, pool],
     queryFn: () => {
-      let borrowingPower = 0
-      let totalBorrow = 0
+      let borrowingPower = 0;
+      let totalBorrow = 0;
       if (assetsAmounts.length == 0) {
-        return 0
+        return 0;
       }
       if (assetsDebts.length == 0) {
-        totalBorrow = 0
+        totalBorrow = 0;
       }
 
       for (const item of assetsAmounts) {
         const data = pool.collateral.find(
           (x) => x.poolAddress === item.poolAddress && pool.position === item.position,
-        ) as PoolAsset
-        console.log('data11111111', data)
+        ) as PoolAsset;
+        console.log('data11111111', data);
         if (data) {
           borrowingPower +=
             (BigNumber(Number(item.value)).div(BigNumber(10).pow(data.token.decimals)).toNumber() *
               data?.token?.price *
               data.liquidationThresholdBps) /
-            10000
+            10000;
         } else {
-          borrowingPower += 0
+          borrowingPower += 0;
         }
       }
       for (const item of assetsDebts) {
         const data = pool.liability.find(
           (x) => x.poolAddress === item.poolAddress && pool.position === item.position,
-        ) as PoolAsset
-        console.log('data2222222222', data)
+        ) as PoolAsset;
+        console.log('data2222222222', data);
 
         if (data) {
           totalBorrow +=
             BigNumber(Number(item.value)).div(BigNumber(10).pow(data.token.decimals)).toNumber() *
-            Number(data?.token?.price)
+            Number(data?.token?.price);
         } else {
-          totalBorrow += 0
+          totalBorrow += 0;
         }
       }
-      console.log('totalBorrow', totalBorrow)
-      console.log('borrowingPower', borrowingPower)
-      return (totalBorrow / borrowingPower) * 100
+      console.log('totalBorrow', totalBorrow);
+      console.log('borrowingPower', borrowingPower);
+      return (totalBorrow / borrowingPower) * 100;
     },
     refetchOnReconnect: true,
     refetchOnWindowFocus: true,
     refetchIntervalInBackground: true,
-  })
+  });
 
   return (
     <Card bordered={false} className={'border border-[#E4E7EC] rounded-[16px]'}>
@@ -180,5 +182,5 @@ export const IsolateBox: React.FunctionComponent<Props> = ({ pool }) => {
         </Row>
       </div>
     </Card>
-  )
-}
+  );
+};

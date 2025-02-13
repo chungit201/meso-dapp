@@ -1,18 +1,18 @@
-import React, { useMemo } from 'react'
-import { Card, Switch, Tooltip, Typography } from 'antd'
-import { CircularProgressbar } from 'react-circular-progressbar'
-import { EMODE_NAME } from '@/common/components/Views/dashboard/YourBorrows'
-import { nFormatter } from '@/utils'
-import { calculatorNetApr } from '@/utils/calculator'
-import { useSelector } from 'react-redux'
-import { CircleInfo } from '@/common/components/Icons'
+import { CircleInfo } from '@/common/components/Icons';
+import { EMODE_NAME } from '@/common/components/Views/dashboard/YourBorrows';
+import { nFormatter } from '@/utils';
+import { calculatorNetApr } from '@/utils/calculator';
+import { Card, Switch, Tooltip, Typography } from 'antd';
+import React, { useMemo } from 'react';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import { useSelector } from 'react-redux';
 
 interface Props {
-  supplyAssets: PoolAsset[]
-  borrowAssets: PoolAsset[]
-  setShow: (value: boolean) => void
-  userEMode: string
-  tokens: Token[]
+  supplyAssets: PoolAsset[];
+  borrowAssets: PoolAsset[];
+  setShow: (value: boolean) => void;
+  userEMode: string;
+  tokens: Token[];
 }
 
 export const CalculatorPositionBox: React.FunctionComponent<Props> = ({
@@ -22,77 +22,77 @@ export const CalculatorPositionBox: React.FunctionComponent<Props> = ({
   userEMode,
   tokens,
 }) => {
-  const app = useSelector((state: any) => state.app)
+  const app = useSelector((state: any) => state.app);
 
   const emodeName = useMemo(() => {
     if (userEMode.includes('aptos')) {
-      return EMODE_NAME.APT
+      return EMODE_NAME.APT;
     }
     if (userEMode.includes('USD')) {
-      return EMODE_NAME.USD
+      return EMODE_NAME.USD;
     }
-  }, [userEMode])
+  }, [userEMode]);
 
   const netAPR = useMemo(() => {
-    const data = calculatorNetApr(supplyAssets, borrowAssets, tokens)
-    return !isNaN(data) ? data : 0
-  }, [borrowAssets, supplyAssets, tokens])
+    const data = calculatorNetApr(supplyAssets, borrowAssets, tokens);
+    return !isNaN(data) ? data : 0;
+  }, [borrowAssets, supplyAssets, tokens]);
 
   const supplyApr = useMemo(() => {
-    let totalSl = 0
-    let totalApr = 0
-    if (supplyAssets.length === 0) return 0
+    let totalSl = 0;
+    let totalApr = 0;
+    if (supplyAssets.length === 0) return 0;
     for (const item of supplyAssets) {
-      const tokenPrice = tokens.find((x) => x.address === item.token.address)?.priceChange ?? 0
-      totalSl += item.amountChange * tokenPrice
-      totalApr += (item.supplyApy + item.stakingApr + item.incentiveSupplyApy) * item.amountChange * tokenPrice
+      const tokenPrice = tokens.find((x) => x.address === item.token.address)?.priceChange ?? 0;
+      totalSl += item.amountChange * tokenPrice;
+      totalApr += (item.supplyApy + item.stakingApr + item.incentiveSupplyApy) * item.amountChange * tokenPrice;
     }
-    return totalSl > 0 ? totalApr / totalSl : 0
-  }, [supplyAssets, tokens])
+    return totalSl > 0 ? totalApr / totalSl : 0;
+  }, [supplyAssets, tokens]);
 
   const borrowApr = useMemo(() => {
-    let totalBr = 0
-    let totalApr = 0
-    if (borrowAssets.length === 0) return 0
+    let totalBr = 0;
+    let totalApr = 0;
+    if (borrowAssets.length === 0) return 0;
     for (const item of borrowAssets) {
-      const tokenPrice = tokens.find((x) => x.address === item.token.address)?.priceChange ?? 0
-      totalBr += item.amountChange * tokenPrice
-      totalApr += (item.borrowApy + -item.incentiveBorrowApy) * (item.amountChange * tokenPrice)
+      const tokenPrice = tokens.find((x) => x.address === item.token.address)?.priceChange ?? 0;
+      totalBr += item.amountChange * tokenPrice;
+      totalApr += (item.borrowApy + -item.incentiveBorrowApy) * (item.amountChange * tokenPrice);
     }
-    return totalBr > 0 ? totalApr / totalBr : 0
-  }, [borrowAssets, tokens])
+    return totalBr > 0 ? totalApr / totalBr : 0;
+  }, [borrowAssets, tokens]);
 
   const riskFactor = useMemo(() => {
-    let borrowingPower = 0
-    let totalBorrow = 0
+    let borrowingPower = 0;
+    let totalBorrow = 0;
     if (app.stepCalculator === 4) {
-      return 40
+      return 40;
     }
     if (supplyAssets.length == 0) {
-      return 0
+      return 0;
     }
     if (borrowAssets.length == 0) {
-      totalBorrow = 0
+      totalBorrow = 0;
     }
     for (const item of supplyAssets) {
-      const tokenPrice = tokens.find((x) => x.address === item.token.address)?.priceChange ?? 0
+      const tokenPrice = tokens.find((x) => x.address === item.token.address)?.priceChange ?? 0;
       borrowingPower +=
         item.amountChange *
         tokenPrice *
         (userEMode && item.emodeId === userEMode
           ? item.emodeLiquidationThresholdBps / 10000
-          : item.liquidationThresholdBps / 10000)
+          : item.liquidationThresholdBps / 10000);
     }
     for (const item of borrowAssets) {
-      const tokenPrice = tokens.find((x) => x.address === item.token.address)?.priceChange ?? 0
-      totalBorrow += item.amountChange * tokenPrice
+      const tokenPrice = tokens.find((x) => x.address === item.token.address)?.priceChange ?? 0;
+      totalBorrow += item.amountChange * tokenPrice;
     }
-    if (borrowingPower === 0) return 0
-    return !isNaN((totalBorrow / borrowingPower) * 100) ? (totalBorrow / borrowingPower) * 100 : 0
-  }, [borrowAssets, supplyAssets, userEMode, tokens, app.stepCalculator])
+    if (borrowingPower === 0) return 0;
+    return !isNaN((totalBorrow / borrowingPower) * 100) ? (totalBorrow / borrowingPower) * 100 : 0;
+  }, [borrowAssets, supplyAssets, userEMode, tokens, app.stepCalculator]);
 
   const riskFactorColor =
-    riskFactor <= 90 ? '#7F56D9' : riskFactor >= 100 ? '#D92D20' : riskFactor >= 90 ? '#F79009' : ''
+    riskFactor <= 90 ? '#7F56D9' : riskFactor >= 100 ? '#D92D20' : riskFactor >= 90 ? '#F79009' : '';
 
   return (
     <Card
@@ -212,5 +212,5 @@ export const CalculatorPositionBox: React.FunctionComponent<Props> = ({
         </div>
       </div>
     </Card>
-  )
-}
+  );
+};

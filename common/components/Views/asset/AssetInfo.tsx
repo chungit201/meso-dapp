@@ -1,19 +1,19 @@
-import React from 'react'
-import { Card, Col, Row, Typography } from 'antd'
-import { formatNumberBalance, nFormatter } from '@/utils'
-import BigNumber from 'bignumber.js'
-import { useQuery } from '@tanstack/react-query'
-import { MESO_ADDRESS } from '@/common/consts'
-import useContract from '@/common/hooks/useContract'
-import Link from 'next/link'
-import { ShareIcon } from '@/common/components/Icons'
+import { ShareIcon } from '@/common/components/Icons';
+import { MESO_ADDRESS } from '@/common/consts';
+import useContract from '@/common/hooks/useContract';
+import { formatNumberBalance, nFormatter } from '@/utils';
+import { useQuery } from '@tanstack/react-query';
+import { Card, Col, Row, Typography } from 'antd';
+import BigNumber from 'bignumber.js';
+import Link from 'next/link';
+import React from 'react';
 
 interface Props {
-  asset: PoolAsset
+  asset: PoolAsset;
 }
 
 export const AssetInfo: React.FunctionComponent<Props> = ({ asset }) => {
-  const { view } = useContract()
+  const { view } = useContract();
   const { data: price = 0 } = useQuery({
     queryKey: ['GetPrice', asset],
     queryFn: async () => {
@@ -21,11 +21,11 @@ export const AssetInfo: React.FunctionComponent<Props> = ({ asset }) => {
         function: `${MESO_ADDRESS}::oracle::get_price`,
         typeArguments: [],
         functionArguments: [asset.token.address],
-      })
-      return BigNumber(Number(res[0])).div(BigNumber(10).pow(8)).toNumber()
+      });
+      return BigNumber(Number(res[0])).div(BigNumber(10).pow(8)).toNumber();
     },
     enabled: !!asset,
-  })
+  });
 
   return (
     <Card bordered={false} className={'p-4 flex rounded-[12px] card-shadow2'}>
@@ -42,7 +42,8 @@ export const AssetInfo: React.FunctionComponent<Props> = ({ asset }) => {
               <Link
                 target={'_blank'}
                 className={'flex items-center text-xs sm:text-sm gap-2 text-[#5D6B98]'}
-                href={`https://aptoscan.com/${asset.token.type === 'COIN' ? 'coin' : 'objects'}/${asset?.token?.address}`}
+                href={`https://aptoscan.com/${asset.token.type === 'COIN' ? 'coin' : 'objects'}/${asset?.token
+                  ?.address}`}
               >
                 View on explorer
                 <ShareIcon />
@@ -113,5 +114,5 @@ export const AssetInfo: React.FunctionComponent<Props> = ({ asset }) => {
         </Row>
       </div>
     </Card>
-  )
-}
+  );
+};

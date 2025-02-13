@@ -1,13 +1,13 @@
-import React, { useMemo } from 'react'
-import { Button } from 'antd'
-import { ArrowRightIcon, CheckIcon } from '@/common/components/Icons'
-import appActions from '@/modules/app/actions'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import { useDispatch, useSelector } from 'react-redux'
-import { signIn } from 'next-auth/react'
-import useUser, { LOGIN_TYPE } from '@/common/hooks/useUser'
-import { DiscordIcon, StarIcon, TelegramIcon, TwitterIcon } from '@/common/components/Icons/points'
-import { getData } from '@/common/hooks/useLocalStoragre'
+import { ArrowRightIcon, CheckIcon } from '@/common/components/Icons';
+import { DiscordIcon, StarIcon, TelegramIcon, TwitterIcon } from '@/common/components/Icons/points';
+import { getData } from '@/common/hooks/useLocalStoragre';
+import useUser, { LOGIN_TYPE } from '@/common/hooks/useUser';
+import appActions from '@/modules/app/actions';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { Button } from 'antd';
+import { signIn } from 'next-auth/react';
+import React, { useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 export enum SOCIAL_TASKS {
   FOLLOW_TWITTER = 'FOLLOW_TWITTER',
@@ -18,12 +18,12 @@ export enum SOCIAL_TASKS {
 }
 
 interface Props {
-  socialTasks: any[]
-  tasksStatus: any
-  setSelectedTask: (task: any) => void
-  userInfo: any
-  handleCompleteTask: (task: any) => Promise<void>
-  setShowDoTask: (value: boolean) => void
+  socialTasks: any[];
+  tasksStatus: any;
+  setSelectedTask: (task: any) => void;
+  userInfo: any;
+  handleCompleteTask: (task: any) => Promise<void>;
+  setShowDoTask: (value: boolean) => void;
 }
 
 export const SocialTask: React.FunctionComponent<Props> = ({
@@ -34,40 +34,40 @@ export const SocialTask: React.FunctionComponent<Props> = ({
   handleCompleteTask,
   setShowDoTask,
 }) => {
-  const { connected, account } = useWallet()
-  const dispatch = useDispatch()
-  const { handleLogin } = useUser()
-  const isLogin = useSelector((state: any) => state.app.isLogin)
-  const accessToken = useMemo(() => getData('accessToken'), [account, isLogin])
+  const { connected, account } = useWallet();
+  const dispatch = useDispatch();
+  const { handleLogin } = useUser();
+  const isLogin = useSelector((state: any) => state.app.isLogin);
+  const accessToken = useMemo(() => getData('accessToken'), [account, isLogin]);
 
   const handleDoTask = async (type: any, task: any) => {
     if (!accessToken) {
-      const res = await handleLogin(LOGIN_TYPE.TASK)
+      const res = await handleLogin(LOGIN_TYPE.TASK);
       if (!res) {
-        return
+        return;
       }
     }
     switch (task.key) {
       case 'JOIN_DISCORD':
         if (userInfo && !userInfo?.discordId) {
-          await signIn('discord', { callbackUrl: `/points?provider=discord` })
+          await signIn('discord', { callbackUrl: `/points?provider=discord` });
         }
-        break
+        break;
       case 'FOLLOW_TWITTER':
         if (userInfo && !userInfo?.twitterId) {
-          await signIn('twitter', { callbackUrl: `/points?provider=twitter` })
+          await signIn('twitter', { callbackUrl: `/points?provider=twitter` });
         }
-        break
+        break;
       case 'RETWEET_TWITTER':
         if (userInfo && !userInfo?.twitterId) {
-          await signIn('twitter', { callbackUrl: `/points?provider=twitter` })
+          await signIn('twitter', { callbackUrl: `/points?provider=twitter` });
         }
-        break
+        break;
       default:
-        break
+        break;
     }
     if ((task.key == 'JOIN_DISCORD' && userInfo?.discordId) || (task.key == 'FOLLOW_TWITTER' && userInfo?.twitterId)) {
-      setShowDoTask(true)
+      setShowDoTask(true);
     }
     if (
       (task.key == 'JOIN_DISCORD' && userInfo?.discordId) ||
@@ -76,26 +76,26 @@ export const SocialTask: React.FunctionComponent<Props> = ({
       task.key == SOCIAL_TASKS.JOIN_TELEGRAM_GROUP_CHAT ||
       task.key == SOCIAL_TASKS.RETWEET_TWITTER
     ) {
-      await handleCompleteTask(task)
+      await handleCompleteTask(task);
     }
-  }
+  };
 
   const getSocialTaskIcon = (task: any) => {
     switch (task.key) {
       case SOCIAL_TASKS.FOLLOW_TWITTER:
-        return <TwitterIcon className={'w-[60px] sm:w-[60px] h-auto'} />
+        return <TwitterIcon className={'w-[60px] sm:w-[60px] h-auto'} />;
       case SOCIAL_TASKS.JOIN_DISCORD:
-        return <DiscordIcon className={'w-[60px] sm:w-[60px] h-auto'} />
+        return <DiscordIcon className={'w-[60px] sm:w-[60px] h-auto'} />;
       case SOCIAL_TASKS.JOIN_TELEGRAM_GROUP_CHAT:
-        return <TelegramIcon className={'w-[60px] sm:w-[60px] h-auto'} />
+        return <TelegramIcon className={'w-[60px] sm:w-[60px] h-auto'} />;
       case SOCIAL_TASKS.JOIN_TELEGRAM_ANNOUNCEMENT:
-        return <TelegramIcon className={'w-[60px] sm:w-[60px] h-auto'} />
+        return <TelegramIcon className={'w-[60px] sm:w-[60px] h-auto'} />;
       case SOCIAL_TASKS.RETWEET_TWITTER:
-        return <TwitterIcon className={'w-[60px] sm:w-[60px] h-auto'} />
+        return <TwitterIcon className={'w-[60px] sm:w-[60px] h-auto'} />;
       default:
-        return
+        return;
     }
-  }
+  };
 
   return (
     <div className={'mt-10 relative z-50'}>
@@ -104,7 +104,7 @@ export const SocialTask: React.FunctionComponent<Props> = ({
       </div>
       <div className={'flex flex-col border border-[#F2F4F7] rounded-[16px] mt-3'}>
         {socialTasks?.map((task1: any, index: number) => {
-          const status = tasksStatus?.find((task2: any) => task2?.id == task1?._id).status
+          const status = tasksStatus?.find((task2: any) => task2?.id == task1?._id).status;
           return (
             <div
               key={index}
@@ -137,15 +137,15 @@ export const SocialTask: React.FunctionComponent<Props> = ({
                   <Button
                     onClick={async () => {
                       if (!connected) {
-                        dispatch(appActions.SET_SHOW_CONNECT(true))
-                        return
+                        dispatch(appActions.SET_SHOW_CONNECT(true));
+                        return;
                       }
                       if (!userInfo && account) {
-                        await handleLogin(LOGIN_TYPE.TASK)
-                        return
+                        await handleLogin(LOGIN_TYPE.TASK);
+                        return;
                       }
-                      setSelectedTask(task1)
-                      await handleDoTask(task1?.key, task1)
+                      setSelectedTask(task1);
+                      await handleDoTask(task1?.key, task1);
                     }}
                     className={
                       'flex w-fit sm:w-auto items-center gap-3 bg-[#7F56D9] min-w-[102px] rounded-full text-base text-white h-[42px] px-4'
@@ -157,9 +157,9 @@ export const SocialTask: React.FunctionComponent<Props> = ({
                 )}
               </div>
             </div>
-          )
+          );
         })}
       </div>
     </div>
-  )
-}
+  );
+};

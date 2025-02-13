@@ -1,43 +1,43 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Card, Row } from 'antd'
-import { AccountDashboard } from '@/common/components/Views/dashboard/AccountDashboard'
-import { AssetRowType, YourSupplies } from '@/common/components/Views/dashboard/YourSupplies'
-import { YourBorrows } from '@/common/components/Views/dashboard/YourBorrows'
-import { AssetsSupply } from '@/common/components/Views/dashboard/AssetsSupply'
-import { AssetsBorrow } from '@/common/components/Views/dashboard/AssetsBorrow'
-import { ManageAssetMode, ModalManageAssets } from '@/common/components/Modals/ModalManageAssets'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import { WalletIcon } from '@/common/components/Icons'
-import { ModalConnectWallet } from '@/common/components/Modals/ModalConnectWallet'
-import { useModal } from '@/common/hooks/useModal'
-import AssetContextProvider from '@/common/context/AssetContextProvider'
-import { BannerPage } from '@/common/components/Layout/BannerPage'
-import { useRouter } from 'next/router'
-import { getDiff, isAddress, setHiddenTimePopupTether } from '@/utils'
-import { ModalTetherLive } from '@/common/components/Modals/ModalTetherLive'
-import { getData } from '@/common/hooks/useLocalStoragre'
-import { IsolateDashboard } from '@/common/components/Views/isolate/IsolateDashboard'
+import { WalletIcon } from '@/common/components/Icons';
+import { BannerPage } from '@/common/components/Layout/BannerPage';
+import { ModalConnectWallet } from '@/common/components/Modals/ModalConnectWallet';
+import { ManageAssetMode, ModalManageAssets } from '@/common/components/Modals/ModalManageAssets';
+import { ModalTetherLive } from '@/common/components/Modals/ModalTetherLive';
+import { AccountDashboard } from '@/common/components/Views/dashboard/AccountDashboard';
+import { AssetsBorrow } from '@/common/components/Views/dashboard/AssetsBorrow';
+import { AssetsSupply } from '@/common/components/Views/dashboard/AssetsSupply';
+import { YourBorrows } from '@/common/components/Views/dashboard/YourBorrows';
+import { AssetRowType, YourSupplies } from '@/common/components/Views/dashboard/YourSupplies';
+import { IsolateDashboard } from '@/common/components/Views/isolate/IsolateDashboard';
+import AssetContextProvider from '@/common/context/AssetContextProvider';
+import { getData } from '@/common/hooks/useLocalStoragre';
+import { useModal } from '@/common/hooks/useModal';
+import { getDiff, isAddress, setHiddenTimePopupTether } from '@/utils';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { Button, Card, Row } from 'antd';
+import { useRouter } from 'next/router';
+import React, { useEffect, useMemo, useState } from 'react';
 
 const Page: React.FunctionComponent = () => {
-  const { connected, account } = useWallet()
-  const [assetSelected, setAssetSelected] = useState<PoolAsset | null>(null)
-  const [mode, setMode] = useState<ManageAssetMode | AssetRowType>(ManageAssetMode.Supply)
-  const { show, setShow, toggle } = useModal()
-  const { show: showTether, setShow: setShowTether, toggle: toggleTether } = useModal()
+  const { connected, account } = useWallet();
+  const [assetSelected, setAssetSelected] = useState<PoolAsset | null>(null);
+  const [mode, setMode] = useState<ManageAssetMode | AssetRowType>(ManageAssetMode.Supply);
+  const { show, setShow, toggle } = useModal();
+  const { show: showTether, setShow: setShowTether, toggle: toggleTether } = useModal();
 
   const closePopupTether = () => {
-    toggleTether()
-    setHiddenTimePopupTether()
-  }
+    toggleTether();
+    setHiddenTimePopupTether();
+  };
 
   useEffect(() => {
-    const time = Number(getData('hiddePopupTether'))
+    const time = Number(getData('hiddePopupTether'));
     if (getDiff(time * 1000) < 0) {
-      setShowTether(true)
+      setShowTether(true);
     }
-  }, [])
+  }, []);
 
-  const router = useRouter()
+  const router = useRouter();
 
   const walletAddress = useMemo(
     () =>
@@ -45,11 +45,11 @@ const Page: React.FunctionComponent = () => {
         ? router.query.view_address
         : account?.address,
     [account, router],
-  )
+  );
 
   const handleClose = () => {
-    setAssetSelected(null)
-  }
+    setAssetSelected(null);
+  };
 
   return (
     <AssetContextProvider>
@@ -106,6 +106,6 @@ const Page: React.FunctionComponent = () => {
       <ModalConnectWallet isModalOpen={!!show} handleClose={toggle} />
       <ModalTetherLive isModalOpen={!!showTether} handleClose={closePopupTether} />
     </AssetContextProvider>
-  )
-}
-export default Page
+  );
+};
+export default Page;

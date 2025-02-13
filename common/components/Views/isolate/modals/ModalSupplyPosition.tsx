@@ -1,21 +1,21 @@
-import React, { useEffect, useMemo } from 'react'
-import { Button, Modal, notification, Typography } from 'antd'
-import InputCurrency from '@/common/components/InputCurrentcy'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import BigNumber from 'bignumber.js'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import useBalanceToken, { CoinType } from '@/common/hooks/useBalanceToken'
-import { CloseIcon } from '@/common/components/Icons'
-import { InputEntryFunctionData } from '@aptos-labs/ts-sdk'
-import { ISOLATE_ADDRESS } from '@/common/consts'
-import { useIsolatePools } from '@/common/hooks/useIsolatePools'
-import useContract from '@/common/hooks/useContract'
+import { CloseIcon } from '@/common/components/Icons';
+import InputCurrency from '@/common/components/InputCurrentcy';
+import { ISOLATE_ADDRESS } from '@/common/consts';
+import useBalanceToken, { CoinType } from '@/common/hooks/useBalanceToken';
+import useContract from '@/common/hooks/useContract';
+import { useIsolatePools } from '@/common/hooks/useIsolatePools';
+import { InputEntryFunctionData } from '@aptos-labs/ts-sdk';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { Button, Modal, Typography, notification } from 'antd';
+import BigNumber from 'bignumber.js';
+import React, { useEffect, useMemo } from 'react';
 
 interface Props {
-  isModalOpen: boolean
-  handleClose: () => void
-  collateral: PoolAsset
-  isolatePool: IsolatePools
+  isModalOpen: boolean;
+  handleClose: () => void;
+  collateral: PoolAsset;
+  isolatePool: IsolatePools;
 }
 
 export const ModalSupplyPosition: React.FunctionComponent<Props> = ({
@@ -24,35 +24,35 @@ export const ModalSupplyPosition: React.FunctionComponent<Props> = ({
   collateral,
   isolatePool,
 }) => {
-  const [amount, setAmount] = React.useState(0)
-  const { account } = useWallet()
-  const { getBalanceCoin } = useBalanceToken()
-  const { refetchUserPosition } = useIsolatePools()
-  const { run } = useContract()
+  const [amount, setAmount] = React.useState(0);
+  const { account } = useWallet();
+  const { getBalanceCoin } = useBalanceToken();
+  const { refetchUserPosition } = useIsolatePools();
+  const { run } = useContract();
 
-  const position = useMemo(() => isolatePool.position, [isolatePool])
+  const position = useMemo(() => isolatePool.position, [isolatePool]);
 
   useEffect(() => {
-    ;(async () => {
-      await refetchUserPosition()
-      setAmount(0)
-    })()
-  }, [isModalOpen])
+    (async () => {
+      await refetchUserPosition();
+      setAmount(0);
+    })();
+  }, [isModalOpen]);
 
   const { data: balanceAsset = 0, refetch } = useQuery({
     queryKey: ['getBalanceAssets', collateral, account],
     queryFn: async () => {
-      const balance = await getBalanceCoin(collateral.token, account?.address as string)
+      const balance = await getBalanceCoin(collateral.token, account?.address as string);
       return BigNumber(balance)
         .div(BigNumber(10).pow(collateral.token.decimals ?? 8))
-        .toNumber()
+        .toNumber();
     },
     enabled: !!collateral && !!account,
     refetchIntervalInBackground: true,
     refetchOnReconnect: 'always',
     refetchOnMount: 'always',
     refetchOnWindowFocus: 'always',
-  })
+  });
 
   const deposit = () => {
     if (position !== '') {
@@ -64,7 +64,7 @@ export const ModalSupplyPosition: React.FunctionComponent<Props> = ({
           collateral.poolAddress,
           BigNumber(amount).times(BigNumber(10).pow(collateral.token.decimals)).toString(),
         ],
-      }
+      };
       const payloadDepositFa: InputEntryFunctionData = {
         function: `${ISOLATE_ADDRESS}::isolated::deposit`,
         typeArguments: [],
@@ -74,8 +74,8 @@ export const ModalSupplyPosition: React.FunctionComponent<Props> = ({
           collateral.poolAddress,
           BigNumber(amount).times(BigNumber(10).pow(collateral.token.decimals)).toString(),
         ],
-      }
-      return run(collateral.token.type === CoinType.COIN ? payloadDepositCoin : payloadDepositFa)
+      };
+      return run(collateral.token.type === CoinType.COIN ? payloadDepositCoin : payloadDepositFa);
     } else {
       // return run({
       //   function: `${ISOLATE_ADDRESS}::isolated::${collateral.token.type === CoinType.COIN ? 'deposit_coin_without_position' : 'deposit_without_position'}`,
@@ -93,7 +93,7 @@ export const ModalSupplyPosition: React.FunctionComponent<Props> = ({
             collateral.poolAddress,
             BigNumber(amount).times(BigNumber(10).pow(collateral.token.decimals)).toString(),
           ],
-        })
+        });
       } else {
         return run({
           function: `${ISOLATE_ADDRESS}::isolated::deposit_without_position`,
@@ -103,38 +103,38 @@ export const ModalSupplyPosition: React.FunctionComponent<Props> = ({
             collateral.poolAddress,
             BigNumber(amount).times(BigNumber(10).pow(collateral.token.decimals)).toString(),
           ],
-        })
+        });
       }
     }
-  }
+  };
 
   const { isPending, mutate: supply } = useMutation({
     mutationFn: async () => {
-      return await deposit()
+      return await deposit();
     },
     onSuccess: (res: any) => {
-      refetch()
-      setAmount(0)
+      refetch();
+      setAmount(0);
       setTimeout(() => {
-        refetchUserPosition()
-      }, 3000)
-      handleClose()
-      notification.success({ message: 'Transaction created.' })
+        refetchUserPosition();
+      }, 3000);
+      handleClose();
+      notification.success({ message: 'Transaction created.' });
     },
     onError: (error: any) => {
-      notification.error({ message: error?.message || 'Something went wrong.' })
+      notification.error({ message: error?.message || 'Something went wrong.' });
     },
-  })
+  });
 
   const handleChange = (value: number) => {
-    setAmount(value)
-  }
+    setAmount(value);
+  };
 
   return (
     <Modal
       centered
       onCancel={() => {
-        handleClose()
+        handleClose();
       }}
       open={isModalOpen}
       footer={false}
@@ -175,5 +175,5 @@ export const ModalSupplyPosition: React.FunctionComponent<Props> = ({
         </Button>
       </div>
     </Modal>
-  )
-}
+  );
+};

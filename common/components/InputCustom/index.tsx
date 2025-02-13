@@ -1,24 +1,24 @@
-import React, { ReactNode } from 'react'
-import { NumericFormat } from 'react-number-format'
+import React, { ReactNode } from 'react';
+import { NumericFormat } from 'react-number-format';
 
 type PositiveFloatNumInputProps = {
-  inputAmount?: string
-  className?: string
-  isDisabled?: boolean
-  placeholder?: string
-  min?: number
-  max?: number
-  maxDecimals?: number
-  onInputChange?: (e: any) => void
-  onAmountChange?: (a: number) => void
-  prefix?: ReactNode
-  suffix?: string
-  label?: string
-  showCommas?: boolean
-}
+  inputAmount?: string;
+  className?: string;
+  isDisabled?: boolean;
+  placeholder?: string;
+  min?: number;
+  max?: number;
+  maxDecimals?: number;
+  onInputChange?: (e: any) => void;
+  onAmountChange?: (a: number) => void;
+  prefix?: ReactNode;
+  suffix?: string;
+  label?: string;
+  showCommas?: boolean;
+};
 
-const MAX_DEFAULT = Number.MAX_SAFE_INTEGER
-const MAX_DECIMALS_DEFAULT = 8
+const MAX_DEFAULT = Number.MAX_SAFE_INTEGER;
+const MAX_DECIMALS_DEFAULT = 8;
 
 export const InputCustom: React.FunctionComponent<PositiveFloatNumInputProps> = ({
   inputAmount,
@@ -42,19 +42,19 @@ export const InputCustom: React.FunctionComponent<PositiveFloatNumInputProps> = 
       thousandSeparator
       decimalSeparator={'.'}
       isAllowed={(values) => {
-        const { formattedValue, floatValue } = values
-        return formattedValue === '' || Number(floatValue) <= max
+        const { formattedValue, floatValue } = values;
+        return formattedValue === '' || Number(floatValue) <= max;
       }}
       onValueChange={(values: any) => {
         if (Number(values.floatValue) > max) {
-          onInputChange(max)
+          onInputChange(max);
         } else if (Number(values.floatValue) < 0) {
-          onInputChange(0)
+          onInputChange(0);
         } else {
-          onInputChange(values.floatValue)
+          onInputChange(values.floatValue);
         }
       }}
       disabled={isDisabled}
     />
-  )
-}
+  );
+};

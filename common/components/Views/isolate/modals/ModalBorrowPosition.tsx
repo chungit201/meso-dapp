@@ -1,21 +1,21 @@
-import React, { useEffect, useMemo } from 'react'
-import { Button, Modal, notification, Typography } from 'antd'
-import InputCurrency from '@/common/components/InputCurrentcy'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import BigNumber from 'bignumber.js'
-import { CloseIcon, LeftToRightIcon } from '@/common/components/Icons'
-import { ISOLATE_ADDRESS } from '@/common/consts'
-import useContract from '@/common/hooks/useContract'
-import { useIsolatePools } from '@/common/hooks/useIsolatePools'
-import { CoinType } from '@/common/hooks/useBalanceToken'
-import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets'
-import { formatNumberBalance, getRiskFactorColor, roundDown } from '@/utils'
+import { CloseIcon, LeftToRightIcon } from '@/common/components/Icons';
+import InputCurrency from '@/common/components/InputCurrentcy';
+import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets';
+import { ISOLATE_ADDRESS } from '@/common/consts';
+import { CoinType } from '@/common/hooks/useBalanceToken';
+import useContract from '@/common/hooks/useContract';
+import { useIsolatePools } from '@/common/hooks/useIsolatePools';
+import { formatNumberBalance, getRiskFactorColor, roundDown } from '@/utils';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { Button, Modal, Typography, notification } from 'antd';
+import BigNumber from 'bignumber.js';
+import React, { useEffect, useMemo } from 'react';
 
 interface Props {
-  isModalOpen: boolean
-  handleClose: () => void
-  asset: PoolAsset
-  isolatePool: IsolatePools
+  isModalOpen: boolean;
+  handleClose: () => void;
+  asset: PoolAsset;
+  isolatePool: IsolatePools;
 }
 
 export const ModalBorrowPosition: React.FunctionComponent<Props> = ({
@@ -24,20 +24,20 @@ export const ModalBorrowPosition: React.FunctionComponent<Props> = ({
   asset,
   isolatePool,
 }) => {
-  const [amount, setAmount] = React.useState(0)
-  const { view, run } = useContract()
-  const { refetchUserPosition, calculatorPosition, assetsAmounts, assetsDebts, getRiskFactor } = useIsolatePools()
+  const [amount, setAmount] = React.useState(0);
+  const { view, run } = useContract();
+  const { refetchUserPosition, calculatorPosition, assetsAmounts, assetsDebts, getRiskFactor } = useIsolatePools();
 
-  const position = useMemo(() => isolatePool.position, [isolatePool])
+  const position = useMemo(() => isolatePool.position, [isolatePool]);
 
   useEffect(() => {
-    refetchUserPosition()
-    setAmount(0)
-  }, [isModalOpen])
+    refetchUserPosition();
+    setAmount(0);
+  }, [isModalOpen]);
 
   const riskFactor = useMemo(() => {
-    return getRiskFactor(assetsAmounts, assetsDebts, isolatePool)
-  }, [assetsAmounts, assetsDebts, isolatePool])
+    return getRiskFactor(assetsAmounts, assetsDebts, isolatePool);
+  }, [assetsAmounts, assetsDebts, isolatePool]);
 
   const calculator = useMemo(() => {
     return calculatorPosition(
@@ -47,8 +47,8 @@ export const ModalBorrowPosition: React.FunctionComponent<Props> = ({
       assetsAmounts,
       assetsDebts,
       isolatePool,
-    )
-  }, [assetsAmounts, assetsDebts, amount, asset])
+    );
+  }, [assetsAmounts, assetsDebts, amount, asset]);
 
   const { data: totalReserves = 0 } = useQuery({
     queryKey: ['totalReserves', asset],
@@ -64,14 +64,14 @@ export const ModalBorrowPosition: React.FunctionComponent<Props> = ({
           typeArguments: [],
           functionArguments: [asset.poolAddress],
         }),
-      ])
-      const totalSupply = BigNumber(Number(data[0][0])).div(BigNumber(10).pow(asset.token.decimals)).toNumber()
-      const totalBorrow = BigNumber(Number(data[1][0])).div(BigNumber(10).pow(asset.token.decimals)).toNumber()
-      const reserves = roundDown(totalSupply - totalBorrow, asset.token.decimals)
-      return reserves > 0 ? reserves : 0
+      ]);
+      const totalSupply = BigNumber(Number(data[0][0])).div(BigNumber(10).pow(asset.token.decimals)).toNumber();
+      const totalBorrow = BigNumber(Number(data[1][0])).div(BigNumber(10).pow(asset.token.decimals)).toNumber();
+      const reserves = roundDown(totalSupply - totalBorrow, asset.token.decimals);
+      return reserves > 0 ? reserves : 0;
     },
     enabled: !!asset,
-  })
+  });
 
   const { data: totalBorrowAvailable = 0, refetch: refetchBorrowAmount } = useQuery({
     queryKey: ['BorrowAssetAvailable', asset, isModalOpen, position],
@@ -80,17 +80,17 @@ export const ModalBorrowPosition: React.FunctionComponent<Props> = ({
         function: `${ISOLATE_ADDRESS}::lending_pool::max_borrowable_amount`,
         typeArguments: [],
         functionArguments: [position, asset.poolAddress],
-      })
-      const maxBorrow = BigNumber(Number(res[0])).div(BigNumber(10).pow(asset.token.decimals)).toNumber()
+      });
+      const maxBorrow = BigNumber(Number(res[0])).div(BigNumber(10).pow(asset.token.decimals)).toNumber();
       const totalBorrowAvailableInPool = BigNumber(asset.borrowCap - asset.totalDebt)
         .div(BigNumber(10).pow(asset.token.decimals))
-        .toNumber()
-      const borrowAvailable = maxBorrow > totalBorrowAvailableInPool ? totalBorrowAvailableInPool : maxBorrow
-      return borrowAvailable < 0 ? 0 : Number(((borrowAvailable * 99.5) / 100).toFixed(asset.token.decimals))
+        .toNumber();
+      const borrowAvailable = maxBorrow > totalBorrowAvailableInPool ? totalBorrowAvailableInPool : maxBorrow;
+      return borrowAvailable < 0 ? 0 : Number(((borrowAvailable * 99.5) / 100).toFixed(asset.token.decimals));
     },
     enabled: !!asset && !!position,
     refetchInterval: 5000,
-  })
+  });
 
   const borrow = async () => {
     if (asset.token.type === CoinType.COIN) {
@@ -102,7 +102,7 @@ export const ModalBorrowPosition: React.FunctionComponent<Props> = ({
           position,
           BigNumber(amount).times(BigNumber(10).pow(asset.token.decimals)).toString(),
         ],
-      })
+      });
     } else {
       return await run({
         function: `${ISOLATE_ADDRESS}::isolated::borrow`,
@@ -114,33 +114,33 @@ export const ModalBorrowPosition: React.FunctionComponent<Props> = ({
 
           BigNumber(amount).times(BigNumber(10).pow(asset.token.decimals)).toString(),
         ],
-      })
+      });
     }
-  }
+  };
 
   const { isPending, mutate: hanldeBorrow } = useMutation({
     mutationFn: async () => borrow(),
     onSuccess: (res: any) => {
-      refetchBorrowAmount()
-      refetchUserPosition()
-      setAmount(0)
-      handleClose()
-      notification.success({ message: 'Transaction created.' })
+      refetchBorrowAmount();
+      refetchUserPosition();
+      setAmount(0);
+      handleClose();
+      notification.success({ message: 'Transaction created.' });
     },
     onError: (error: any) => {
-      notification.error({ message: error?.message || 'Something went wrong.' })
+      notification.error({ message: error?.message || 'Something went wrong.' });
     },
-  })
+  });
 
   const handleChange = (value: number) => {
-    setAmount(value)
-  }
+    setAmount(value);
+  };
 
   return (
     <Modal
       centered
       onCancel={() => {
-        handleClose()
+        handleClose();
       }}
       open={isModalOpen}
       footer={false}
@@ -202,5 +202,5 @@ export const ModalBorrowPosition: React.FunctionComponent<Props> = ({
         </Button>
       </div>
     </Modal>
-  )
-}
+  );
+};

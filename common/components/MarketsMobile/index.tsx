@@ -1,28 +1,28 @@
-import React from 'react'
-import { Button, Col, Collapse, Row, Typography } from 'antd'
-import { MAX_BPS } from '@/common/consts'
-import useUser from '@/common/hooks/useUser'
-import { formatNumberBalance, nFormatter } from '@/utils'
-import { DownIcon } from '@/common/components/Icons'
-import BigNumber from 'bignumber.js'
-import { useRouter } from 'next/router'
-import { PoolSupplyApr } from '@/common/components/Views/asset/PoolSupplyApr'
-import { PoolBorrowApr } from '@/common/components/Views/asset/PoolBorrowApr'
-import useToken from '@/common/hooks/useTokens'
-const { Panel } = Collapse
+import { DownIcon } from '@/common/components/Icons';
+import { PoolBorrowApr } from '@/common/components/Views/asset/PoolBorrowApr';
+import { PoolSupplyApr } from '@/common/components/Views/asset/PoolSupplyApr';
+import { MAX_BPS } from '@/common/consts';
+import useToken from '@/common/hooks/useTokens';
+import useUser from '@/common/hooks/useUser';
+import { formatNumberBalance, nFormatter } from '@/utils';
+import { Button, Col, Collapse, Row, Typography } from 'antd';
+import BigNumber from 'bignumber.js';
+import { useRouter } from 'next/router';
+import React from 'react';
+const { Panel } = Collapse;
 
 interface Props {
-  allAssetsData: PoolAsset[]
+  allAssetsData: PoolAsset[];
 }
 
 export const MarketsMobile: React.FunctionComponent<Props> = ({ allAssetsData }) => {
-  const { userEMode } = useUser()
-  const router = useRouter()
-  const { getTokenBySymbol } = useToken()
+  const { userEMode } = useUser();
+  const router = useRouter();
+  const { getTokenBySymbol } = useToken();
 
   const onChange = (key: string | string[]) => {
-    console.log(key)
-  }
+    console.log(key);
+  };
   return (
     <div className={'border border-[#DCDFEA] block md:hidden mt-4 rounded-[16px]'}>
       <Row className={'px-[12px] py-4  text-[#5D6B98] font-medium border-[#DCDFEA] border-b pr-[40px]'}>
@@ -167,9 +167,9 @@ export const MarketsMobile: React.FunctionComponent<Props> = ({ allAssetsData })
                 </Button>
               </div>
             </Panel>
-          )
+          );
         })}
       </Collapse>
     </div>
-  )
-}
+  );
+};

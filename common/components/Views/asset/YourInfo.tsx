@@ -1,31 +1,31 @@
-import React, { useState } from 'react'
-import { Button, Card, Typography } from 'antd'
-import { WalletIcon } from '@/common/components/Icons'
-import { formatNumberBalance } from '@/utils'
-import { useQuery } from '@tanstack/react-query'
-import BigNumber from 'bignumber.js'
-import useContract from '@/common/hooks/useContract'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import { ManageAssetMode, ModalManageAssets } from '@/common/components/Modals/ModalManageAssets'
-import { MESO_ADDRESS } from '@/common/consts'
-import AssetContextProvider from '@/common/context/AssetContextProvider'
-import { useDispatch, useSelector } from 'react-redux'
-import appActions from '@/modules/app/actions'
+import { WalletIcon } from '@/common/components/Icons';
+import { ManageAssetMode, ModalManageAssets } from '@/common/components/Modals/ModalManageAssets';
+import { MESO_ADDRESS } from '@/common/consts';
+import AssetContextProvider from '@/common/context/AssetContextProvider';
+import useContract from '@/common/hooks/useContract';
+import appActions from '@/modules/app/actions';
+import { formatNumberBalance } from '@/utils';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { useQuery } from '@tanstack/react-query';
+import { Button, Card, Typography } from 'antd';
+import BigNumber from 'bignumber.js';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface Props {
-  asset: PoolAsset
+  asset: PoolAsset;
 }
 
 export const YourInfo: React.FunctionComponent<Props> = ({ asset }) => {
-  const [mode, setMode] = useState<ManageAssetMode>(ManageAssetMode.Supply)
-  const { view } = useContract()
-  const { account } = useWallet()
-  const dispatch = useDispatch()
-  const app = useSelector((state: any) => state.app)
+  const [mode, setMode] = useState<ManageAssetMode>(ManageAssetMode.Supply);
+  const { view } = useContract();
+  const { account } = useWallet();
+  const dispatch = useDispatch();
+  const app = useSelector((state: any) => state.app);
 
   const handleClose = () => {
-    dispatch(appActions.SET_MANAGE_ASSETS(false))
-  }
+    dispatch(appActions.SET_MANAGE_ASSETS(false));
+  };
 
   const { data: totalBorrowAvailable = 0, refetch: refetchBorrowAmount } = useQuery({
     queryKey: ['calculateBorrowAsset', asset],
@@ -34,16 +34,16 @@ export const YourInfo: React.FunctionComponent<Props> = ({ asset }) => {
         function: `${MESO_ADDRESS}::lending_pool::max_borrowable_amount`,
         typeArguments: [],
         functionArguments: [account?.address, asset.poolAddress],
-      })
-      const maxBorrow = BigNumber(Number(res[0])).div(BigNumber(10).pow(asset.token.decimals)).toNumber()
+      });
+      const maxBorrow = BigNumber(Number(res[0])).div(BigNumber(10).pow(asset.token.decimals)).toNumber();
       const totalBorrowAvailableInPool = BigNumber(asset.borrowCap - asset.totalDebt)
         .div(BigNumber(10).pow(asset.token.decimals))
-        .toNumber()
-      const borrowAvailable = maxBorrow > totalBorrowAvailableInPool ? totalBorrowAvailableInPool : maxBorrow
-      return borrowAvailable < 0 ? 0 : borrowAvailable
+        .toNumber();
+      const borrowAvailable = maxBorrow > totalBorrowAvailableInPool ? totalBorrowAvailableInPool : maxBorrow;
+      return borrowAvailable < 0 ? 0 : borrowAvailable;
     },
     enabled: !!asset && !!account?.address,
-  })
+  });
 
   return (
     <Card bordered={false} className={'bg-[#FFF] border border-[#EFF1F5] p-4 sm:p-5 rounded-[12px] card-shadow2'}>
@@ -71,8 +71,8 @@ export const YourInfo: React.FunctionComponent<Props> = ({ asset }) => {
           <Button
             className={'bg-transparent border-[#7F56D9] rounded-full text-[#7F56D9]'}
             onClick={() => {
-              dispatch(appActions.SET_MANAGE_ASSETS(true))
-              setMode(ManageAssetMode.Supply)
+              dispatch(appActions.SET_MANAGE_ASSETS(true));
+              setMode(ManageAssetMode.Supply);
             }}
           >
             Supply
@@ -91,8 +91,8 @@ export const YourInfo: React.FunctionComponent<Props> = ({ asset }) => {
           <Button
             className={'bg-transparent border-[#7F56D9] rounded-full text-[#7F56D9]'}
             onClick={() => {
-              dispatch(appActions.SET_MANAGE_ASSETS(true))
-              setMode(ManageAssetMode.Borrow)
+              dispatch(appActions.SET_MANAGE_ASSETS(true));
+              setMode(ManageAssetMode.Borrow);
             }}
           >
             Borrow
@@ -111,5 +111,5 @@ export const YourInfo: React.FunctionComponent<Props> = ({ asset }) => {
         </AssetContextProvider>
       )}
     </Card>
-  )
-}
+  );
+};

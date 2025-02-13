@@ -1,55 +1,55 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Input, Modal, notification, Typography } from 'antd'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useMutation } from '@tanstack/react-query'
-import { addPromotionCode } from '@/common/services/points'
-import { getData } from '@/common/hooks/useLocalStoragre'
-import { useSelector } from 'react-redux'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import useUser, { LOGIN_TYPE } from '@/common/hooks/useUser'
-import { CloseIcon } from '@/common/components/Icons'
+import { CloseIcon } from '@/common/components/Icons';
+import { getData } from '@/common/hooks/useLocalStoragre';
+import useUser, { LOGIN_TYPE } from '@/common/hooks/useUser';
+import { addPromotionCode } from '@/common/services/points';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { useMutation } from '@tanstack/react-query';
+import { Button, Input, Modal, Typography, notification } from 'antd';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 interface Props {
-  handleClose: () => void
-  isModalOpen: boolean
+  handleClose: () => void;
+  isModalOpen: boolean;
 }
 
 export const ModalPromationCode: React.FunctionComponent<Props> = ({ isModalOpen, handleClose }) => {
-  const [code, setCode] = useState('')
-  const isLogin = useSelector((state: any) => state.app.isLogin)
-  const { account } = useWallet()
-  const accessToken = useMemo(() => getData('accessToken'), [account, isLogin])
-  const { handleLogin, refetchUserInfo } = useUser()
+  const [code, setCode] = useState('');
+  const isLogin = useSelector((state: any) => state.app.isLogin);
+  const { account } = useWallet();
+  const accessToken = useMemo(() => getData('accessToken'), [account, isLogin]);
+  const { handleLogin, refetchUserInfo } = useUser();
 
   useEffect(() => {
-    setCode('')
-  }, [isModalOpen])
+    setCode('');
+  }, [isModalOpen]);
 
   const { isPending, mutate: add } = useMutation({
     mutationFn: async () => {
       if (!accessToken) {
-        const res = await handleLogin(LOGIN_TYPE.PROMOTION)
+        const res = await handleLogin(LOGIN_TYPE.PROMOTION);
         if (!res) {
-          return
+          return;
         }
       }
-      return await addPromotionCode(code)
+      return await addPromotionCode(code);
     },
     onSuccess: (res: any) => {
       if (res.status === 201) {
-        notification.success({ message: 'Code is applied successfully' })
-        refetchUserInfo()
-        handleClose()
+        notification.success({ message: 'Code is applied successfully' });
+        refetchUserInfo();
+        handleClose();
       } else {
-        notification.error({ message: res.data.message || 'Something went wrong.' })
+        notification.error({ message: res.data.message || 'Something went wrong.' });
       }
     },
     onError: (error: any) => {
-      console.log('error', error)
-      notification.error({ message: error?.response?.data?.message || 'Something went wrong.' })
+      console.log('error', error);
+      notification.error({ message: error?.response?.data?.message || 'Something went wrong.' });
     },
-  })
+  });
 
   return (
     <Modal centered onCancel={handleClose} visible={isModalOpen} footer={false} closable={false} width={450}>
@@ -92,5 +92,5 @@ export const ModalPromationCode: React.FunctionComponent<Props> = ({ isModalOpen
         </div>
       </div>
     </Modal>
-  )
-}
+  );
+};

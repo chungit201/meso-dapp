@@ -1,16 +1,16 @@
-import React from 'react'
-import { Button, Modal, Typography } from 'antd'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import useNetworkConfiguration from '@/common/hooks/useNetwork'
+import useNetworkConfiguration from '@/common/hooks/useNetwork';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { Button, Modal, Typography } from 'antd';
+import React from 'react';
 
 interface Props {
-  isModalOpen: boolean
-  handleClose: () => void
+  isModalOpen: boolean;
+  handleClose: () => void;
 }
 
 export const ModalWrongNetwork: React.FunctionComponent<Props> = ({ isModalOpen, handleClose }) => {
-  const { networkCfg } = useNetworkConfiguration()
-  const { disconnect } = useWallet()
+  const { networkCfg } = useNetworkConfiguration();
+  const { disconnect } = useWallet();
 
   return (
     <Modal centered open={isModalOpen} footer={false} closable={false} width={400}>
@@ -23,8 +23,8 @@ export const ModalWrongNetwork: React.FunctionComponent<Props> = ({ isModalOpen,
         <div className={'mt-5 flex items-center gap-3 justify-center'}>
           <Button
             onClick={() => {
-              disconnect()
-              handleClose()
+              disconnect();
+              handleClose();
             }}
             className={'flex-1 border-[#7F56D9] bg-[#7F56D9] text-[#fff] rounded-full h-10'}
           >
@@ -33,5 +33,5 @@ export const ModalWrongNetwork: React.FunctionComponent<Props> = ({ isModalOpen,
         </div>
       </div>
     </Modal>
-  )
-}
+  );
+};

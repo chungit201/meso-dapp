@@ -1,5 +1,5 @@
-import React from 'react'
-import { Col, Row, Skeleton } from 'antd'
+import { Col, Row, Skeleton } from 'antd';
+import React from 'react';
 
 export const AssetsLoadingMobile: React.FunctionComponent = () => {
   return (
@@ -30,5 +30,5 @@ export const AssetsLoadingMobile: React.FunctionComponent = () => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};

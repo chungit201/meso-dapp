@@ -1,55 +1,55 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
-import { Card, Col, Pagination, PaginationProps, Row, Switch, Typography } from 'antd'
-import { AssetsContext } from '@/common/context'
-import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets'
-import { AssetRowItem } from '@/common/components/Views/asset/AssetRowItem'
-import { AssetRowType } from '@/common/components/Views/dashboard/YourSupplies'
-import { LoadingAssets } from '@/common/components/LoadingAssets'
-import { getData, setData } from '@/common/hooks/useLocalStoragre'
-import { paginate } from '@/utils'
+import { LoadingAssets } from '@/common/components/LoadingAssets';
+import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets';
+import { AssetRowItem } from '@/common/components/Views/asset/AssetRowItem';
+import { AssetRowType } from '@/common/components/Views/dashboard/YourSupplies';
+import { AssetsContext } from '@/common/context';
+import { getData, setData } from '@/common/hooks/useLocalStoragre';
+import { paginate } from '@/utils';
+import { Card, Col, Pagination, PaginationProps, Row, Switch, Typography } from 'antd';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 interface Props {
-  setAssetSelected: (value: PoolAsset) => void
-  setMode: (value: ManageAssetMode | AssetRowType) => void
+  setAssetSelected: (value: PoolAsset) => void;
+  setMode: (value: ManageAssetMode | AssetRowType) => void;
 }
 
 export const AssetsSupply: React.FunctionComponent<Props> = ({ setAssetSelected, setMode }) => {
-  const { allAssetsData, isLoading } = useContext(AssetsContext)
-  const [hiddenNoAssets, setHiddenNoAssets] = useState<boolean>(true)
-  const [current, setCurrent] = useState(1)
+  const { allAssetsData, isLoading } = useContext(AssetsContext);
+  const [hiddenNoAssets, setHiddenNoAssets] = useState<boolean>(true);
+  const [current, setCurrent] = useState(1);
 
   useEffect(() => {
     if (getData('hidden0Balance')) {
-      setHiddenNoAssets(getData('hidden0Balance') === 'true')
+      setHiddenNoAssets(getData('hidden0Balance') === 'true');
     }
-  }, [])
+  }, []);
 
   const handleChange = (checked: boolean) => {
-    setHiddenNoAssets(checked)
-    setData('hidden0Balance', checked)
-  }
+    setHiddenNoAssets(checked);
+    setData('hidden0Balance', checked);
+  };
 
-  const totalAsset0Balance = useMemo(() => allAssetsData.filter((item) => item.walletBalance > 0), [allAssetsData])
+  const totalAsset0Balance = useMemo(() => allAssetsData.filter((item) => item.walletBalance > 0), [allAssetsData]);
 
   const filterData = useMemo(() => {
-    let data = allAssetsData.sort((a, b) => b.walletBalance * b.token.price - a.walletBalance * a.token.price)
+    let data = allAssetsData.sort((a, b) => b.walletBalance * b.token.price - a.walletBalance * a.token.price);
     if (hiddenNoAssets) {
-      data = allAssetsData.filter((item) => item.walletBalance > 0)
+      data = allAssetsData.filter((item) => item.walletBalance > 0);
     }
-    return data
-  }, [allAssetsData, hiddenNoAssets])
+    return data;
+  }, [allAssetsData, hiddenNoAssets]);
 
   useEffect(() => {
     if (filterData.length <= 10) {
-      setCurrent(1)
+      setCurrent(1);
     }
-  }, [filterData])
+  }, [filterData]);
 
-  const assets = useMemo(() => paginate(filterData, current, 10), [filterData, current, hiddenNoAssets])
+  const assets = useMemo(() => paginate(filterData, current, 10), [filterData, current, hiddenNoAssets]);
 
   const onChange: PaginationProps['onChange'] = (page) => {
-    setCurrent(page)
-  }
+    setCurrent(page);
+  };
 
   return (
     <Col xs={24} xl={12}>
@@ -88,7 +88,7 @@ export const AssetsSupply: React.FunctionComponent<Props> = ({ setAssetSelected,
                       setMode={setMode}
                       setAssetSelected={setAssetSelected}
                     />
-                  )
+                  );
                 })}
               </>
             )}
@@ -109,5 +109,5 @@ export const AssetsSupply: React.FunctionComponent<Props> = ({ setAssetSelected,
         </div>
       </Card>
     </Col>
-  )
-}
+  );
+};

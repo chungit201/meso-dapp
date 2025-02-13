@@ -1,32 +1,32 @@
-import React, { useMemo } from 'react'
-import { Card, Col, Row } from 'antd'
-import { BorrowingPowerProgress } from '@/common/components/Views/dashboard/BorrowingPowerProgress'
-import { formatNumberBalance, nFormatter } from '@/utils'
-import { useAssets } from '@/common/hooks/assets/useAssets'
-import { useDashboard } from '@/common/hooks/dashboard/useDashboard'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
+import { BorrowingPowerProgress } from '@/common/components/Views/dashboard/BorrowingPowerProgress';
+import { useAssets } from '@/common/hooks/assets/useAssets';
+import { useDashboard } from '@/common/hooks/dashboard/useDashboard';
+import { formatNumberBalance, nFormatter } from '@/utils';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { Card, Col, Row } from 'antd';
+import React, { useMemo } from 'react';
 
 export const UserDashBoard: React.FunctionComponent = () => {
-  const { riskFactor, assetDebts, assetDeposits } = useAssets()
-  const { borrowPower } = useDashboard()
-  const { connected } = useWallet()
+  const { riskFactor, assetDebts, assetDeposits } = useAssets();
+  const { borrowPower } = useDashboard();
+  const { connected } = useWallet();
   const totalSupply = useMemo(() => {
-    let total = 0
+    let total = 0;
     for (const item of assetDeposits) {
-      total += item.amountDeposit * item?.token?.price
+      total += item.amountDeposit * item?.token?.price;
     }
-    return total
-  }, [assetDeposits])
+    return total;
+  }, [assetDeposits]);
 
   const totalBorrowed = useMemo(() => {
-    let total = 0
+    let total = 0;
     for (const item of assetDebts) {
-      total += item.debtAmount * item?.token?.price
+      total += item.debtAmount * item?.token?.price;
     }
-    return total
-  }, [assetDebts])
+    return total;
+  }, [assetDebts]);
 
-  const progressColor = riskFactor < 80 ? '#7F56D9' : riskFactor > 90 ? '#F04438' : riskFactor > 80 ? '#DC6803' : ''
+  const progressColor = riskFactor < 80 ? '#7F56D9' : riskFactor > 90 ? '#F04438' : riskFactor > 80 ? '#DC6803' : '';
 
   return (
     <Card
@@ -65,5 +65,5 @@ export const UserDashBoard: React.FunctionComponent = () => {
         </Col>
       </Row>
     </Card>
-  )
-}
+  );
+};

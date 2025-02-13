@@ -1,69 +1,69 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import InputCurrency from '@/common/components/InputCurrentcy'
-import { Button, Slider } from 'antd'
-import { formatNumberBalance, nFormatter, roundDown } from '@/utils'
-import { calculatePositionLoop, generatePayloadLoop, Strategy } from '@/utils/stategies'
-import { useAssets } from '@/common/hooks/assets/useAssets'
-import useUser from '@/common/hooks/useUser'
-import { CalculatorLoopingPosition } from '@/common/components/Views/strategies/CalculatorLoopingPosition'
-import useTransactionCallback from '@/common/hooks/assets/useTransactionCallback'
-import { useQuery } from '@tanstack/react-query'
-import BigNumber from 'bignumber.js'
-import useBalanceToken from '@/common/hooks/useBalanceToken'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import { MAX_BPS } from '@/common/consts'
-import { LoopMode } from '@/common/hooks/strategies/ModalLoop'
+import InputCurrency from '@/common/components/InputCurrentcy';
+import { CalculatorLoopingPosition } from '@/common/components/Views/strategies/CalculatorLoopingPosition';
+import { MAX_BPS } from '@/common/consts';
+import { useAssets } from '@/common/hooks/assets/useAssets';
+import useTransactionCallback from '@/common/hooks/assets/useTransactionCallback';
+import { LoopMode } from '@/common/hooks/strategies/ModalLoop';
+import useBalanceToken from '@/common/hooks/useBalanceToken';
+import useUser from '@/common/hooks/useUser';
+import { formatNumberBalance, nFormatter, roundDown } from '@/utils';
+import { Strategy, calculatePositionLoop, generatePayloadLoop } from '@/utils/stategies';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { useQuery } from '@tanstack/react-query';
+import { Button, Slider } from 'antd';
+import BigNumber from 'bignumber.js';
+import React, { useEffect, useMemo, useState } from 'react';
 
 interface Props {
-  pair: Strategy
+  pair: Strategy;
 }
 
 export const DepositLoop: React.FunctionComponent<Props> = ({ pair }) => {
-  const [error, setError] = useState<string>('')
-  const [amountDeposit, setAmountDeposit] = React.useState(0)
-  const [leverage, setLeverage] = React.useState(1.1)
-  const [loading, setLoading] = useState(false)
-  const { assetDeposits, assetDebts, refetch: refetchPosition } = useAssets()
-  const { userEMode } = useUser()
-  const transactionCallback = useTransactionCallback()
-  const { getBalanceCoin } = useBalanceToken()
-  const { account } = useWallet()
+  const [error, setError] = useState<string>('');
+  const [amountDeposit, setAmountDeposit] = React.useState(0);
+  const [leverage, setLeverage] = React.useState(1.1);
+  const [loading, setLoading] = useState(false);
+  const { assetDeposits, assetDebts, refetch: refetchPosition } = useAssets();
+  const { userEMode } = useUser();
+  const transactionCallback = useTransactionCallback();
+  const { getBalanceCoin } = useBalanceToken();
+  const { account } = useWallet();
 
   useEffect(() => {
-    setError('')
-  }, [amountDeposit])
+    setError('');
+  }, [amountDeposit]);
 
   const maxLeverage = useMemo(() => {
-    let leverage = 0
+    let leverage = 0;
     if (userEMode && userEMode === pair.asset1.emodeId) {
-      const num = 1 / (1 - pair.asset1.emodeBps / MAX_BPS)
-      leverage = roundDown(num - (num > 4 ? 2 : 0), 2)
+      const num = 1 / (1 - pair.asset1.emodeBps / MAX_BPS);
+      leverage = roundDown(num - (num > 4 ? 2 : 0), 2);
     } else {
-      const num = 1 / (1 - pair.asset1.normaBps / MAX_BPS)
-      leverage = roundDown(num - (num > 4 ? 1 : 0), 2)
+      const num = 1 / (1 - pair.asset1.normaBps / MAX_BPS);
+      leverage = roundDown(num - (num > 4 ? 1 : 0), 2);
     }
-    return leverage
-  }, [pair, userEMode])
+    return leverage;
+  }, [pair, userEMode]);
 
   const { data: balanceAsset = 0, refetch } = useQuery({
     queryKey: ['getBalanceAssetsSupply', pair, account],
     queryFn: async () => {
-      const balance = await getBalanceCoin(pair.asset0.token, account?.address as string)
+      const balance = await getBalanceCoin(pair.asset0.token, account?.address as string);
       return BigNumber(balance)
         .div(BigNumber(10).pow(pair.asset0.token.decimals ?? 8))
-        .toNumber()
+        .toNumber();
     },
     enabled: !!pair && !!account,
     refetchIntervalInBackground: true,
     refetchOnReconnect: 'always',
     refetchOnMount: 'always',
     refetchOnWindowFocus: 'always',
-  })
+  });
 
   const onchangeSlider = (value: any) => {
-    const leverage = Number((Number(maxLeverage) * value) / 100)
-    setLeverage(Number(leverage).toFixed(2) as any)
-  }
+    const leverage = Number((Number(maxLeverage) * value) / 100);
+    setLeverage(Number(leverage).toFixed(2) as any);
+  };
 
   const calculator = useMemo(() => {
     return calculatePositionLoop(
@@ -74,35 +74,35 @@ export const DepositLoop: React.FunctionComponent<Props> = ({ pair }) => {
       userEMode,
       Number(leverage),
       LoopMode.DEPOSIT,
-    )
-  }, [assetDebts, assetDeposits, amountDeposit, pair, userEMode, leverage])
+    );
+  }, [assetDebts, assetDeposits, amountDeposit, pair, userEMode, leverage]);
 
   const handleLoop = async () => {
     try {
       if (amountDeposit === 0) {
-        setError('The amount must be above zero')
-        return
+        setError('The amount must be above zero');
+        return;
       }
       if (userEMode && userEMode !== pair.asset1.emodeId) {
-        setError('You are only allowed to loop assets belonging to the selected category on Emode.')
-        return
+        setError('You are only allowed to loop assets belonging to the selected category on Emode.');
+        return;
       }
-      setLoading(true)
+      setLoading(true);
       transactionCallback({
         payload: generatePayloadLoop(pair, amountDeposit, leverage),
         onSuccess(hash: string) {
-          console.log('hash', hash)
-          refetch()
-          refetchPosition()
-          setAmountDeposit(0)
-          setLeverage(1.1)
+          console.log('hash', hash);
+          refetch();
+          refetchPosition();
+          setAmountDeposit(0);
+          setLeverage(1.1);
         },
         setLoading,
-      })
+      });
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }
+  };
 
   return (
     <>
@@ -155,5 +155,5 @@ export const DepositLoop: React.FunctionComponent<Props> = ({ pair }) => {
         Loop now
       </Button>
     </>
-  )
-}
+  );
+};

@@ -1,18 +1,18 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
-import { Input, Modal, Typography } from 'antd'
-import { CloseIcon, SearchIcon } from '@/common/components/Icons'
-import { AssetsContext } from '@/common/context'
-import { formatNumberBalance } from '@/utils'
-import { ASSETS_MODE } from '@/pages/calculator'
-import Image from 'next/image'
+import { CloseIcon, SearchIcon } from '@/common/components/Icons';
+import { AssetsContext } from '@/common/context';
+import { ASSETS_MODE } from '@/pages/calculator';
+import { formatNumberBalance } from '@/utils';
+import { Input, Modal, Typography } from 'antd';
+import Image from 'next/image';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 interface Props {
-  mode?: ASSETS_MODE
-  isModalOpen: boolean
-  handleClose: () => void
-  setAssets: any
-  assetsSelected?: PoolAsset[]
-  userEMode?: string
+  mode?: ASSETS_MODE;
+  isModalOpen: boolean;
+  handleClose: () => void;
+  setAssets: any;
+  assetsSelected?: PoolAsset[];
+  userEMode?: string;
 }
 
 export const ModalSelectAssets: React.FunctionComponent<Props> = ({
@@ -23,44 +23,44 @@ export const ModalSelectAssets: React.FunctionComponent<Props> = ({
   mode = ASSETS_MODE.SUPPLY,
   userEMode = '',
 }) => {
-  const [pools, setPools] = useState<PoolAsset[]>([])
-  const { allAssetsData } = useContext(AssetsContext)
-  const [search, setSearch] = useState<string>('')
+  const [pools, setPools] = useState<PoolAsset[]>([]);
+  const { allAssetsData } = useContext(AssetsContext);
+  const [search, setSearch] = useState<string>('');
 
   useEffect(() => {
-    setPools(allAssetsData)
-  }, [allAssetsData])
+    setPools(allAssetsData);
+  }, [allAssetsData]);
 
   useEffect(() => {
-    setSearch('')
-  }, [isModalOpen])
+    setSearch('');
+  }, [isModalOpen]);
 
   const filterToken = (value: string) => (item: any) => {
-    const array = [item.token.name, item.token.symbol, item.token.address]
-    return array.some((item?: string) => item?.toLowerCase().includes(value.trim().toLowerCase()))
-  }
+    const array = [item.token.name, item.token.symbol, item.token.address];
+    return array.some((item?: string) => item?.toLowerCase().includes(value.trim().toLowerCase()));
+  };
 
   const existingIds = assetsSelected?.map(function (item) {
-    return item.poolAddress
-  })
+    return item.poolAddress;
+  });
 
   const filterData = useMemo(() => {
-    let data = pools
+    let data = pools;
     data = data.filter(function (item) {
-      return existingIds?.indexOf(item.poolAddress) === -1
-    })
-    data = data.filter(filterToken(search))
+      return existingIds?.indexOf(item.poolAddress) === -1;
+    });
+    data = data.filter(filterToken(search));
     if (mode === ASSETS_MODE.BORROW && userEMode) {
-      data = data.sort((a, b) => (a.emodeId === userEMode ? -1 : 1))
+      data = data.sort((a, b) => (a.emodeId === userEMode ? -1 : 1));
     }
-    return data
-  }, [pools, search, assetsSelected, userEMode, mode])
+    return data;
+  }, [pools, search, assetsSelected, userEMode, mode]);
 
   return (
     <Modal
       centered
       onCancel={() => {
-        handleClose()
+        handleClose();
       }}
       open={isModalOpen}
       footer={false}
@@ -94,10 +94,15 @@ export const ModalSelectAssets: React.FunctionComponent<Props> = ({
                   setAssets((prevItems: any) => [
                     ...prevItems,
                     { ...item, normaBps: item.token.symbol === 'APE' ? 500 : item.normaBps },
-                  ])
-                  handleClose()
+                  ]);
+                  handleClose();
                 }}
-                className={`flex cursor-pointer justify-between items-center ${userEMode && userEMode !== item.emodeId && mode === ASSETS_MODE.BORROW && 'opacity-20 pointer-events-none'}`}
+                className={`flex cursor-pointer justify-between items-center ${
+                  userEMode &&
+                  userEMode !== item.emodeId &&
+                  mode === ASSETS_MODE.BORROW &&
+                  'opacity-20 pointer-events-none'
+                }`}
                 key={index}
               >
                 <div className={'flex items-center gap-2 py-2'}>
@@ -115,7 +120,7 @@ export const ModalSelectAssets: React.FunctionComponent<Props> = ({
                 </div>
                 <span className={'text-[#667085]'}>${formatNumberBalance(item.token.price, 4)}</span>
               </div>
-            )
+            );
           })}
           {filterData.length === 0 && (
             <div className={'flex items-center justify-center min-h-[400px] max-h-[400px]'}>
@@ -128,5 +133,5 @@ export const ModalSelectAssets: React.FunctionComponent<Props> = ({
         </div>
       </div>
     </Modal>
-  )
-}
+  );
+};

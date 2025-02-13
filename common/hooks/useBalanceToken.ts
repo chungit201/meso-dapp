@@ -1,6 +1,6 @@
-import useNetworkConfiguration from '@/common/hooks/useNetwork'
-import { Provider, FungibleAssetClient } from 'aptos'
-import useClient from '@/common/hooks/useClient'
+import useClient from '@/common/hooks/useClient';
+import useNetworkConfiguration from '@/common/hooks/useNetwork';
+import { FungibleAssetClient, Provider } from 'aptos';
 
 export enum CoinType {
   COIN = 'COIN',
@@ -8,9 +8,9 @@ export enum CoinType {
 }
 
 const useBalanceToken = () => {
-  const { networkCfg } = useNetworkConfiguration()
-  const { aptos } = useClient()
-  const provider = new Provider(networkCfg.toLocaleLowerCase() || ('testnet' as any))
+  const { networkCfg } = useNetworkConfiguration();
+  const { aptos } = useClient();
+  const provider = new Provider(networkCfg.toLocaleLowerCase() || ('testnet' as any));
 
   const getBalanceCoin = async (token: Token, address: string) => {
     try {
@@ -19,21 +19,21 @@ const useBalanceToken = () => {
           const TodoListResource: any = await aptos.getAccountResource({
             accountAddress: address as any,
             resourceType: `0x1::coin::CoinStore<${token.address}>`,
-          })
-          return Number(TodoListResource.coin.value)
+          });
+          return Number(TodoListResource.coin.value);
         } else {
-          const fungibleAsset = new FungibleAssetClient(provider)
-          const balance = await fungibleAsset.getPrimaryBalance(address, token.address)
-          return Number(balance)
+          const fungibleAsset = new FungibleAssetClient(provider);
+          const balance = await fungibleAsset.getPrimaryBalance(address, token.address);
+          return Number(balance);
         }
       } else {
-        return 0
+        return 0;
       }
     } catch (e) {
-      return 0
+      return 0;
     }
-  }
-  return { getBalanceCoin }
-}
+  };
+  return { getBalanceCoin };
+};
 
-export default useBalanceToken
+export default useBalanceToken;

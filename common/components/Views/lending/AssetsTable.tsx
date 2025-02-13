@@ -1,20 +1,20 @@
-import React, { useContext, useEffect, useMemo } from 'react'
-import { Button, Card, Checkbox, Col, Popover, Row, Table, Typography } from 'antd'
-import { ModalManageAssets } from '@/common/components/Modals/ModalManageAssets'
-import { formatNumberBalance, nFormatter } from '@/utils'
-import BigNumber from 'bignumber.js'
-import { AssetsContext, MesoContext } from '@/common/context'
-import { MAX_BPS } from '@/common/consts'
-import { useRouter } from 'next/router'
-import { AssetsTableLoading } from '@/common/components/LoadingAssets/AssetsTableLoading'
-import useUser from '@/common/hooks/useUser'
-import { MarketsMobile } from '@/common/components/MarketsMobile'
-import { AssetsLoadingMobile } from '@/common/components/LoadingAssets/AssetsLoadingMobile'
-import { DownBrowIcon, SettingIcon } from '@/common/components/Icons'
-import { getData, setData } from '@/common/hooks/useLocalStoragre'
-import { PoolBorrowApr } from '@/common/components/Views/asset/PoolBorrowApr'
-import { PoolSupplyApr } from '@/common/components/Views/asset/PoolSupplyApr'
-import useToken from '@/common/hooks/useTokens'
+import { DownBrowIcon, SettingIcon } from '@/common/components/Icons';
+import { AssetsLoadingMobile } from '@/common/components/LoadingAssets/AssetsLoadingMobile';
+import { AssetsTableLoading } from '@/common/components/LoadingAssets/AssetsTableLoading';
+import { MarketsMobile } from '@/common/components/MarketsMobile';
+import { ModalManageAssets } from '@/common/components/Modals/ModalManageAssets';
+import { PoolBorrowApr } from '@/common/components/Views/asset/PoolBorrowApr';
+import { PoolSupplyApr } from '@/common/components/Views/asset/PoolSupplyApr';
+import { MAX_BPS } from '@/common/consts';
+import { AssetsContext, MesoContext } from '@/common/context';
+import { getData, setData } from '@/common/hooks/useLocalStoragre';
+import useToken from '@/common/hooks/useTokens';
+import useUser from '@/common/hooks/useUser';
+import { formatNumberBalance, nFormatter } from '@/utils';
+import { Button, Card, Checkbox, Col, Popover, Row, Table, Typography } from 'antd';
+import BigNumber from 'bignumber.js';
+import { useRouter } from 'next/router';
+import React, { useContext, useEffect, useMemo } from 'react';
 
 export enum ASSETS_TABLE_KEYS {
   ASSETS = 'ASSETS',
@@ -40,26 +40,26 @@ const filterDefault = [
   ASSETS_TABLE_KEYS.TOTAL_DEBT,
   ASSETS_TABLE_KEYS.UTILIZATION,
   ASSETS_TABLE_KEYS.WALLET,
-]
+];
 
-const PAGE_SIZE_OPTIONS = ['5', '10', '20', '50']
+const PAGE_SIZE_OPTIONS = ['5', '10', '20', '50'];
 
 export const AssetsTable: React.FunctionComponent = () => {
-  const [filter, setFilter] = React.useState(filterDefault)
-  const [assetSelected, setAssetSelected] = React.useState<PoolAsset | null>(null)
-  const { allAssetsData, isLoading } = useContext(AssetsContext)
-  const { userEMode } = useUser()
-  const router = useRouter()
-  const { getTokenBySymbol } = useToken()
-  const { tokens } = useContext(MesoContext)
+  const [filter, setFilter] = React.useState(filterDefault);
+  const [assetSelected, setAssetSelected] = React.useState<PoolAsset | null>(null);
+  const { allAssetsData, isLoading } = useContext(AssetsContext);
+  const { userEMode } = useUser();
+  const router = useRouter();
+  const { getTokenBySymbol } = useToken();
+  const { tokens } = useContext(MesoContext);
 
   useEffect(() => {
-    getData('marketFilter') ? setFilter(JSON.parse(getData('marketFilter') as any)) : setFilter(filterDefault)
-  }, [])
+    getData('marketFilter') ? setFilter(JSON.parse(getData('marketFilter') as any)) : setFilter(filterDefault);
+  }, []);
 
   useEffect(() => {
-    setData('marketFilter', JSON.stringify(filter))
-  }, [filter])
+    setData('marketFilter', JSON.stringify(filter));
+  }, [filter]);
 
   const defaultColumns = useMemo(() => {
     const columns = [
@@ -88,7 +88,7 @@ export const AssetsTable: React.FunctionComponent = () => {
                 </span>
               </div>
             </div>
-          )
+          );
         },
       },
       {
@@ -126,9 +126,9 @@ export const AssetsTable: React.FunctionComponent = () => {
         align: 'right',
         width: 150,
         sorter: (a: PoolAsset, b: PoolAsset) => {
-          const totalApyA = a.supplyApy + a.incentiveSupplyApy + a.stakingApr
-          const totalApyB = b.supplyApy + b.incentiveSupplyApy + b.stakingApr
-          return totalApyA - totalApyB
+          const totalApyA = a.supplyApy + a.incentiveSupplyApy + a.stakingApr;
+          const totalApyB = b.supplyApy + b.incentiveSupplyApy + b.stakingApr;
+          return totalApyA - totalApyB;
         },
         render: (record: any, row: PoolAsset) => (
           <div>
@@ -148,7 +148,7 @@ export const AssetsTable: React.FunctionComponent = () => {
           (a.poolSupply / 10 ** a.token.decimals) * a.token.price -
           (b.poolSupply / 10 ** b.token.decimals) * b.token.price,
         render: (record: any, row: PoolAsset) => {
-          const totalDolar = BigNumber(record).div(BigNumber(10).pow(row.token.decimals)).toNumber() * row.token.price
+          const totalDolar = BigNumber(record).div(BigNumber(10).pow(row.token.decimals)).toNumber() * row.token.price;
           return (
             <div className={'text-sm'}>
               <div className={'text-[#30374F] font-medium'}>
@@ -157,7 +157,7 @@ export const AssetsTable: React.FunctionComponent = () => {
               </div>
               <div className={'text-xs text-[#5D6B98]'}>${nFormatter(totalDolar < 0.01 ? 0 : totalDolar)}</div>
             </div>
-          )
+          );
         },
       },
       {
@@ -271,10 +271,10 @@ export const AssetsTable: React.FunctionComponent = () => {
           </div>
         ),
       },
-    ]
-    const filterData = columns.filter((column) => filter.includes(column.key))
-    return filterData
-  }, [filter, tokens, allAssetsData])
+    ];
+    const filterData = columns.filter((column) => filter.includes(column.key));
+    return filterData;
+  }, [filter, tokens, allAssetsData]);
 
   const locale = {
     emptyText: (
@@ -282,16 +282,16 @@ export const AssetsTable: React.FunctionComponent = () => {
         <div className={'py-20 text-[#000] dark:text-white'}>No data</div>
       </React.Fragment>
     ),
-  }
+  };
 
   const handleFilter = (checked: boolean, key: ASSETS_TABLE_KEYS) => {
     if (checked) {
-      setFilter([...filter, key])
+      setFilter([...filter, key]);
     } else {
-      const data = filter.filter((x) => x !== key)
-      setFilter(data)
+      const data = filter.filter((x) => x !== key);
+      setFilter(data);
     }
-  }
+  };
 
   return (
     <Col span={24}>
@@ -399,7 +399,9 @@ export const AssetsTable: React.FunctionComponent = () => {
               }
             >
               <Button
-                className={`flex justify-center text-[#313547] items-center gap-1 h-9 ${filterDefault === filter ? 'border-[#DCDFEA]' : 'border-[#7F56D9]'} rounded-full`}
+                className={`flex justify-center text-[#313547] items-center gap-1 h-9 ${
+                  filterDefault === filter ? 'border-[#DCDFEA]' : 'border-[#7F56D9]'
+                } rounded-full`}
               >
                 <SettingIcon />
                 Data settings
@@ -428,7 +430,7 @@ export const AssetsTable: React.FunctionComponent = () => {
                     <>
                       Show {range[0]} - {range[1]} / Total {total}
                     </>
-                  )
+                  );
                 },
               }}
               onChange={() => {}}
@@ -437,9 +439,9 @@ export const AssetsTable: React.FunctionComponent = () => {
               onRow={(record) => {
                 return {
                   onClick: async (e) => {
-                    await router.push('/asset/' + record.poolAddress)
+                    await router.push('/asset/' + record.poolAddress);
                   },
-                }
+                };
               }}
             />
           )}
@@ -454,5 +456,5 @@ export const AssetsTable: React.FunctionComponent = () => {
         />
       </Card>
     </Col>
-  )
-}
+  );
+};

@@ -1,28 +1,28 @@
-import React, { useMemo } from 'react'
-import { Button, Col, Typography } from 'antd'
-import { useIsolatePools } from '@/common/hooks/useIsolatePools'
-import BigNumber from 'bignumber.js'
-import { formatNumberBalance } from '@/utils'
-import { ModalAddCollateral } from '@/common/components/Views/isolate/modals/ModalAddCollateral'
-import { ModalRemoveCollateral } from '@/common/components/Views/isolate/modals/ModalRemoveCollateral'
-import { useModal } from '@/common/hooks/useModal'
+import { ModalAddCollateral } from '@/common/components/Views/isolate/modals/ModalAddCollateral';
+import { ModalRemoveCollateral } from '@/common/components/Views/isolate/modals/ModalRemoveCollateral';
+import { useIsolatePools } from '@/common/hooks/useIsolatePools';
+import { useModal } from '@/common/hooks/useModal';
+import { formatNumberBalance } from '@/utils';
+import { Button, Col, Typography } from 'antd';
+import BigNumber from 'bignumber.js';
+import React, { useMemo } from 'react';
 
 interface Props {
-  collateral: PoolAsset
-  pool: IsolatePools
+  collateral: PoolAsset;
+  pool: IsolatePools;
 }
 
 export const IsolateCollateral: React.FunctionComponent<Props> = ({ collateral, pool }) => {
-  const { assetsAmounts } = useIsolatePools()
-  const { show, setShow, toggle } = useModal()
-  const { show: showRemove, setShow: setShowRemove, toggle: toggleRemove } = useModal()
+  const { assetsAmounts } = useIsolatePools();
+  const { show, setShow, toggle } = useModal();
+  const { show: showRemove, setShow: setShowRemove, toggle: toggleRemove } = useModal();
 
   const totalDeposit = useMemo(() => {
     const data = assetsAmounts.find(
       (x: any) => x.poolAddress === collateral.poolAddress && pool.position === x.position,
-    )
-    return data ? BigNumber(Number(data.value)).div(BigNumber(10).pow(collateral.token.decimals)).toNumber() : 0
-  }, [collateral, assetsAmounts, pool])
+    );
+    return data ? BigNumber(Number(data.value)).div(BigNumber(10).pow(collateral.token.decimals)).toNumber() : 0;
+  }, [collateral, assetsAmounts, pool]);
 
   return (
     <Col xs={24} xl={12}>
@@ -98,5 +98,5 @@ export const IsolateCollateral: React.FunctionComponent<Props> = ({ collateral, 
         handleClose={toggleRemove}
       />
     </Col>
-  )
-}
+  );
+};

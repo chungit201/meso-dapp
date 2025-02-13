@@ -13,4 +13,4 @@ export const googleConfig = {
   client_x509_cert_url:
     'https://www.googleapis.com/robot/v1/metadata/x509/meso-516%40meso-finance.iam.gserviceaccount.com',
   universe_domain: 'googleapis.com',
-}
+};

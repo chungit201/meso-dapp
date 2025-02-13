@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { Divider, Modal, Tabs, Typography } from 'antd'
-import { Deposit } from '@/common/components/Views/lending/manage/Deposit'
-import { Withdraw } from '@/common/components/Views/lending/manage/Withdraw'
-import { useQuery } from '@tanstack/react-query'
-import BigNumber from 'bignumber.js'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import useBalanceToken from '@/common/hooks/useBalanceToken'
-import { Borrow } from '@/common/components/Views/lending/manage/Borrow'
-import { Repay } from '../Views/lending/manage/Repay'
-import { CloseIcon } from '@/common/components/Icons'
-import { AssetRowType } from '@/common/components/Views/dashboard/YourSupplies'
-import { AssetMoreInformation } from '@/common/components/Views/asset/AssetMoreInformation'
+import { CloseIcon } from '@/common/components/Icons';
+import { AssetMoreInformation } from '@/common/components/Views/asset/AssetMoreInformation';
+import { AssetRowType } from '@/common/components/Views/dashboard/YourSupplies';
+import { Borrow } from '@/common/components/Views/lending/manage/Borrow';
+import { Deposit } from '@/common/components/Views/lending/manage/Deposit';
+import { Withdraw } from '@/common/components/Views/lending/manage/Withdraw';
+import useBalanceToken from '@/common/hooks/useBalanceToken';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { useQuery } from '@tanstack/react-query';
+import { Divider, Modal, Tabs, Typography } from 'antd';
+import BigNumber from 'bignumber.js';
+import React, { useEffect, useState } from 'react';
+import { Repay } from '../Views/lending/manage/Repay';
 
 export enum ManageAssetMode {
   Supply = 'Supply',
@@ -20,12 +20,12 @@ export enum ManageAssetMode {
 }
 
 interface Props {
-  isModalOpen: boolean
-  handleClose: () => void
-  asset: PoolAsset
-  mode?: ManageAssetMode | AssetRowType
-  setMode?: (mode: ManageAssetMode) => void
-  refetch?: () => void
+  isModalOpen: boolean;
+  handleClose: () => void;
+  asset: PoolAsset;
+  mode?: ManageAssetMode | AssetRowType;
+  setMode?: (mode: ManageAssetMode) => void;
+  refetch?: () => void;
 }
 
 export const ModalManageAssets: React.FunctionComponent<Props> = ({
@@ -36,44 +36,44 @@ export const ModalManageAssets: React.FunctionComponent<Props> = ({
   setMode,
   refetch: refetchOuter,
 }) => {
-  const [assetSelected, setAssetSelected] = useState<PoolAsset>(asset)
-  const [showMoreInfo, setShowMoreInfo] = useState(false)
-  const { getBalanceCoin } = useBalanceToken()
-  const { account } = useWallet()
+  const [assetSelected, setAssetSelected] = useState<PoolAsset>(asset);
+  const [showMoreInfo, setShowMoreInfo] = useState(false);
+  const { getBalanceCoin } = useBalanceToken();
+  const { account } = useWallet();
 
   useEffect(() => {
-    setAssetSelected(asset)
-  }, [asset])
+    setAssetSelected(asset);
+  }, [asset]);
 
   const { data: balanceAsset = 0, refetch } = useQuery({
     queryKey: ['getBalanceAssets', asset, account, assetSelected],
     queryFn: async () => {
-      const balance = await getBalanceCoin(assetSelected.token, account?.address as string)
+      const balance = await getBalanceCoin(assetSelected.token, account?.address as string);
       return BigNumber(balance)
         .div(BigNumber(10).pow(assetSelected.token.decimals ?? 8))
-        .toNumber()
+        .toNumber();
     },
     enabled: !!asset && !!account,
     refetchIntervalInBackground: true,
     refetchOnReconnect: 'always',
     refetchOnMount: 'always',
     refetchOnWindowFocus: 'always',
-  })
+  });
 
   const handleChange = (value: string) => {
-    setMode?.(value as any)
-  }
+    setMode?.(value as any);
+  };
 
   const retchData = async () => {
-    refetchOuter?.()
-    await refetch()
-  }
+    refetchOuter?.();
+    await refetch();
+  };
 
   return (
     <Modal
       centered
       onCancel={() => {
-        handleClose()
+        handleClose();
       }}
       open={isModalOpen}
       footer={false}
@@ -143,7 +143,9 @@ export const ModalManageAssets: React.FunctionComponent<Props> = ({
             >
               More Info{' '}
               <i
-                className={`${showMoreInfo ? 'expanded-array' : ''} fa-solid fa-chevron-down text-sm mt-1 transition-delay`}
+                className={`${
+                  showMoreInfo ? 'expanded-array' : ''
+                } fa-solid fa-chevron-down text-sm mt-1 transition-delay`}
               ></i>
             </span>
           </Divider>
@@ -151,5 +153,5 @@ export const ModalManageAssets: React.FunctionComponent<Props> = ({
         </div>
       )}
     </Modal>
-  )
-}
+  );
+};

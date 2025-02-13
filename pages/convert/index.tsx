@@ -1,52 +1,52 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { Button, Card, Dropdown, Menu, notification } from 'antd'
-import { InputCustom } from '@/common/components/InputCustom'
-import { TetherIcon } from '@/common/components/Icons'
-import { useQuery } from '@tanstack/react-query'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import useToken from '@/common/hooks/useTokens'
-import useBalanceToken from '@/common/hooks/useBalanceToken'
-import BigNumber from 'bignumber.js'
-import { InputEntryFunctionData, InputViewFunctionData } from '@aptos-labs/ts-sdk'
-import useContract from '@/common/hooks/useContract'
-import { REDEEM_USDT_ADDRESS } from '@/common/consts'
-import { formatNumberBalance } from '@/utils'
-import appActions from '@/modules/app/actions'
-import { useDispatch } from 'react-redux'
+import { TetherIcon } from '@/common/components/Icons';
+import { InputCustom } from '@/common/components/InputCustom';
+import { REDEEM_USDT_ADDRESS } from '@/common/consts';
+import useBalanceToken from '@/common/hooks/useBalanceToken';
+import useContract from '@/common/hooks/useContract';
+import useToken from '@/common/hooks/useTokens';
+import appActions from '@/modules/app/actions';
+import { formatNumberBalance } from '@/utils';
+import { InputEntryFunctionData, InputViewFunctionData } from '@aptos-labs/ts-sdk';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { useQuery } from '@tanstack/react-query';
+import { Button, Card, Dropdown, Menu, notification } from 'antd';
+import BigNumber from 'bignumber.js';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 const Page: React.FunctionComponent = () => {
-  const [amount, setAmount] = React.useState(0)
-  const { account, connected } = useWallet()
-  const { getTokenBySymbol, tokens } = useToken()
-  const { getBalanceCoin } = useBalanceToken()
-  const [tokenSelected, setTokenSelected] = useState<Token>()
+  const [amount, setAmount] = React.useState(0);
+  const { account, connected } = useWallet();
+  const { getTokenBySymbol, tokens } = useToken();
+  const { getBalanceCoin } = useBalanceToken();
+  const [tokenSelected, setTokenSelected] = useState<Token>();
 
-  const { view, run } = useContract()
-  const dispatch = useDispatch()
-  const [loading, setLoading] = React.useState(false)
+  const { view, run } = useContract();
+  const dispatch = useDispatch();
+  const [loading, setLoading] = React.useState(false);
 
   const tokensRedeem = useMemo(() => {
-    const zUSDT = getTokenBySymbol('zUSDT')
-    const zUSDc = getTokenBySymbol('zUSDC')
-    return [zUSDc, zUSDT]
-  }, [tokens])
+    const zUSDT = getTokenBySymbol('zUSDT');
+    const zUSDc = getTokenBySymbol('zUSDC');
+    return [zUSDc, zUSDT];
+  }, [tokens]);
 
   useEffect(() => {
     if (!tokenSelected && tokensRedeem.length > 0) {
-      setTokenSelected(tokensRedeem[0])
+      setTokenSelected(tokensRedeem[0]);
     }
-  }, [tokensRedeem])
+  }, [tokensRedeem]);
 
   const { data: zUsdtBalance = 0, refetch: refetchBalance } = useQuery({
     queryKey: ['zUSDTBalance', account, tokenSelected],
     queryFn: async () => {
-      const balance = await getBalanceCoin(tokenSelected as any, account?.address as any)
+      const balance = await getBalanceCoin(tokenSelected as any, account?.address as any);
       return BigNumber(Number(balance))
         .div(BigNumber(10).pow(tokenSelected?.decimals ?? 8))
-        .toNumber()
+        .toNumber();
     },
     enabled: !!account?.address && !!tokenSelected,
-  })
+  });
 
   const { data: totalAvailable = 0, refetch } = useQuery({
     queryKey: ['UsdtAvailable', tokens, tokenSelected],
@@ -55,39 +55,39 @@ const Page: React.FunctionComponent = () => {
         function: `${REDEEM_USDT_ADDRESS}::redemption::native_balance`,
         typeArguments: [tokenSelected?.address as string],
         functionArguments: [],
-      }
-      const amount = Number((await view(payload))[0])
+      };
+      const amount = Number((await view(payload))[0]);
       return BigNumber(amount)
         .div(BigNumber(10).pow(tokenSelected?.decimals ?? 8))
-        .toNumber()
+        .toNumber();
     },
     enabled: !!tokenSelected,
-  })
+  });
 
   const handleMax = () => {
     if (zUsdtBalance > totalAvailable) {
-      setAmount(totalAvailable)
+      setAmount(totalAvailable);
     } else {
-      setAmount(zUsdtBalance)
+      setAmount(zUsdtBalance);
     }
-  }
+  };
 
   const redeem = async () => {
     if (!connected) {
-      dispatch(appActions.SET_SHOW_CONNECT(true))
-      return
+      dispatch(appActions.SET_SHOW_CONNECT(true));
+      return;
     }
     if (zUsdtBalance < amount) {
-      notification.error({ message: `Insufficient balance of ${tokenSelected?.symbol}!` })
-      return
+      notification.error({ message: `Insufficient balance of ${tokenSelected?.symbol}!` });
+      return;
     }
 
     if (amount > totalAvailable) {
-      notification.error({ message: 'Exceeded limit amount!' })
-      return
+      notification.error({ message: 'Exceeded limit amount!' });
+      return;
     }
 
-    setLoading(true)
+    setLoading(true);
     try {
       const payload: InputEntryFunctionData = {
         function: `${REDEEM_USDT_ADDRESS}::redemption::redeem`,
@@ -97,21 +97,21 @@ const Page: React.FunctionComponent = () => {
             .times(BigNumber(10).pow(tokenSelected?.decimals ?? 8))
             .toString(),
         ],
-      }
-      const { hash } = await run(payload)
+      };
+      const { hash } = await run(payload);
       if (hash) {
-        await refetchBalance()
-        await refetch()
-        notification.success({ message: 'Converted successfully' })
+        await refetchBalance();
+        await refetch();
+        notification.success({ message: 'Converted successfully' });
       }
     } catch (e: any) {
-      console.log(e)
-      notification.error({ message: JSON.stringify(e.message) })
-      setLoading(false)
+      console.log(e);
+      notification.error({ message: JSON.stringify(e.message) });
+      setLoading(false);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="container max-w-[1536px] mx-auto pb-20 pt-10 px-3">
@@ -208,7 +208,7 @@ const Page: React.FunctionComponent = () => {
         </Button>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

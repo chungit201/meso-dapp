@@ -1,5 +1,5 @@
-import React from 'react'
-import { Col, Row, Skeleton } from 'antd'
+import { Col, Row, Skeleton } from 'antd';
+import React from 'react';
 
 export const TableLoading: React.FunctionComponent = () => {
   return (
@@ -17,8 +17,8 @@ export const TableLoading: React.FunctionComponent = () => {
               <Skeleton.Button className={'w-full max-w-[150px]  h-8'} active />
             </Col>
           </Row>
-        )
+        );
       })}
     </>
-  )
-}
+  );
+};

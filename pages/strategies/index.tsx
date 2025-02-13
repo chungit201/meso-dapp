@@ -37,6 +37,6 @@ const Strategies: React.FunctionComponent = () => {
     //     </div>
     //   )}
     // </>
-  )
-}
-export default Strategies
+  );
+};
+export default Strategies;

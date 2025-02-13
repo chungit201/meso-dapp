@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { Card, Col, Typography } from 'antd'
-import { useAssets } from '@/common/hooks/assets/useAssets'
-import { formatNumberBalance } from '@/utils'
-import { ManageAssetMode, ModalManageAssets } from '@/common/components/Modals/ModalManageAssets'
-import { useModal } from '@/common/hooks/useModal'
+import { ManageAssetMode, ModalManageAssets } from '@/common/components/Modals/ModalManageAssets';
+import { useAssets } from '@/common/hooks/assets/useAssets';
+import { useModal } from '@/common/hooks/useModal';
+import { formatNumberBalance } from '@/utils';
+import { Card, Col, Typography } from 'antd';
+import React, { useEffect, useState } from 'react';
 
 export const DepositCollapse: React.FunctionComponent = () => {
-  const [totalBalance, setTotalBalance] = useState(0)
-  const { assetDeposits } = useAssets()
-  const { show, setShow, toggle } = useModal()
-  const [asset, setAsset] = useState<PoolAsset | null>(null)
+  const [totalBalance, setTotalBalance] = useState(0);
+  const { assetDeposits } = useAssets();
+  const { show, setShow, toggle } = useModal();
+  const [asset, setAsset] = useState<PoolAsset | null>(null);
 
   useEffect(() => {
-    let total = 0
+    let total = 0;
     for (const item of assetDeposits) {
-      total += item.amountDeposit * (item?.token?.price ?? 0)
+      total += item.amountDeposit * (item?.token?.price ?? 0);
     }
-    setTotalBalance(total)
-  }, [assetDeposits])
+    setTotalBalance(total);
+  }, [assetDeposits]);
 
   return (
     <Col xs={24} xl={8}>
@@ -35,8 +35,8 @@ export const DepositCollapse: React.FunctionComponent = () => {
             return (
               <div
                 onClick={() => {
-                  setAsset(item)
-                  setShow(true)
+                  setAsset(item);
+                  setShow(true);
                 }}
                 className={
                   'p-3 asset-row cursor-pointer hover:bg-[#F3F5F8] hover:bg-opacity-30 flex justify-between border-b border-b-[#F3F5F8]'
@@ -53,11 +53,11 @@ export const DepositCollapse: React.FunctionComponent = () => {
                 </div>
                 <Typography>${formatNumberBalance(item.amountDeposit * item?.token?.price, 2)}</Typography>
               </div>
-            )
+            );
           })}
         </div>
       </Card>
       <ModalManageAssets mode={ManageAssetMode.Supply} isModalOpen={!!show} handleClose={toggle} asset={asset!} />
     </Col>
-  )
-}
+  );
+};

@@ -1,57 +1,57 @@
-import React, { useState } from 'react'
-import { Button, Card, Col, Row, Tooltip } from 'antd'
-import { useQuery } from '@tanstack/react-query'
-import { getTotalParticipants } from '@/common/services/points'
-import { useModal } from '@/common/hooks/useModal'
-import { copyToClipboard, ellipseAddress, formatNumberBalance } from '@/utils'
-import { CopyIcon, DocsIcon, ShareIcon } from '@/common/components/Icons'
-import Link from 'next/link'
-import Image from 'next/image'
-import { StarIcon } from '@/common/components/Icons/points'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import useNetworkConfiguration from '@/common/hooks/useNetwork'
-import { useDispatch } from 'react-redux'
-import { ModalPromationCode } from '@/common/components/Modals/points/ModalPromationCode'
+import { CopyIcon, DocsIcon, ShareIcon } from '@/common/components/Icons';
+import { StarIcon } from '@/common/components/Icons/points';
+import { ModalPromationCode } from '@/common/components/Modals/points/ModalPromationCode';
+import { useModal } from '@/common/hooks/useModal';
+import useNetworkConfiguration from '@/common/hooks/useNetwork';
+import { getTotalParticipants } from '@/common/services/points';
+import appActions from '@/modules/app/actions';
+import { copyToClipboard, ellipseAddress, formatNumberBalance } from '@/utils';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { useQuery } from '@tanstack/react-query';
+import { Button, Card, Col, Row, Tooltip } from 'antd';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 interface Props {
-  userInfo: any
+  userInfo: any;
 }
-import appActions from '@/modules/app/actions'
 
 export const PointsInfo: React.FunctionComponent<Props> = ({ userInfo }) => {
-  const [copyText, setCopyText] = useState('Copy')
+  const [copyText, setCopyText] = useState('Copy');
 
-  const { show, setShow, toggle } = useModal()
-  const { show: showPromotionCode, setShow: setShowPromotionCode, toggle: togglePromotionCode } = useModal()
-  const { connected } = useWallet()
-  const { networkCfg } = useNetworkConfiguration()
+  const { show, setShow, toggle } = useModal();
+  const { show: showPromotionCode, setShow: setShowPromotionCode, toggle: togglePromotionCode } = useModal();
+  const { connected } = useWallet();
+  const { networkCfg } = useNetworkConfiguration();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const { data: totalParticipant } = useQuery({
     queryKey: ['totalParticipant'],
     queryFn: async () => {
-      const { data } = await getTotalParticipants()
-      return data
+      const { data } = await getTotalParticipants();
+      return data;
     },
-  })
+  });
 
   const scroll = () => {
-    const task = document.getElementById('daily-task')
+    const task = document.getElementById('daily-task');
     if (task) {
       task.scrollIntoView({
         behavior: 'smooth',
-      })
+      });
     }
-  }
+  };
 
   const handleCopy = () => {
-    setCopyText('Copied!')
+    setCopyText('Copied!');
     setTimeout(() => {
-      setCopyText('Copy')
-    }, 1000)
-    copyToClipboard(userInfo.referralLink as any)
-  }
+      setCopyText('Copy');
+    }, 1000);
+    copyToClipboard(userInfo.referralLink as any);
+  };
 
   return (
     <div className={'sm:rounded-b-[80px] point-info h-full py-10 sm:py-20  px-2 '}>
@@ -166,17 +166,17 @@ export const PointsInfo: React.FunctionComponent<Props> = ({ userInfo }) => {
                             <div>{item.promotionCode}</div>
                           </div>
                         </div>
-                      )
+                      );
                     })}
                   </>
                 ) : (
                   <Button
                     onClick={() => {
                       if (!connected) {
-                        dispatch(appActions.SET_SHOW_CONNECT(true))
-                        return
+                        dispatch(appActions.SET_SHOW_CONNECT(true));
+                        return;
                       }
-                      setShowPromotionCode(true)
+                      setShowPromotionCode(true);
                     }}
                     className={'border-0  w-full bg-[#7F56D9] text-[#fff] h-12 font-semibold rounded-full'}
                   >
@@ -207,5 +207,5 @@ export const PointsInfo: React.FunctionComponent<Props> = ({ userInfo }) => {
       </div>
       <ModalPromationCode isModalOpen={!!showPromotionCode} handleClose={togglePromotionCode} />
     </div>
-  )
-}
+  );
+};

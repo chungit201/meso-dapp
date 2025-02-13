@@ -1,7 +1,7 @@
-import { Html, Head, Main, NextScript } from 'next/document'
-const title = 'Meso Finance'
+import { Head, Html, Main, NextScript } from 'next/document';
+const title = 'Meso Finance';
 const description =
-  'Meso Finance is an Open Source Protocol to create Non-Custodial Liquidity Markets to earn interest on supplying and borrowing assets with a variable or stable interest rate. The protocol is designed for easy integration into your products and services on Aptos.'
+  'Meso Finance is an Open Source Protocol to create Non-Custodial Liquidity Markets to earn interest on supplying and borrowing assets with a variable or stable interest rate. The protocol is designed for easy integration into your products and services on Aptos.';
 export default function Document() {
   return (
     <Html lang="en" suppressHydrationWarning={true}>
@@ -42,5 +42,5 @@ export default function Document() {
         <NextScript />
       </body>
     </Html>
-  )
+  );
 }

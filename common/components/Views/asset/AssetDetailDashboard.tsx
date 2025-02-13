@@ -1,13 +1,13 @@
-import React from 'react'
-import { Card, Col, Progress, Row, Typography } from 'antd'
-import { formatNumberBalance, nFormatter } from '@/utils'
-import BigNumber from 'bignumber.js'
-import { MAX_BPS } from '@/common/consts'
-import { InterestRate } from '@/common/components/Views/asset/InterestRate'
-import { isMobile } from 'react-device-detect'
+import { InterestRate } from '@/common/components/Views/asset/InterestRate';
+import { MAX_BPS } from '@/common/consts';
+import { formatNumberBalance, nFormatter } from '@/utils';
+import { Card, Col, Progress, Row, Typography } from 'antd';
+import BigNumber from 'bignumber.js';
+import React from 'react';
+import { isMobile } from 'react-device-detect';
 
 interface Props {
-  asset: PoolAsset
+  asset: PoolAsset;
 }
 
 export const AssetDetailDashboard: React.FunctionComponent<Props> = ({ asset }) => {
@@ -306,5 +306,5 @@ export const AssetDetailDashboard: React.FunctionComponent<Props> = ({ asset }) 
         </Col>
       </Row>
     </div>
-  )
-}
+  );
+};

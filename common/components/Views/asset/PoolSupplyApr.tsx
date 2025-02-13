@@ -1,10 +1,10 @@
-import { Popover } from 'antd'
-import { BoostIcon } from '@/common/components/Icons'
-import { formatNumberBalance } from '@/utils'
-import React from 'react'
+import { BoostIcon } from '@/common/components/Icons';
+import { formatNumberBalance } from '@/utils';
+import { Popover } from 'antd';
+import React from 'react';
 
 interface Props {
-  asset: PoolAsset
+  asset: PoolAsset;
 }
 
 export const PoolSupplyApr: React.FunctionComponent<Props> = ({ asset }) => {
@@ -61,5 +61,5 @@ export const PoolSupplyApr: React.FunctionComponent<Props> = ({ asset }) => {
         </span>
       </div>
     </Popover>
-  )
-}
+  );
+};

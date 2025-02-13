@@ -1,85 +1,85 @@
-import React, { useEffect, useMemo } from 'react'
-import { PointsInfo } from '@/common/components/Views/points/PointsInfo'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import { useQuery } from '@tanstack/react-query'
-import { getTasksStatus } from '@/common/services/points'
-import { getData, removeData } from '@/common/hooks/useLocalStoragre'
-import { useDispatch, useSelector } from 'react-redux'
-import { NotificationPlacement } from 'antd/es/notification'
-import { notification, Tabs } from 'antd'
-import { jwtDecode } from 'jwt-decode'
-import { getDiff } from '@/utils'
-import appActions from '@/modules/app/actions'
+import { PointsInfo } from '@/common/components/Views/points/PointsInfo';
+import { getData, removeData } from '@/common/hooks/useLocalStoragre';
+import { getTasksStatus } from '@/common/services/points';
+import appActions from '@/modules/app/actions';
+import { getDiff } from '@/utils';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { useQuery } from '@tanstack/react-query';
+import { Tabs, notification } from 'antd';
+import { NotificationPlacement } from 'antd/es/notification';
+import { jwtDecode } from 'jwt-decode';
+import React, { useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 // import { DailyTask } from '@/common/components/Views/points/DailyTask'
-import { useRouter } from 'next/router'
-import useUser from '@/common/hooks/useUser'
-import { DailyTask } from '@/common/components/Views/points/DailyTask'
-import { ReferralInfo } from '@/common/components/Views/points/ReferralInfo'
-import { MesoPointLeaderboard } from '@/common/components/Modals/points/MesoPointLeaderboard'
+import { MesoPointLeaderboard } from '@/common/components/Modals/points/MesoPointLeaderboard';
+import { DailyTask } from '@/common/components/Views/points/DailyTask';
+import { ReferralInfo } from '@/common/components/Views/points/ReferralInfo';
+import useUser from '@/common/hooks/useUser';
+import { useRouter } from 'next/router';
 
-const WARNING_TIMEOUT = 5
+const WARNING_TIMEOUT = 5;
 
 const Points: React.FunctionComponent = () => {
-  const isLogin = useSelector((state: any) => state.app.isLogin)
-  const { account, disconnect, connected } = useWallet()
-  const walletAddress = useMemo(() => account?.address, [account])
-  const dispatch = useDispatch()
-  const router = useRouter()
-  const { handleLogin, userInfo, refetchUserInfo } = useUser()
-  const accessToken = useMemo(() => getData('accessToken'), [account, isLogin])
+  const isLogin = useSelector((state: any) => state.app.isLogin);
+  const { account, disconnect, connected } = useWallet();
+  const walletAddress = useMemo(() => account?.address, [account]);
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const { handleLogin, userInfo, refetchUserInfo } = useUser();
+  const accessToken = useMemo(() => getData('accessToken'), [account, isLogin]);
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       if (router.query.ref && !accessToken && account) {
-        await handleLogin()
+        await handleLogin();
       }
-    })()
-  }, [router, isLogin, account])
+    })();
+  }, [router, isLogin, account]);
 
   const openNotification = (placement: NotificationPlacement) => {
     notification.error({
       message: `You changed your account, please reconnect the wallet !`,
       placement,
       duration: WARNING_TIMEOUT,
-    })
-  }
+    });
+  };
 
   const { data: tasksStatus, refetch: refetchTasksStatus } = useQuery({
     queryKey: ['tasksStatus', account, isLogin],
     queryFn: async () => {
-      const { data } = await getTasksStatus(walletAddress as string)
-      return data.tasks
+      const { data } = await getTasksStatus(walletAddress as string);
+      return data.tasks;
     },
     enabled: !!walletAddress,
-  })
+  });
 
   const accessToken2 = useMemo(async () => {
-    const accessToken = getData('accessToken')
-    if (!accessToken) return
-    const decoded: any = jwtDecode(accessToken ?? '')
-    const exp = getDiff(Number(decoded?.exp) * 1000)
+    const accessToken = getData('accessToken');
+    if (!accessToken) return;
+    const decoded: any = jwtDecode(accessToken ?? '');
+    const exp = getDiff(Number(decoded?.exp) * 1000);
     if (connected && account && walletAddress !== decoded.address) {
-      openNotification('top')
-      await removeData('accessToken')
-      disconnect()
-      dispatch(appActions.SET_IS_LOGIN(false))
+      openNotification('top');
+      await removeData('accessToken');
+      disconnect();
+      dispatch(appActions.SET_IS_LOGIN(false));
     }
     if (exp < 0) {
-      dispatch(appActions.SET_IS_LOGIN(false))
-      await removeData('accessToken')
-      disconnect()
+      dispatch(appActions.SET_IS_LOGIN(false));
+      await removeData('accessToken');
+      disconnect();
     }
-    return accessToken
-  }, [walletAddress])
+    return accessToken;
+  }, [walletAddress]);
 
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       if (!accessToken2) {
-        dispatch(appActions.SET_IS_LOGIN(false))
-        disconnect()
+        dispatch(appActions.SET_IS_LOGIN(false));
+        disconnect();
       }
-    })()
-  }, [walletAddress])
+    })();
+  }, [walletAddress]);
 
   return (
     <div className={'bg-[#FFF] min-h-screen'}>
@@ -104,7 +104,7 @@ const Points: React.FunctionComponent = () => {
         <ReferralInfo userInfo={userInfo} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Points
+export default Points;

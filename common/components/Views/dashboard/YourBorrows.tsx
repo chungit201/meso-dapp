@@ -1,20 +1,20 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { Card, Col, Pagination, PaginationProps, Popover, Row, Switch, Typography } from 'antd'
-import { useAssets } from '@/common/hooks/assets/useAssets'
-import { formatNumberBalance, paginate } from '@/utils'
-import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets'
-import ModalEnableEMode from '@/common/components/Modals/ModalEnableEMode'
-import { useModal } from '@/common/hooks/useModal'
-import { AssetRowItem } from '@/common/components/Views/asset/AssetRowItem'
-import { AssetRowType } from '@/common/components/Views/dashboard/YourSupplies'
-import { BorrowingPowerProgress } from '@/common/components/Views/dashboard/BorrowingPowerProgress'
-import { useDashboard } from '@/common/hooks/dashboard/useDashboard'
-import useUser from '@/common/hooks/useUser'
-import { CircleInfo, CircleInfoBlue } from '@/common/components/Icons'
+import { CircleInfo, CircleInfoBlue } from '@/common/components/Icons';
+import ModalEnableEMode from '@/common/components/Modals/ModalEnableEMode';
+import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets';
+import { AssetRowItem } from '@/common/components/Views/asset/AssetRowItem';
+import { BorrowingPowerProgress } from '@/common/components/Views/dashboard/BorrowingPowerProgress';
+import { AssetRowType } from '@/common/components/Views/dashboard/YourSupplies';
+import { useAssets } from '@/common/hooks/assets/useAssets';
+import { useDashboard } from '@/common/hooks/dashboard/useDashboard';
+import { useModal } from '@/common/hooks/useModal';
+import useUser from '@/common/hooks/useUser';
+import { formatNumberBalance, paginate } from '@/utils';
+import { Card, Col, Pagination, PaginationProps, Popover, Row, Switch, Typography } from 'antd';
+import React, { useEffect, useMemo, useState } from 'react';
 
 interface Props {
-  setAssetSelected: (value: PoolAsset) => void
-  setMode: (value: ManageAssetMode | AssetRowType) => void
+  setAssetSelected: (value: PoolAsset) => void;
+  setMode: (value: ManageAssetMode | AssetRowType) => void;
 }
 
 export enum EMODE_NAME {
@@ -23,45 +23,45 @@ export enum EMODE_NAME {
 }
 
 export const YourBorrows: React.FunctionComponent<Props> = ({ setAssetSelected, setMode }) => {
-  const { assetDebts } = useAssets()
-  const [totalBorrow, setTotalBorrow] = useState(0)
-  const [totalBorrowApr, setTotalBorrowApr] = useState(0)
-  const { userEMode } = useUser()
-  const { borrowPower } = useDashboard()
-  const { show, setShow, toggle } = useModal()
-  const [current, setCurrent] = useState(1)
+  const { assetDebts } = useAssets();
+  const [totalBorrow, setTotalBorrow] = useState(0);
+  const [totalBorrowApr, setTotalBorrowApr] = useState(0);
+  const { userEMode } = useUser();
+  const { borrowPower } = useDashboard();
+  const { show, setShow, toggle } = useModal();
+  const [current, setCurrent] = useState(1);
 
   useEffect(() => {
-    let totalBr = 0
-    let totalApr = 0
-    let balance = 0
+    let totalBr = 0;
+    let totalApr = 0;
+    let balance = 0;
     for (const item of assetDebts) {
-      totalBr += item.debtAmount * item?.token?.price
-      totalApr += (item.borrowApy + -item.incentiveBorrowApy) * (item.debtAmount * item?.token?.price)
-      balance += item.walletBalance * item?.token?.price
+      totalBr += item.debtAmount * item?.token?.price;
+      totalApr += (item.borrowApy + -item.incentiveBorrowApy) * (item.debtAmount * item?.token?.price);
+      balance += item.walletBalance * item?.token?.price;
     }
-    setTotalBorrowApr(totalApr / totalBr)
-    setTotalBorrow(totalBr)
-  }, [assetDebts])
+    setTotalBorrowApr(totalApr / totalBr);
+    setTotalBorrow(totalBr);
+  }, [assetDebts]);
 
   const handleClick = () => {
-    setShow(true)
-  }
+    setShow(true);
+  };
 
   const onChange: PaginationProps['onChange'] = (page) => {
-    setCurrent(page)
-  }
+    setCurrent(page);
+  };
 
-  const assets = useMemo(() => paginate(assetDebts, current, 10), [assetDebts, current])
+  const assets = useMemo(() => paginate(assetDebts, current, 10), [assetDebts, current]);
 
   const emodeName = useMemo(() => {
     if (userEMode.includes('aptos')) {
-      return EMODE_NAME.APT
+      return EMODE_NAME.APT;
     }
     if (userEMode.includes('USD')) {
-      return EMODE_NAME.USD
+      return EMODE_NAME.USD;
     }
-  }, [userEMode])
+  }, [userEMode]);
 
   return (
     <Col xs={24} xl={12}>
@@ -150,7 +150,7 @@ export const YourBorrows: React.FunctionComponent<Props> = ({ setAssetSelected, 
                     setMode={setMode}
                     setAssetSelected={setAssetSelected}
                   />
-                )
+                );
               })}
             </div>
           )}
@@ -171,5 +171,5 @@ export const YourBorrows: React.FunctionComponent<Props> = ({ setAssetSelected, 
       </Card>
       {show && <ModalEnableEMode isModalOpen={show} handleClose={toggle} />}
     </Col>
-  )
-}
+  );
+};

@@ -1,36 +1,38 @@
-import React, { useMemo } from 'react'
-import { Button, Col, Row, Typography } from 'antd'
-import BigNumber from 'bignumber.js'
-import { useIsolatePools } from '@/common/hooks/useIsolatePools'
-import { formatNumberBalance } from '@/utils'
-import { useModal } from '@/common/hooks/useModal'
-import { ModalSupplyPosition } from '@/common/components/Views/isolate/modals/ModalSupplyPosition'
-import { ModalWithdrawPosition } from '@/common/components/Views/isolate/modals/ModalWithdrawPosition'
-import { ModalBorrowPosition } from '@/common/components/Views/isolate/modals/ModalBorrowPosition'
-import { ModalRepayPosition } from '@/common/components/Views/isolate/modals/ModalRepayPosition'
+import { ModalBorrowPosition } from '@/common/components/Views/isolate/modals/ModalBorrowPosition';
+import { ModalRepayPosition } from '@/common/components/Views/isolate/modals/ModalRepayPosition';
+import { ModalSupplyPosition } from '@/common/components/Views/isolate/modals/ModalSupplyPosition';
+import { ModalWithdrawPosition } from '@/common/components/Views/isolate/modals/ModalWithdrawPosition';
+import { useIsolatePools } from '@/common/hooks/useIsolatePools';
+import { useModal } from '@/common/hooks/useModal';
+import { formatNumberBalance } from '@/utils';
+import { Button, Col, Row, Typography } from 'antd';
+import BigNumber from 'bignumber.js';
+import React, { useMemo } from 'react';
 
 interface Props {
-  liability: PoolAsset
-  pool: IsolatePools
+  liability: PoolAsset;
+  pool: IsolatePools;
 }
 
 export const IsolateLiability: React.FunctionComponent<Props> = ({ liability, pool }) => {
-  const { assetsAmounts, assetsDebts } = useIsolatePools()
+  const { assetsAmounts, assetsDebts } = useIsolatePools();
 
-  const { show: showSupply, setShow: setShowSupply, toggle: toggleSupply } = useModal()
-  const { show: showWithdraw, setShow: setShowWithdraw, toggle: toggleWithdraw } = useModal()
-  const { show: showBorrow, setShow: setShowBorrow, toggle: toggleBorrow } = useModal()
-  const { show: showRepay, setShow: setShowRepay, toggle: toggleRepay } = useModal()
+  const { show: showSupply, setShow: setShowSupply, toggle: toggleSupply } = useModal();
+  const { show: showWithdraw, setShow: setShowWithdraw, toggle: toggleWithdraw } = useModal();
+  const { show: showBorrow, setShow: setShowBorrow, toggle: toggleBorrow } = useModal();
+  const { show: showRepay, setShow: setShowRepay, toggle: toggleRepay } = useModal();
 
   const totalSupply = useMemo(() => {
-    const data = assetsAmounts.find((x: any) => x.poolAddress === liability.poolAddress && pool.position === x.position)
-    return data ? BigNumber(Number(data.value)).div(BigNumber(10).pow(liability.token.decimals)).toNumber() : 0
-  }, [liability, assetsAmounts, pool])
+    const data = assetsAmounts.find(
+      (x: any) => x.poolAddress === liability.poolAddress && pool.position === x.position,
+    );
+    return data ? BigNumber(Number(data.value)).div(BigNumber(10).pow(liability.token.decimals)).toNumber() : 0;
+  }, [liability, assetsAmounts, pool]);
 
   const totalBorrow = useMemo(() => {
-    const data = assetsDebts.find((x: any) => x.poolAddress === liability.poolAddress && pool.position === x.position)
-    return data ? BigNumber(Number(data.value)).div(BigNumber(10).pow(liability.token.decimals)).toNumber() : 0
-  }, [liability, assetsAmounts, pool])
+    const data = assetsDebts.find((x: any) => x.poolAddress === liability.poolAddress && pool.position === x.position);
+    return data ? BigNumber(Number(data.value)).div(BigNumber(10).pow(liability.token.decimals)).toNumber() : 0;
+  }, [liability, assetsAmounts, pool]);
 
   return (
     <Col xs={24} xl={12}>
@@ -195,5 +197,5 @@ export const IsolateLiability: React.FunctionComponent<Props> = ({ liability, po
         handleClose={toggleRepay}
       />
     </Col>
-  )
-}
+  );
+};

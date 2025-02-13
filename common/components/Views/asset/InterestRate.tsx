@@ -1,40 +1,40 @@
-import React, { useMemo } from 'react'
-import { Card, Typography } from 'antd'
-import { UtilizationChart } from '@/common/components/Views/asset/UtilizationChart'
-import { MAX_BPS } from '@/common/consts'
-import { formatNumberBalance } from '@/utils'
-import { getBorrowRate } from '@/utils/assets'
+import { UtilizationChart } from '@/common/components/Views/asset/UtilizationChart';
+import { MAX_BPS } from '@/common/consts';
+import { formatNumberBalance } from '@/utils';
+import { getBorrowRate } from '@/utils/assets';
+import { Card, Typography } from 'antd';
+import React, { useMemo } from 'react';
 
 interface Props {
-  asset: PoolAsset
+  asset: PoolAsset;
 }
 
 export const InterestRate: React.FunctionComponent<Props> = ({ asset }) => {
   const data = useMemo(() => {
-    const chartData = []
-    const current_utilization = asset.totalDebt / asset.poolSupply
-    const optimal_utilization = [0, asset.optimalUtilizationBps / MAX_BPS, 1]
+    const chartData = [];
+    const current_utilization = asset.totalDebt / asset.poolSupply;
+    const optimal_utilization = [0, asset.optimalUtilizationBps / MAX_BPS, 1];
     optimal_utilization.splice(
       asset.optimalUtilizationBps / MAX_BPS < current_utilization ? 2 : 1,
       0,
       current_utilization,
-    )
+    );
 
-    const utilizationData = []
-    let range = 0
+    const utilizationData = [];
+    let range = 0;
     for (let i = 0; i < 200; i++) {
-      utilizationData.push((range += 0.5))
+      utilizationData.push((range += 0.5));
     }
-    utilizationData.push(current_utilization * 100)
+    utilizationData.push(current_utilization * 100);
     for (const num of utilizationData) {
       chartData.push({
         utilization: num,
         borrowRate: (getBorrowRate(num / 100, asset) / MAX_BPS) * 100,
-      })
+      });
     }
 
-    return chartData.sort((a, b) => a.utilization - b.utilization)
-  }, [asset])
+    return chartData.sort((a, b) => a.utilization - b.utilization);
+  }, [asset]);
 
   return (
     <div className={'border border-[#EFF1F5] bg-[#F9F9FB] rounded-[28px] p-2 sm:p-3'}>
@@ -77,5 +77,5 @@ export const InterestRate: React.FunctionComponent<Props> = ({ asset }) => {
         </div>
       </Card>
     </div>
-  )
-}
+  );
+};

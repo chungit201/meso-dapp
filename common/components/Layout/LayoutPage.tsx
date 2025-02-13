@@ -1,41 +1,41 @@
-import React, { useEffect } from 'react'
-import { HeaderPage } from '@/common/components/Header'
-import { backup } from '@/common/services/assets'
-import Footer from '@/common/components/Footer'
-import { ModalWrongNetwork } from '@/common/components/Modals/ModalWrongNetwork'
-import { useModal } from '@/common/hooks/useModal'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import useNetworkConfiguration from '@/common/hooks/useNetwork'
-import Image from 'next/image'
+import Footer from '@/common/components/Footer';
+import { HeaderPage } from '@/common/components/Header';
+import { ModalWrongNetwork } from '@/common/components/Modals/ModalWrongNetwork';
+import { useModal } from '@/common/hooks/useModal';
+import useNetworkConfiguration from '@/common/hooks/useNetwork';
+import { backup } from '@/common/services/assets';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import Image from 'next/image';
+import React, { useEffect } from 'react';
 
 interface Props {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export const LayoutPage: React.FunctionComponent<Props> = ({ children }) => {
-  const { show, setShow, toggle } = useModal()
-  const { network } = useWallet()
-  const { networkCfg } = useNetworkConfiguration()
+  const { show, setShow, toggle } = useModal();
+  const { network } = useWallet();
+  const { networkCfg } = useNetworkConfiguration();
 
   useEffect(() => {
     if (network && network?.name !== networkCfg) {
-      setShow(true)
+      setShow(true);
     } else {
-      setShow(false)
+      setShow(false);
     }
-  }, [network, networkCfg])
+  }, [network, networkCfg]);
 
   useEffect(() => {
-    backupData()
-  }, [])
+    backupData();
+  }, []);
 
   const backupData = async () => {
     try {
-      await backup()
+      await backup();
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }
+  };
 
   return (
     <div className={'relative'}>
@@ -54,5 +54,5 @@ export const LayoutPage: React.FunctionComponent<Props> = ({ children }) => {
       />
       <ModalWrongNetwork isModalOpen={!!show} handleClose={toggle} />
     </div>
-  )
-}
+  );
+};

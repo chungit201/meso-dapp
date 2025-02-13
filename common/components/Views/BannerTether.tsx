@@ -1,18 +1,18 @@
-import React from 'react'
-import Image from 'next/image'
-import { Button } from 'antd'
-import { useRouter } from 'next/router'
-import { CloseIconVector } from '@/common/components/Icons/points'
+import { CloseIconVector } from '@/common/components/Icons/points';
+import { Button } from 'antd';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import React from 'react';
 
 interface Props {
-  handleClose: () => void
+  handleClose: () => void;
 }
 
 export const BannerTether: React.FunctionComponent<Props> = ({ handleClose }) => {
-  const router = useRouter()
+  const router = useRouter();
   const gotoRedeem = () => {
-    router.push('/convert')
-  }
+    router.push('/convert');
+  };
 
   return (
     <div className={'fixed bottom-5 flex items-center gap-3 p-4 right-1 sm:right-5 bannerTetherBox z-[100]'}>
@@ -32,5 +32,5 @@ export const BannerTether: React.FunctionComponent<Props> = ({ handleClose }) =>
         </Button>
       </div>
     </div>
-  )
-}
+  );
+};

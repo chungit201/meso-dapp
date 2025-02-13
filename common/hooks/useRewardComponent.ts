@@ -1,8 +1,8 @@
-import useContract from '@/common/hooks/useContract'
-import { MESO_ADDRESS } from '@/common/consts'
+import { MESO_ADDRESS } from '@/common/consts';
+import useContract from '@/common/hooks/useContract';
 
 export const useRewardComponent = () => {
-  const { view } = useContract()
+  const { view } = useContract();
 
   const getRewardRate = async (rewardPoolAddress: string) => {
     try {
@@ -10,12 +10,12 @@ export const useRewardComponent = () => {
         function: `${MESO_ADDRESS}::rewards_pool::reward_rate`,
         typeArguments: [],
         functionArguments: [rewardPoolAddress],
-      })
-      return Number(data[0])
+      });
+      return Number(data[0]);
     } catch (e) {
-      return 0
+      return 0;
     }
-  }
+  };
 
   const getTotalStake = async (rewardPoolAddress: string) => {
     try {
@@ -23,11 +23,11 @@ export const useRewardComponent = () => {
         function: `${MESO_ADDRESS}::rewards_pool::total_stake`,
         typeArguments: [],
         functionArguments: [rewardPoolAddress],
-      })
-      return Number(data[0])
+      });
+      return Number(data[0]);
     } catch (e) {
-      return 0
+      return 0;
     }
-  }
-  return { getRewardRate, getTotalStake }
-}
+  };
+  return { getRewardRate, getTotalStake };
+};

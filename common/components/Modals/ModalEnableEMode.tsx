@@ -1,22 +1,22 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
-import { Button, Col, Modal, Row, Select, Skeleton, Typography } from 'antd'
-import useTransactionCallback from '@/common/hooks/assets/useTransactionCallback'
-import { useQuery } from '@tanstack/react-query'
-import useContract from '@/common/hooks/useContract'
-import { MAX_BPS, MESO_ADDRESS } from '@/common/consts'
-import { CloseIcon } from '@/common/components/Icons'
-import useUser from '@/common/hooks/useUser'
-import { useAssets } from '@/common/hooks/assets/useAssets'
-import { emodeWarming } from '@/utils/warning'
-import { formatNumberBalance } from '@/utils'
-import { ManageAssetMode, ModalManageAssets } from '@/common/components/Modals/ModalManageAssets'
-import { useDispatch, useSelector } from 'react-redux'
-import appActions from '@/modules/app/actions'
-import { AssetsContext } from '@/common/context'
+import { CloseIcon } from '@/common/components/Icons';
+import { ManageAssetMode, ModalManageAssets } from '@/common/components/Modals/ModalManageAssets';
+import { MAX_BPS, MESO_ADDRESS } from '@/common/consts';
+import { AssetsContext } from '@/common/context';
+import { useAssets } from '@/common/hooks/assets/useAssets';
+import useTransactionCallback from '@/common/hooks/assets/useTransactionCallback';
+import useContract from '@/common/hooks/useContract';
+import useUser from '@/common/hooks/useUser';
+import appActions from '@/modules/app/actions';
+import { formatNumberBalance } from '@/utils';
+import { emodeWarming } from '@/utils/warning';
+import { useQuery } from '@tanstack/react-query';
+import { Button, Col, Modal, Row, Select, Skeleton, Typography } from 'antd';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface Props {
-  isModalOpen: boolean
-  handleClose: () => void
+  isModalOpen: boolean;
+  handleClose: () => void;
 }
 
 export enum EMODE_NAME {
@@ -25,22 +25,22 @@ export enum EMODE_NAME {
 }
 
 export const ModalEnableEMode: React.FunctionComponent<Props> = ({ isModalOpen, handleClose }) => {
-  const { refetchAllAssetData, allAssetsData } = useContext(AssetsContext)
-  const { userEMode, refetchUserEmode } = useUser()
-  const { assetDebts, assetDeposits } = useAssets()
-  const transactionCallback = useTransactionCallback()
-  const [modeKey, setModeKey] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [assetsCanRepay, setAssetsCanRepay] = useState<PoolAsset[]>([])
-  const [assetRepaySelected, setAssetRepaySelected] = useState<PoolAsset | null>(null)
-  const { view } = useContract()
-  const app = useSelector((state: any) => state.app)
-  const dispatch = useDispatch()
+  const { refetchAllAssetData, allAssetsData } = useContext(AssetsContext);
+  const { userEMode, refetchUserEmode } = useUser();
+  const { assetDebts, assetDeposits } = useAssets();
+  const transactionCallback = useTransactionCallback();
+  const [modeKey, setModeKey] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [assetsCanRepay, setAssetsCanRepay] = useState<PoolAsset[]>([]);
+  const [assetRepaySelected, setAssetRepaySelected] = useState<PoolAsset | null>(null);
+  const { view } = useContract();
+  const app = useSelector((state: any) => state.app);
+  const dispatch = useDispatch();
 
   const handleChange = (value: EMODE_NAME) => {
-    console.log(`selected ${value}`)
-    setModeKey(value)
-  }
+    console.log(`selected ${value}`);
+    setModeKey(value);
+  };
 
   const { data: emodeKeys = [] } = useQuery({
     queryKey: ['emodeKeys', MESO_ADDRESS],
@@ -49,24 +49,24 @@ export const ModalEnableEMode: React.FunctionComponent<Props> = ({ isModalOpen, 
         function: `${MESO_ADDRESS}::meso::emode_keys`,
         typeArguments: [],
         functionArguments: [],
-      })
-      return res[0] as string[]
+      });
+      return res[0] as string[];
     },
-  })
+  });
 
   const { data: assetsModeAvailable = [], isFetching } = useQuery({
     queryKey: ['AssetModeAvailable', modeKey, allAssetsData],
     queryFn: async () => {
-      return allAssetsData.filter((x) => x.emodeId === modeKey)
+      return allAssetsData.filter((x) => x.emodeId === modeKey);
     },
     enabled: !!modeKey,
-  })
+  });
 
   useEffect(() => {
     if (emodeKeys.length > 0) {
-      setModeKey(emodeKeys[0])
+      setModeKey(emodeKeys[0]);
     }
-  }, [emodeKeys])
+  }, [emodeKeys]);
 
   const options = useMemo(() => {
     return emodeKeys.map((key: string) => ({
@@ -74,40 +74,40 @@ export const ModalEnableEMode: React.FunctionComponent<Props> = ({ isModalOpen, 
       label: (
         <div className={'py-3'}>{key.includes('0x1::aptos_coin::AptosCoin') ? EMODE_NAME.APT : EMODE_NAME.STABLE}</div>
       ),
-    }))
-  }, [emodeKeys])
+    }));
+  }, [emodeKeys]);
 
   //handle warning when enable or disable E-Mode
   const warning = useMemo(() => {
-    if (!modeKey) return ''
-    if (assetDebts.length === 0) return ''
-    if (assetDeposits.length === 0) return ''
+    if (!modeKey) return '';
+    if (assetDebts.length === 0) return '';
+    if (assetDeposits.length === 0) return '';
 
     if (!userEMode) {
-      const assetNotAvailable = assetDebts.find((x) => x.emodeId !== modeKey)
+      const assetNotAvailable = assetDebts.find((x) => x.emodeId !== modeKey);
       if (assetNotAvailable) {
-        setAssetsCanRepay(assetDebts.filter((x) => x.emodeId !== modeKey))
-        return emodeWarming.Enable
+        setAssetsCanRepay(assetDebts.filter((x) => x.emodeId !== modeKey));
+        return emodeWarming.Enable;
       }
     } else {
-      let totalSupply = 0
-      let totalDebt = 0
-      let totalBorrowDisabledEmodeAvailable = 0
+      let totalSupply = 0;
+      let totalDebt = 0;
+      let totalBorrowDisabledEmodeAvailable = 0;
 
       for (const asset of assetDeposits) {
-        totalSupply += asset.amountDeposit * asset.token.price
-        totalBorrowDisabledEmodeAvailable += asset.amountDeposit * asset.token.price * (asset.normaBps / MAX_BPS)
+        totalSupply += asset.amountDeposit * asset.token.price;
+        totalBorrowDisabledEmodeAvailable += asset.amountDeposit * asset.token.price * (asset.normaBps / MAX_BPS);
       }
       for (const asset of assetDebts) {
-        totalDebt += asset.debtAmount * asset.token.price
+        totalDebt += asset.debtAmount * asset.token.price;
       }
       if (totalDebt > totalBorrowDisabledEmodeAvailable) {
-        setAssetsCanRepay(assetDebts)
-        return emodeWarming.Disable
+        setAssetsCanRepay(assetDebts);
+        return emodeWarming.Disable;
       }
     }
-    return ''
-  }, [emodeKeys, assetDebts, modeKey, assetDeposits])
+    return '';
+  }, [emodeKeys, assetDebts, modeKey, assetDeposits]);
 
   const handleEnable = async () => {
     try {
@@ -118,18 +118,18 @@ export const ModalEnableEMode: React.FunctionComponent<Props> = ({ isModalOpen, 
           functionArguments: [modeKey.toString()],
         },
         onSuccess(hash: string) {
-          console.log('hash', hash)
+          console.log('hash', hash);
           setTimeout(() => {
-            refetchUserEmode()
-            refetchAllAssetData()
-          }, 1000)
+            refetchUserEmode();
+            refetchAllAssetData();
+          }, 1000);
         },
         setLoading,
-      })
+      });
     } catch (e) {
-      console.log('e', e)
+      console.log('e', e);
     }
-  }
+  };
 
   const handleDisable = async () => {
     try {
@@ -141,16 +141,16 @@ export const ModalEnableEMode: React.FunctionComponent<Props> = ({ isModalOpen, 
         },
         onSuccess(hash: string) {
           setTimeout(() => {
-            refetchUserEmode()
-            refetchAllAssetData()
-          }, 1000)
+            refetchUserEmode();
+            refetchAllAssetData();
+          }, 1000);
         },
         setLoading,
-      })
+      });
     } catch (e) {
-      console.log('e', e)
+      console.log('e', e);
     }
-  }
+  };
 
   const renderEmodeForm = () => (
     <div className={'px-5 pb-5'}>
@@ -231,13 +231,13 @@ export const ModalEnableEMode: React.FunctionComponent<Props> = ({ isModalOpen, 
             </Row>
             <div className={'max-h-[200px] overflow-y-auto'}>
               {assetsCanRepay.map((item, index) => {
-                let totalSupply = 0
-                const assetsDepositMode = assetDeposits.filter((x) => x.emodeId === userEMode)
+                let totalSupply = 0;
+                const assetsDepositMode = assetDeposits.filter((x) => x.emodeId === userEMode);
                 for (const asset of assetsDepositMode) {
-                  totalSupply += asset.amountDeposit * asset.token.price
+                  totalSupply += asset.amountDeposit * asset.token.price;
                 }
-                const totalCanRepay = totalSupply - totalSupply * (item.normaBps / MAX_BPS)
-                const mintRepay = userEMode ? totalCanRepay : item.debtAmount
+                const totalCanRepay = totalSupply - totalSupply * (item.normaBps / MAX_BPS);
+                const mintRepay = userEMode ? totalCanRepay : item.debtAmount;
                 return (
                   <Row key={index} className={'py-2 px-4'}>
                     <Col className={'flex items-center'} span={7}>
@@ -271,8 +271,8 @@ export const ModalEnableEMode: React.FunctionComponent<Props> = ({ isModalOpen, 
                     <Col span={5}>
                       <Button
                         onClick={() => {
-                          setAssetRepaySelected(item)
-                          dispatch(appActions.SET_MANAGE_ASSETS(true))
+                          setAssetRepaySelected(item);
+                          dispatch(appActions.SET_MANAGE_ASSETS(true));
                         }}
                         className={
                           'w-full flex justify-center items-center border-[#7F56D9] gap-2 rounded-full text-[#7F56D9] font-semibold'
@@ -283,7 +283,7 @@ export const ModalEnableEMode: React.FunctionComponent<Props> = ({ isModalOpen, 
                       </Button>
                     </Col>
                   </Row>
-                )
+                );
               })}
             </div>
           </div>
@@ -310,13 +310,13 @@ export const ModalEnableEMode: React.FunctionComponent<Props> = ({ isModalOpen, 
         </Button>
       )}
     </div>
-  )
+  );
 
   return (
     <Modal
       centered
       onCancel={() => {
-        handleClose()
+        handleClose();
       }}
       closable={false}
       open={isModalOpen}
@@ -336,11 +336,11 @@ export const ModalEnableEMode: React.FunctionComponent<Props> = ({ isModalOpen, 
         mode={ManageAssetMode.Repay}
         isModalOpen={app.showModalManageAssets}
         handleClose={() => {
-          dispatch(appActions.SET_MANAGE_ASSETS(false))
+          dispatch(appActions.SET_MANAGE_ASSETS(false));
         }}
         asset={assetRepaySelected!}
       />
     </Modal>
-  )
-}
-export default ModalEnableEMode
+  );
+};
+export default ModalEnableEMode;

@@ -1,20 +1,20 @@
-import React, { useMemo } from 'react'
-import { Modal, Tabs, Typography } from 'antd'
-import { CloseIcon, SwapIcon } from '@/common/components/Icons'
-import { generatePayloadUserPosition, Strategy } from '@/utils/stategies'
-import { DepositLoop } from '@/common/components/Views/strategies/DepositLoop'
-import { IncreaseLoop } from '@/common/components/Views/strategies/IncreaseLoop'
-import { useQuery } from '@tanstack/react-query'
-import BigNumber from 'bignumber.js'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import useContract from '@/common/hooks/useContract'
-import { WithdrawLoop } from '@/common/components/Views/strategies/WithdrawLoop'
-import { useAssets } from '@/common/hooks/assets/useAssets'
+import { CloseIcon, SwapIcon } from '@/common/components/Icons';
+import { DepositLoop } from '@/common/components/Views/strategies/DepositLoop';
+import { IncreaseLoop } from '@/common/components/Views/strategies/IncreaseLoop';
+import { WithdrawLoop } from '@/common/components/Views/strategies/WithdrawLoop';
+import { useAssets } from '@/common/hooks/assets/useAssets';
+import useContract from '@/common/hooks/useContract';
+import { Strategy, generatePayloadUserPosition } from '@/utils/stategies';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { useQuery } from '@tanstack/react-query';
+import { Modal, Tabs, Typography } from 'antd';
+import BigNumber from 'bignumber.js';
+import React, { useMemo } from 'react';
 
 interface Props {
-  isModalOpen: boolean
-  handleClose: () => void
-  pair: Strategy
+  isModalOpen: boolean;
+  handleClose: () => void;
+  pair: Strategy;
 }
 
 export enum LoopMode {
@@ -24,27 +24,27 @@ export enum LoopMode {
 }
 
 export const ModalLoop: React.FunctionComponent<Props> = ({ isModalOpen, handleClose, pair }) => {
-  const [mode, setMode] = React.useState<LoopMode>(LoopMode.DEPOSIT)
-  const { assetDebts, assetDeposits } = useAssets()
+  const [mode, setMode] = React.useState<LoopMode>(LoopMode.DEPOSIT);
+  const { assetDebts, assetDeposits } = useAssets();
 
-  const { account } = useWallet()
-  const { view } = useContract()
+  const { account } = useWallet();
+  const { view } = useContract();
 
   const handleChange = (value: string) => {
-    setMode(value as any)
-  }
+    setMode(value as any);
+  };
 
   const { data: { totalSupplied = 0, totalDebt = 0, userLeverage = 0 } = {}, refetch: refetchPosition } = useQuery({
     queryKey: ['UserPosition', pair, account],
     queryFn: async () => {
-      const userPosition = await view(generatePayloadUserPosition(pair, account?.address as string))
+      const userPosition = await view(generatePayloadUserPosition(pair, account?.address as string));
       const totalSupplied =
         pair.asset0.token.symbol === 'stAPT'
           ? BigNumber(Number(userPosition[0]))
               .div(BigNumber(10).pow(pair.asset0.token.decimals))
               .div(pair.asset0.token.price)
               .toNumber()
-          : BigNumber(Number(userPosition[0])).div(BigNumber(10).pow(pair.asset0.token.decimals)).toNumber()
+          : BigNumber(Number(userPosition[0])).div(BigNumber(10).pow(pair.asset0.token.decimals)).toNumber();
 
       const totalDebt =
         pair.asset0.token.symbol === 'stAPT'
@@ -52,38 +52,38 @@ export const ModalLoop: React.FunctionComponent<Props> = ({ isModalOpen, handleC
               .div(BigNumber(10).pow(pair.asset0.token.decimals))
               .div(pair.asset0.token.price)
               .toNumber()
-          : BigNumber(Number(userPosition[2])).div(BigNumber(10).pow(pair.asset0.token.decimals)).toNumber()
+          : BigNumber(Number(userPosition[2])).div(BigNumber(10).pow(pair.asset0.token.decimals)).toNumber();
 
-      const userLeverage = BigNumber(Number(userPosition[3])).div(BigNumber(100)).toNumber()
+      const userLeverage = BigNumber(Number(userPosition[3])).div(BigNumber(100)).toNumber();
 
       return {
         totalSupplied,
         totalDebt,
         userLeverage,
-      }
+      };
     },
     enabled: !!pair && !!account,
-  })
+  });
 
   const amountDeposited = useMemo(() => {
-    if (assetDeposits.length === 0) return 0
-    const assetDeposit = assetDeposits.find((x) => x.token.symbol === pair.asset0.token.symbol)
-    const assetBorrow = assetDebts.find((x) => x.token.symbol === pair.asset1.token.symbol)
-    if (!assetDeposit || !assetBorrow) return 0
+    if (assetDeposits.length === 0) return 0;
+    const assetDeposit = assetDeposits.find((x) => x.token.symbol === pair.asset0.token.symbol);
+    const assetBorrow = assetDebts.find((x) => x.token.symbol === pair.asset1.token.symbol);
+    if (!assetDeposit || !assetBorrow) return 0;
     if (assetDeposit && assetBorrow) {
       return (
         (assetDeposit.amountDeposit * assetDeposit.token.price - assetBorrow.debtAmount * assetBorrow.token.price) /
         assetDeposit.token.price
-      )
+      );
     }
-    return 0
-  }, [assetDeposits, assetDebts])
+    return 0;
+  }, [assetDeposits, assetDebts]);
 
   return (
     <Modal
       centered
       onCancel={() => {
-        handleClose()
+        handleClose();
       }}
       open={isModalOpen}
       footer={false}
@@ -134,5 +134,5 @@ export const ModalLoop: React.FunctionComponent<Props> = ({ isModalOpen, handleC
         </Tabs>
       </div>
     </Modal>
-  )
-}
+  );
+};

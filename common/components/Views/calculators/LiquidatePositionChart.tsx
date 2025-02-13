@@ -1,15 +1,15 @@
-import React, { useMemo } from 'react'
-import { Bar, CartesianGrid, ComposedChart, ReferenceLine, ResponsiveContainer, XAxis, YAxis } from 'recharts'
-import { Card, Tooltip, Typography } from 'antd'
-import { nFormatter } from '@/utils'
-import { useSelector } from 'react-redux'
-import { CircleInfo } from '@/common/components/Icons'
+import { CircleInfo } from '@/common/components/Icons';
+import { nFormatter } from '@/utils';
+import { Card, Tooltip, Typography } from 'antd';
+import React, { useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { Bar, CartesianGrid, ComposedChart, ReferenceLine, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
 interface Props {
-  supplyAssets: PoolAsset[]
-  borrowAssets: PoolAsset[]
-  userEMode: string
-  tokens: Token[]
+  supplyAssets: PoolAsset[];
+  borrowAssets: PoolAsset[];
+  userEMode: string;
+  tokens: Token[];
 }
 
 export const LiquidatePositionChart: React.FunctionComponent<Props> = ({
@@ -18,24 +18,24 @@ export const LiquidatePositionChart: React.FunctionComponent<Props> = ({
   userEMode,
   tokens,
 }) => {
-  const app = useSelector((state: any) => state.app)
+  const app = useSelector((state: any) => state.app);
 
   function formatYAxis(value: number) {
-    return `$${nFormatter(value)}`
+    return `$${nFormatter(value)}`;
   }
 
   const data = useMemo(() => {
-    let supplyValues = 0
-    let borrowValues = 0
+    let supplyValues = 0;
+    let borrowValues = 0;
 
     for (const i of supplyAssets) {
-      const tokenPrice = tokens.find((x) => x.address === i.token.address)?.priceChange ?? 0
-      supplyValues += (i.amountChange ?? 0) * tokenPrice
+      const tokenPrice = tokens.find((x) => x.address === i.token.address)?.priceChange ?? 0;
+      supplyValues += (i.amountChange ?? 0) * tokenPrice;
     }
     for (const i of borrowAssets) {
-      const tokenPrice = tokens.find((x) => x.address === i.token.address)?.priceChange ?? 0
-      const price = tokenPrice ?? 0
-      borrowValues += (i.amountChange ?? 0) * price
+      const tokenPrice = tokens.find((x) => x.address === i.token.address)?.priceChange ?? 0;
+      const price = tokenPrice ?? 0;
+      borrowValues += (i.amountChange ?? 0) * price;
     }
     return [
       {
@@ -44,43 +44,43 @@ export const LiquidatePositionChart: React.FunctionComponent<Props> = ({
         pv: app.stepCalculator === 4 ? 600 : borrowValues,
         amt: 4,
       },
-    ]
-  }, [supplyAssets, borrowAssets, tokens, app])
+    ];
+  }, [supplyAssets, borrowAssets, tokens, app]);
 
   const liquidatePosition = useMemo(() => {
-    let borrowingPower = 0
+    let borrowingPower = 0;
     if (app.stepCalculator === 4) {
-      return 1270
+      return 1270;
     }
     if (supplyAssets.length == 0) {
-      return 0
+      return 0;
     }
     for (const item of supplyAssets) {
-      const tokenPrice = tokens.find((x) => x.address === item.token.address)?.priceChange ?? 0
+      const tokenPrice = tokens.find((x) => x.address === item.token.address)?.priceChange ?? 0;
       borrowingPower +=
         item.amountChange *
         tokenPrice *
         (userEMode && item.emodeId === userEMode
           ? item.emodeLiquidationThresholdBps / 10000
-          : item.liquidationThresholdBps / 10000)
+          : item.liquidationThresholdBps / 10000);
     }
-    return !isNaN(borrowingPower) ? borrowingPower : 0
-  }, [supplyAssets, tokens, app.stepCalculator, userEMode])
+    return !isNaN(borrowingPower) ? borrowingPower : 0;
+  }, [supplyAssets, tokens, app.stepCalculator, userEMode]);
 
   const totalBorrowVaule = useMemo(() => {
-    let total = 0
+    let total = 0;
     if (borrowAssets.length == 0) {
-      return 0
+      return 0;
     }
     for (const item of borrowAssets) {
-      const tokenPrice = tokens.find((x) => x.address === item.token.address)?.priceChange ?? 0
-      total += item.amountChange * tokenPrice
+      const tokenPrice = tokens.find((x) => x.address === item.token.address)?.priceChange ?? 0;
+      total += item.amountChange * tokenPrice;
     }
-    return total
-  }, [borrowAssets, tokens])
+    return total;
+  }, [borrowAssets, tokens]);
 
   const CustomizedLabel = (props: any) => {
-    const { x, y, value, height, width } = props
+    const { x, y, value, height, width } = props;
     return (
       <text
         x={x + width / 2}
@@ -92,13 +92,15 @@ export const LiquidatePositionChart: React.FunctionComponent<Props> = ({
       >
         {`$${nFormatter(value)}`}
       </text>
-    )
-  }
+    );
+  };
 
   return (
     <Card
       bordered={false}
-      className={`bg-[#FFF] h-full border  border-[#EFF1F5] p-5 rounded-[16px] ${app.stepCalculator === 4 && 'z-[100]'}`}
+      className={`bg-[#FFF] h-full border  border-[#EFF1F5] p-5 rounded-[16px] ${
+        app.stepCalculator === 4 && 'z-[100]'
+      }`}
     >
       <div className={'flex flex-col sm:flex-row gap-2 justify-between'}>
         <Typography className={'text-[#475467] flex items-center gap-1 font-medium '}>
@@ -179,5 +181,5 @@ export const LiquidatePositionChart: React.FunctionComponent<Props> = ({
         </ResponsiveContainer>
       </div>
     </Card>
-  )
-}
+  );
+};

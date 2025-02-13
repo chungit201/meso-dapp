@@ -1,10 +1,10 @@
-import React from 'react'
-import { Table } from 'antd'
+import { Table } from 'antd';
+import React from 'react';
 
 interface Props {
-  data: any[]
-  columns?: any[]
-  localeText?: string
+  data: any[];
+  columns?: any[];
+  localeText?: string;
 }
 
 export const AssetTable: React.FunctionComponent<Props> = ({ data, columns, localeText }) => {
@@ -14,7 +14,7 @@ export const AssetTable: React.FunctionComponent<Props> = ({ data, columns, loca
         <div className={'py-0 text-[#adb8d8] text-start dark:text-white'}>{localeText}</div>
       </React.Fragment>
     ),
-  }
+  };
 
   return (
     <Table
@@ -26,5 +26,5 @@ export const AssetTable: React.FunctionComponent<Props> = ({ data, columns, loca
       dataSource={data ?? []}
       columns={columns as any}
     />
-  )
-}
+  );
+};

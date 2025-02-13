@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const TwitterIcon: React.FunctionComponent<{ className?: string }> = ({ className }) => (
   <svg className={className} xmlns="http://www.w3.org/2000/svg" width="60" height="61" viewBox="0 0 60 61" fill="none">
@@ -19,7 +19,7 @@ export const TwitterIcon: React.FunctionComponent<{ className?: string }> = ({ c
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const DiscordIcon: React.FunctionComponent<{ className?: string }> = ({ className }) => (
   <svg className={className} width="60" height="61" viewBox="0 0 60 61" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,7 +39,7 @@ export const DiscordIcon: React.FunctionComponent<{ className?: string }> = ({ c
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const TelegramIcon: React.FunctionComponent<{ className?: string }> = ({ className }) => (
   <svg className={className} xmlns="http://www.w3.org/2000/svg" width="60" height="61" viewBox="0 0 60 61" fill="none">
@@ -72,7 +72,7 @@ export const TelegramIcon: React.FunctionComponent<{ className?: string }> = ({ 
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const PointIcon: React.FunctionComponent<{ className?: string }> = ({ className }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
@@ -90,7 +90,7 @@ export const PointIcon: React.FunctionComponent<{ className?: string }> = ({ cla
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const UpgradeIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13" fill="none">
@@ -131,7 +131,7 @@ export const UpgradeIcon = () => (
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const StarIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
@@ -154,12 +154,12 @@ export const StarIcon = () => (
       </linearGradient>
     </defs>
   </svg>
-)
+);
 export const TagEl = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 15 15" fill="none">
     <path d="M14.5 15V0L14.4451 0.493787C13.5995 8.10487 7.60744 14.1222 0 15H14.5Z" fill="#7F56D9" />
   </svg>
-)
+);
 
 export const Rank1 = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="36" viewBox="0 0 32 36" fill="none">
@@ -196,7 +196,7 @@ export const Rank1 = () => (
       </linearGradient>
     </defs>
   </svg>
-)
+);
 
 export const Rank2 = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="36" viewBox="0 0 32 36" fill="none">
@@ -233,7 +233,7 @@ export const Rank2 = () => (
       </linearGradient>
     </defs>
   </svg>
-)
+);
 
 export const SupplyIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
@@ -258,7 +258,7 @@ export const SupplyIcon = () => (
       </linearGradient>
     </defs>
   </svg>
-)
+);
 
 export const CakeIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
@@ -292,7 +292,7 @@ export const CakeIcon = () => (
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const PointMesoIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
@@ -342,7 +342,7 @@ export const PointMesoIcon = () => (
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const CloseIconVector = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16" fill="none">
@@ -354,4 +354,4 @@ export const CloseIconVector = () => (
       strokeLinejoin="round"
     />
   </svg>
-)
+);

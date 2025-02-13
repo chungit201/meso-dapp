@@ -1,19 +1,19 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
-import InputCurrency from '@/common/components/InputCurrentcy'
-import { Button } from 'antd'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import useTransactionCallback from '@/common/hooks/assets/useTransactionCallback'
-import { useQuery } from '@tanstack/react-query'
-import BigNumber from 'bignumber.js'
-import { useAssets } from '@/common/hooks/assets/useAssets'
-import useContract from '@/common/hooks/useContract'
-import { AssetsContext } from '@/common/context'
-import { MAX_u64, MESO_ADDRESS } from '@/common/consts'
-import { CoinType } from '@/common/hooks/useBalanceToken'
-import { InputEntryFunctionData } from '@aptos-labs/ts-sdk'
-import { CalculatorPosition } from '@/common/components/CaculaterPosition'
-import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets'
-import { AssetManageProps } from '@/common/components/Views/lending/manage/Deposit'
+import { CalculatorPosition } from '@/common/components/CaculaterPosition';
+import InputCurrency from '@/common/components/InputCurrentcy';
+import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets';
+import { AssetManageProps } from '@/common/components/Views/lending/manage/Deposit';
+import { MAX_u64, MESO_ADDRESS } from '@/common/consts';
+import { AssetsContext } from '@/common/context';
+import { useAssets } from '@/common/hooks/assets/useAssets';
+import useTransactionCallback from '@/common/hooks/assets/useTransactionCallback';
+import { CoinType } from '@/common/hooks/useBalanceToken';
+import useContract from '@/common/hooks/useContract';
+import { InputEntryFunctionData } from '@aptos-labs/ts-sdk';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { useQuery } from '@tanstack/react-query';
+import { Button } from 'antd';
+import BigNumber from 'bignumber.js';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 export const Withdraw: React.FunctionComponent<AssetManageProps> = ({
   asset,
@@ -21,66 +21,66 @@ export const Withdraw: React.FunctionComponent<AssetManageProps> = ({
   handleClose,
   setAssetSelected,
 }) => {
-  const { refetchAllAssetData } = useContext(AssetsContext)
-  const { assetDeposits } = useAssets()
+  const { refetchAllAssetData } = useContext(AssetsContext);
+  const { assetDeposits } = useAssets();
 
-  const [loading, setLoading] = useState(false)
-  const [amount, setAmount] = useState(0)
-  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false);
+  const [amount, setAmount] = useState(0);
+  const [error, setError] = useState('');
 
-  const transactionCallback = useTransactionCallback()
-  const { view } = useContract()
-  const { account } = useWallet()
-  const { refetch } = useAssets()
+  const transactionCallback = useTransactionCallback();
+  const { view } = useContract();
+  const { account } = useWallet();
+  const { refetch } = useAssets();
 
   useEffect(() => {
-    setAmount(0)
-  }, [])
+    setAmount(0);
+  }, []);
 
   const { data: totalWithdrawAvailable = 0, refetch: refetchWithdrawAmount } = useQuery({
     queryKey: ['totalWithdrawAvailable', asset],
     queryFn: async () => {
       if (!asset) {
-        return 0
+        return 0;
       }
       const res: any = await view({
         function: `${MESO_ADDRESS}::lending_pool::remaining_withdrawable_amount`,
         typeArguments: [],
         functionArguments: [account?.address, asset.poolAddress],
-      })
-      return BigNumber(Number(res[0])).div(BigNumber(10).pow(asset.token.decimals)).toNumber()
+      });
+      return BigNumber(Number(res[0])).div(BigNumber(10).pow(asset.token.decimals)).toNumber();
     },
-  })
+  });
 
   const isMax = useMemo(() => {
-    return amount === totalWithdrawAvailable
-  }, [totalWithdrawAvailable, amount])
+    return amount === totalWithdrawAvailable;
+  }, [totalWithdrawAvailable, amount]);
 
   useEffect(() => {
-    setError('')
-  }, [amount])
+    setError('');
+  }, [amount]);
 
   const handleChange = (value: number) => {
-    setAmount(value)
-  }
+    setAmount(value);
+  };
 
   const handleWithdraw = async () => {
     if (amount === 0) {
-      setError('The amount must be above zero')
-      return
+      setError('The amount must be above zero');
+      return;
     }
     try {
       const withdrawAmount = isMax
         ? MAX_u64
-        : BigNumber(amount).times(BigNumber(10).pow(asset.token.decimals)).toString()
+        : BigNumber(amount).times(BigNumber(10).pow(asset.token.decimals)).toString();
 
-      let payload = {}
+      let payload = {};
       if (asset.token.type === CoinType.COIN) {
         payload = {
           function: `${MESO_ADDRESS}::meso::withdraw_coin`,
           typeArguments: [asset?.token.address as string],
           functionArguments: [withdrawAmount],
-        }
+        };
       } else {
         payload = {
           function: `${MESO_ADDRESS}::meso::withdraw`,
@@ -89,24 +89,24 @@ export const Withdraw: React.FunctionComponent<AssetManageProps> = ({
             asset?.token.address,
             BigNumber(amount).times(BigNumber(10).pow(asset.token.decimals)).toString(),
           ],
-        }
+        };
       }
       transactionCallback({
         payload: payload as InputEntryFunctionData,
         onSuccess(hash: string) {
           setTimeout(async () => {
-            await refetch()
-            refetchAllAssetData()
-            await refetchWithdrawAmount()
-            setAmount(0)
-          }, 1000)
+            await refetch();
+            refetchAllAssetData();
+            await refetchWithdrawAmount();
+            setAmount(0);
+          }, 1000);
         },
         setLoading,
-      })
+      });
     } catch (e) {
-      console.log('e', e)
+      console.log('e', e);
     }
-  }
+  };
 
   return (
     <div className={'mt-2'}>
@@ -146,5 +146,5 @@ export const Withdraw: React.FunctionComponent<AssetManageProps> = ({
         Withdraw
       </Button>
     </div>
-  )
-}
+  );
+};

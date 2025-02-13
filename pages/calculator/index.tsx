@@ -1,21 +1,21 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { Button, Col, Row, Typography } from 'antd'
-import { AssetsCalculatorBox } from '@/common/components/AssetsCalculatorBox'
-import { CalculatorPositionBox } from '@/common/components/Views/calculators/CalculatorPositionBox'
-import { LiquidatePositionChart } from '@/common/components/Views/calculators/LiquidatePositionChart'
-import { useModal } from '@/common/hooks/useModal'
-import { ModalCalculatorEmode } from '@/common/components/Modals/points/ModalCalculatorEmode'
-import { AssetsContext } from '@/common/context'
-import { useAssets } from '@/common/hooks/assets/useAssets'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import appActions from '@/modules/app/actions'
-import { useDispatch, useSelector } from 'react-redux'
-import useUser from '@/common/hooks/useUser'
-import Image from 'next/image'
-import { StepCalculator } from '@/common/components/Views/calculators/StepCalculator'
-import { getData } from '@/common/hooks/useLocalStoragre'
-import { getDiff } from '@/utils'
-import { isMobile } from 'react-device-detect'
+import { AssetsCalculatorBox } from '@/common/components/AssetsCalculatorBox';
+import { ModalCalculatorEmode } from '@/common/components/Modals/points/ModalCalculatorEmode';
+import { CalculatorPositionBox } from '@/common/components/Views/calculators/CalculatorPositionBox';
+import { LiquidatePositionChart } from '@/common/components/Views/calculators/LiquidatePositionChart';
+import { StepCalculator } from '@/common/components/Views/calculators/StepCalculator';
+import { AssetsContext } from '@/common/context';
+import { useAssets } from '@/common/hooks/assets/useAssets';
+import { getData } from '@/common/hooks/useLocalStoragre';
+import { useModal } from '@/common/hooks/useModal';
+import useUser from '@/common/hooks/useUser';
+import appActions from '@/modules/app/actions';
+import { getDiff } from '@/utils';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { Button, Col, Row, Typography } from 'antd';
+import Image from 'next/image';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { isMobile } from 'react-device-detect';
+import { useDispatch, useSelector } from 'react-redux';
 
 export enum ASSETS_MODE {
   SUPPLY,
@@ -23,72 +23,72 @@ export enum ASSETS_MODE {
 }
 
 const Page: React.FunctionComponent = () => {
-  const { allAssetsData } = useContext(AssetsContext)
-  const [supplyAssets, setSupplyAssets] = React.useState<PoolAsset[]>([])
-  const [borrowAssets, setBorrowAssets] = React.useState<PoolAsset[]>([])
-  const [tokens, setTokens] = React.useState<Token[]>([])
-  const [userEMode, setUserEMode] = useState<string>('')
-  const { show, setShow, toggle } = useModal()
-  const { userEMode: emodePosition } = useUser()
-  const app = useSelector((state: any) => state.app)
+  const { allAssetsData } = useContext(AssetsContext);
+  const [supplyAssets, setSupplyAssets] = React.useState<PoolAsset[]>([]);
+  const [borrowAssets, setBorrowAssets] = React.useState<PoolAsset[]>([]);
+  const [tokens, setTokens] = React.useState<Token[]>([]);
+  const [userEMode, setUserEMode] = useState<string>('');
+  const { show, setShow, toggle } = useModal();
+  const { userEMode: emodePosition } = useUser();
+  const app = useSelector((state: any) => state.app);
 
-  const { assetDebts, assetDeposits, isFetchingDeposits, isFetchingDebt } = useAssets()
-  const { connected } = useWallet()
-  const dispatch = useDispatch()
-  const guideRef = useRef<any>(null)
+  const { assetDebts, assetDeposits, isFetchingDeposits, isFetchingDebt } = useAssets();
+  const { connected } = useWallet();
+  const dispatch = useDispatch();
+  const guideRef = useRef<any>(null);
 
-  const loadingMyPosition = isFetchingDeposits || isFetchingDebt
+  const loadingMyPosition = isFetchingDeposits || isFetchingDebt;
 
   useEffect(() => {
-    const time = Number(getData('hiddeGuideTime'))
+    const time = Number(getData('hiddeGuideTime'));
     if (getDiff(time * 1000) < 0 && !isMobile) {
-      dispatch(appActions.SET_STEP_CALCULATOR(1))
+      dispatch(appActions.SET_STEP_CALCULATOR(1));
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (app.stepCalculator > 0) {
-      guideRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      guideRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  }, [app, guideRef])
+  }, [app, guideRef]);
 
   const setTokenDefault = () => {
-    const data = []
+    const data = [];
     for (const item of allAssetsData) {
-      data.push({ ...item.token, priceChange: item.token.price })
+      data.push({ ...item.token, priceChange: item.token.price });
     }
-    setTokens(data)
-  }
+    setTokens(data);
+  };
 
   useEffect(() => {
-    setTokenDefault()
-  }, [allAssetsData])
+    setTokenDefault();
+  }, [allAssetsData]);
 
   useEffect(() => {
     if (userEMode) {
-      const data = borrowAssets.filter((x) => x.emodeId === userEMode)
-      setBorrowAssets(data)
+      const data = borrowAssets.filter((x) => x.emodeId === userEMode);
+      setBorrowAssets(data);
     }
-  }, [userEMode])
+  }, [userEMode]);
 
   const handleAddMyPosition = () => {
     if (!connected) {
-      dispatch(appActions.SET_SHOW_CONNECT(true))
-      return
+      dispatch(appActions.SET_SHOW_CONNECT(true));
+      return;
     }
-    setTokenDefault()
-    setUserEMode(emodePosition)
-    const userDeposits = []
-    const userBorrows = []
+    setTokenDefault();
+    setUserEMode(emodePosition);
+    const userDeposits = [];
+    const userBorrows = [];
     for (const item of assetDeposits) {
-      userDeposits.push({ ...item, amountChange: item.amountDeposit })
+      userDeposits.push({ ...item, amountChange: item.amountDeposit });
     }
     for (const item of assetDebts) {
-      userBorrows.push({ ...item, amountChange: item.debtAmount })
+      userBorrows.push({ ...item, amountChange: item.debtAmount });
     }
-    setSupplyAssets(userDeposits)
-    setBorrowAssets(userBorrows)
-  }
+    setSupplyAssets(userDeposits);
+    setBorrowAssets(userBorrows);
+  };
 
   return (
     <>
@@ -190,6 +190,6 @@ const Page: React.FunctionComponent = () => {
         />
       </div>
     </>
-  )
-}
-export default Page
+  );
+};
+export default Page;

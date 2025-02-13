@@ -1,106 +1,106 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
-import InputCurrency from '@/common/components/InputCurrentcy'
-import { Button } from 'antd'
-import useTransactionCallback from '@/common/hooks/assets/useTransactionCallback'
-import { useQuery } from '@tanstack/react-query'
-import BigNumber from 'bignumber.js'
-import { useAssets } from '@/common/hooks/assets/useAssets'
-import { roundDown } from '@/utils'
-import { MAX_u64, MESO_ADDRESS } from '@/common/consts'
-import { CoinType } from '@/common/hooks/useBalanceToken'
-import { InputEntryFunctionData } from '@aptos-labs/ts-sdk'
-import { AssetsContext } from '@/common/context'
-import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets'
-import { CalculatorPosition } from '@/common/components/CaculaterPosition'
-import { AssetManageProps } from '@/common/components/Views/lending/manage/Deposit'
+import { CalculatorPosition } from '@/common/components/CaculaterPosition';
+import InputCurrency from '@/common/components/InputCurrentcy';
+import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets';
+import { AssetManageProps } from '@/common/components/Views/lending/manage/Deposit';
+import { MAX_u64, MESO_ADDRESS } from '@/common/consts';
+import { AssetsContext } from '@/common/context';
+import { useAssets } from '@/common/hooks/assets/useAssets';
+import useTransactionCallback from '@/common/hooks/assets/useTransactionCallback';
+import { CoinType } from '@/common/hooks/useBalanceToken';
+import { roundDown } from '@/utils';
+import { InputEntryFunctionData } from '@aptos-labs/ts-sdk';
+import { useQuery } from '@tanstack/react-query';
+import { Button } from 'antd';
+import BigNumber from 'bignumber.js';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 export const Repay: React.FunctionComponent<AssetManageProps> = ({ asset, balance, handleClose, setAssetSelected }) => {
-  const [loading, setLoading] = useState(false)
-  const [amount, setAmount] = useState(0)
-  const [error, setError] = useState('')
-  const transactionCallback = useTransactionCallback()
-  const { assetDebts, refetch, refetchDebt } = useAssets()
-  const { refetchAllAssetData } = useContext(AssetsContext)
+  const [loading, setLoading] = useState(false);
+  const [amount, setAmount] = useState(0);
+  const [error, setError] = useState('');
+  const transactionCallback = useTransactionCallback();
+  const { assetDebts, refetch, refetchDebt } = useAssets();
+  const { refetchAllAssetData } = useContext(AssetsContext);
   useEffect(() => {
-    setError('')
-  }, [amount])
+    setError('');
+  }, [amount]);
 
   useEffect(() => {
-    setAmount(0)
-  }, [])
+    setAmount(0);
+  }, []);
 
   const { data: totalRepay = 0, refetch: refetchBorrowAmount } = useQuery({
     queryKey: ['totalRepay', asset, assetDebts],
     queryFn: async () => {
-      const item = assetDebts.find((x) => x.poolAddress === asset.poolAddress)
-      return item?.debtAmount ?? 0
+      const item = assetDebts.find((x) => x.poolAddress === asset.poolAddress);
+      return item?.debtAmount ?? 0;
     },
     enabled: !!asset,
     refetchIntervalInBackground: true,
     refetchOnReconnect: true,
     refetchOnMount: true,
     refetchOnWindowFocus: true,
-  })
+  });
 
   const isMax = useMemo(() => {
-    return amount === totalRepay
-  }, [amount, totalRepay])
+    return amount === totalRepay;
+  }, [amount, totalRepay]);
 
   const handleChange = (value: number) => {
-    setAmount(value)
-  }
+    setAmount(value);
+  };
 
   const validate = () => {
     if (amount > balance) {
-      setError(`Insufficient balance of ${asset.token.symbol}`)
-      return false
+      setError(`Insufficient balance of ${asset.token.symbol}`);
+      return false;
     }
     if (amount === 0) {
-      setError('The amount must be above zero')
+      setError('The amount must be above zero');
 
-      return false
+      return false;
     }
-    return true
-  }
+    return true;
+  };
 
   const handleRepay = async () => {
-    if (!validate()) return
+    if (!validate()) return;
     try {
       const repayAmount = isMax
         ? MAX_u64
-        : BigNumber(roundDown(amount, asset.token.decimals)).times(BigNumber(10).pow(asset.token.decimals)).toNumber()
+        : BigNumber(roundDown(amount, asset.token.decimals)).times(BigNumber(10).pow(asset.token.decimals)).toNumber();
 
-      let payload = {}
+      let payload = {};
       if (asset.token.type === CoinType.COIN) {
         payload = {
           function: `${MESO_ADDRESS}::meso::repay_coin`,
           typeArguments: [asset?.token.address as string],
           functionArguments: [repayAmount],
-        }
+        };
       } else {
         payload = {
           function: `${MESO_ADDRESS}::meso::repay`,
           typeArguments: [],
           functionArguments: [asset?.token.address, repayAmount],
-        }
+        };
       }
       transactionCallback({
         payload: payload as InputEntryFunctionData,
         onSuccess(hash: string) {
           setTimeout(() => {
-            refetch()
-            refetchBorrowAmount()
-            refetchDebt()
-            refetchAllAssetData()
-            setAmount(0)
-          }, 1000)
+            refetch();
+            refetchBorrowAmount();
+            refetchDebt();
+            refetchAllAssetData();
+            setAmount(0);
+          }, 1000);
         },
         setLoading,
-      })
+      });
     } catch (e) {
-      console.log('e', e)
+      console.log('e', e);
     }
-  }
+  };
 
   return (
     <div className={'mt-2'}>
@@ -136,5 +136,5 @@ export const Repay: React.FunctionComponent<AssetManageProps> = ({ asset, balanc
         Repay
       </Button>
     </div>
-  )
-}
+  );
+};

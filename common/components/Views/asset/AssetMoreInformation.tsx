@@ -1,26 +1,26 @@
-import React, { useState } from 'react'
-import { copyToClipboard, ellipseAddress, formatNumberBalance } from '@/utils'
-import { Tooltip } from 'antd'
-import { CopyIcon } from '@/common/components/Icons'
-import BigNumber from 'bignumber.js'
-import { MAX_BPS } from '@/common/consts'
-import useUser from '@/common/hooks/useUser'
+import { CopyIcon } from '@/common/components/Icons';
+import { MAX_BPS } from '@/common/consts';
+import useUser from '@/common/hooks/useUser';
+import { copyToClipboard, ellipseAddress, formatNumberBalance } from '@/utils';
+import { Tooltip } from 'antd';
+import BigNumber from 'bignumber.js';
+import React, { useState } from 'react';
 
 interface Props {
-  asset: PoolAsset
+  asset: PoolAsset;
 }
 
 export const AssetMoreInformation: React.FunctionComponent<Props> = ({ asset }) => {
-  const { userEMode } = useUser()
-  const [copyText, setCopyText] = useState('Copy')
+  const { userEMode } = useUser();
+  const [copyText, setCopyText] = useState('Copy');
 
   const handleCopy = (value: string) => {
-    setCopyText('Copied!')
+    setCopyText('Copied!');
     setTimeout(() => {
-      setCopyText('Copy')
-    }, 1000)
-    copyToClipboard(value)
-  }
+      setCopyText('Copy');
+    }, 1000);
+    copyToClipboard(value);
+  };
 
   return (
     <div className={'space-y-4'}>
@@ -108,5 +108,5 @@ export const AssetMoreInformation: React.FunctionComponent<Props> = ({ asset }) 
         <div className={'flex items-center gap-2'}>{(asset.maxBps / MAX_BPS) * 100}%</div>
       </div>
     </div>
-  )
-}
+  );
+};

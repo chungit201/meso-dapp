@@ -1,26 +1,26 @@
-import React, { useContext, useState } from 'react'
-import { Button, Col, Row } from 'antd'
-import { useDashboard } from '@/common/hooks/dashboard/useDashboard'
-import { formatNumberBalance } from '@/utils'
-import { MESO_ADDRESS } from '@/common/consts'
-import { AssetsContext } from '@/common/context'
-import useTransactionCallback from '@/common/hooks/assets/useTransactionCallback'
-import { useRewards } from '@/common/hooks/assets/useRewards'
-import { RiskFactorProgress } from '@/common/components/Views/dashboard/RiskFactorProgress'
+import { RiskFactorProgress } from '@/common/components/Views/dashboard/RiskFactorProgress';
+import { MESO_ADDRESS } from '@/common/consts';
+import { AssetsContext } from '@/common/context';
+import { useRewards } from '@/common/hooks/assets/useRewards';
+import useTransactionCallback from '@/common/hooks/assets/useTransactionCallback';
+import { useDashboard } from '@/common/hooks/dashboard/useDashboard';
+import { formatNumberBalance } from '@/utils';
+import { Button, Col, Row } from 'antd';
+import React, { useContext, useState } from 'react';
 
 export const AccountDashboard: React.FunctionComponent = () => {
-  const [loading, setLoading] = useState(false)
-  const { netBalance, netApr } = useDashboard()
-  const { allAssetsData } = useContext(AssetsContext)
-  const { totalRewards, refetchRewardPool } = useRewards()
+  const [loading, setLoading] = useState(false);
+  const { netBalance, netApr } = useDashboard();
+  const { allAssetsData } = useContext(AssetsContext);
+  const { totalRewards, refetchRewardPool } = useRewards();
 
-  const transactionCallback = useTransactionCallback()
+  const transactionCallback = useTransactionCallback();
 
   const handleClaim = () => {
     try {
-      const pools = []
+      const pools = [];
       for (const item of allAssetsData) {
-        pools.push(item.token.address)
+        pools.push(item.token.address);
       }
       transactionCallback({
         payload: {
@@ -29,15 +29,15 @@ export const AccountDashboard: React.FunctionComponent = () => {
           functionArguments: [pools as any],
         },
         onSuccess(hash: string) {
-          console.log('hash', hash)
-          refetchRewardPool()
+          console.log('hash', hash);
+          refetchRewardPool();
         },
         setLoading,
-      })
+      });
     } catch (e) {
-      console.log('e', e)
+      console.log('e', e);
     }
-  }
+  };
 
   return (
     <Col className={'h-full'} xs={24} sm={24} xl={24}>
@@ -77,5 +77,5 @@ export const AccountDashboard: React.FunctionComponent = () => {
         </Row>
       </div>
     </Col>
-  )
-}
+  );
+};

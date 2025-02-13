@@ -1,32 +1,32 @@
-import React, { useState } from 'react'
-import Image from 'next/image'
-import { DirectIcon, PointCopyIcon, PointReferIcon1, PointReferIcon2 } from '@/common/components/Icons'
-import { Button } from 'antd'
-import { copyToClipboard, ellipseAddress } from '@/utils'
-import useNetworkConfiguration from '@/common/hooks/useNetwork'
-import Link from 'next/link'
-import { useDispatch } from 'react-redux'
-import appActions from '@/modules/app/actions'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import { StarIcon, UpgradeIcon } from '@/common/components/Icons/points'
+import { DirectIcon, PointCopyIcon, PointReferIcon1, PointReferIcon2 } from '@/common/components/Icons';
+import { StarIcon, UpgradeIcon } from '@/common/components/Icons/points';
+import useNetworkConfiguration from '@/common/hooks/useNetwork';
+import appActions from '@/modules/app/actions';
+import { copyToClipboard, ellipseAddress } from '@/utils';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { Button } from 'antd';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 interface Props {
-  userInfo: any
+  userInfo: any;
 }
 
 export const PointRefer: React.FunctionComponent<Props> = ({ userInfo }) => {
-  const [copyText, setCopyText] = useState('Copy')
-  const { networkCfg } = useNetworkConfiguration()
-  const { connected } = useWallet()
-  const dispatch = useDispatch()
+  const [copyText, setCopyText] = useState('Copy');
+  const { networkCfg } = useNetworkConfiguration();
+  const { connected } = useWallet();
+  const dispatch = useDispatch();
 
   const handleCopy = () => {
-    setCopyText('Copied!')
+    setCopyText('Copied!');
     setTimeout(() => {
-      setCopyText('Copy')
-    }, 1000)
-    copyToClipboard(userInfo.referralLink as any)
-  }
+      setCopyText('Copy');
+    }, 1000);
+    copyToClipboard(userInfo.referralLink as any);
+  };
 
   return (
     <div className={'w-full my-20 px-2 '}>
@@ -107,7 +107,7 @@ export const PointRefer: React.FunctionComponent<Props> = ({ userInfo }) => {
           ) : (
             <Button
               onClick={() => {
-                dispatch(appActions.SET_SHOW_CONNECT(true))
+                dispatch(appActions.SET_SHOW_CONNECT(true));
               }}
               className={'flex items-center h-[40px] rounded-[8px] bg-[#7F56D9] text-white text-base px-4 gap-1'}
             >
@@ -118,7 +118,9 @@ export const PointRefer: React.FunctionComponent<Props> = ({ userInfo }) => {
         <div className={`${!userInfo?.invitedBy && 'hidden'} flex items-center text-base text-[#7B8AB1] z-20 gap-2`}>
           Invited by <span className={'text-[#3845AD] font-semibold'}>{ellipseAddress(userInfo?.invitedBy, 5)}</span>{' '}
           <Link
-            href={`https://explorer.aptoslabs.com/account/${userInfo?.invitedBy}?network=${networkCfg.toString().toLocaleLowerCase()}`}
+            href={`https://explorer.aptoslabs.com/account/${userInfo?.invitedBy}?network=${networkCfg
+              .toString()
+              .toLocaleLowerCase()}`}
             target={'_blank'}
           >
             <DirectIcon />
@@ -126,5 +128,5 @@ export const PointRefer: React.FunctionComponent<Props> = ({ userInfo }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

@@ -1,43 +1,43 @@
+import { AssetsContext } from '@/common/context';
+import { formatNumberBalance } from '@/utils';
+import { Button, Popover, Slider, Typography } from 'antd';
+import { SliderMarks } from 'antd/es/slider';
 import React, {
-  forwardRef,
   ReactNode,
+  forwardRef,
   useContext,
   useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
   useState,
-} from 'react'
-import { NumericFormat } from 'react-number-format'
-import { formatNumberBalance } from '@/utils'
-import { Button, Popover, Slider, Typography } from 'antd'
-import { SliderMarks } from 'antd/es/slider'
-import { AssetsContext } from '@/common/context'
-import { CheckIcon, ChevronDown } from './Icons'
+} from 'react';
+import { NumericFormat } from 'react-number-format';
+import { CheckIcon, ChevronDown } from './Icons';
 
 type PositiveFloatNumInputProps = {
-  inputAmount?: string
-  className?: string
-  isDisabled?: boolean
-  placeholder?: string
-  min?: number
-  max?: number
-  maxDecimals?: number
-  onInputChange?: (e: any) => void
-  onAmountChange?: (a: number) => void
-  prefix?: ReactNode
-  suffix?: string
-  label?: string
-  showCommas?: boolean
-  asset?: PoolAsset
-  balance: number
-  keepApt?: boolean
-  setAssetSelected?: (asset: PoolAsset) => void
-  assets?: PoolAsset[]
-  showSlider?: boolean
-  disableSelectAssets?: boolean
-  hiddenMax?: boolean
-}
+  inputAmount?: string;
+  className?: string;
+  isDisabled?: boolean;
+  placeholder?: string;
+  min?: number;
+  max?: number;
+  maxDecimals?: number;
+  onInputChange?: (e: any) => void;
+  onAmountChange?: (a: number) => void;
+  prefix?: ReactNode;
+  suffix?: string;
+  label?: string;
+  showCommas?: boolean;
+  asset?: PoolAsset;
+  balance: number;
+  keepApt?: boolean;
+  setAssetSelected?: (asset: PoolAsset) => void;
+  assets?: PoolAsset[];
+  showSlider?: boolean;
+  disableSelectAssets?: boolean;
+  hiddenMax?: boolean;
+};
 
 const marks: SliderMarks = {
   0: '0%',
@@ -45,10 +45,10 @@ const marks: SliderMarks = {
   50: '50%',
   75: '75%',
   100: '100%',
-}
+};
 
-const MAX_DEFAULT = Number.MAX_SAFE_INTEGER
-const MAX_DECIMALS_DEFAULT = 8
+const MAX_DEFAULT = Number.MAX_SAFE_INTEGER;
+const MAX_DECIMALS_DEFAULT = 8;
 
 // eslint-disable-next-line react/display-name
 const InputCurrency = forwardRef<HTMLInputElement, PositiveFloatNumInputProps>(
@@ -73,39 +73,39 @@ const InputCurrency = forwardRef<HTMLInputElement, PositiveFloatNumInputProps>(
     },
     ref,
   ) => {
-    const { allAssetsData } = useContext(AssetsContext)
-    const inputRef = useRef<HTMLInputElement>(null)
-    useImperativeHandle(ref, () => inputRef.current!)
-    const [open, setOpen] = useState(false)
+    const { allAssetsData } = useContext(AssetsContext);
+    const inputRef = useRef<HTMLInputElement>(null);
+    useImperativeHandle(ref, () => inputRef.current!);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
-      onInputChange(0)
-    }, [asset])
+      onInputChange(0);
+    }, [asset]);
 
     const handleMax = () => {
       if (asset?.token.symbol === 'APT' && keepApt) {
-        onInputChange(Number(max - 0.01).toFixed(asset?.token.decimals))
+        onInputChange(Number(max - 0.01).toFixed(asset?.token.decimals));
       } else {
-        onInputChange(max)
+        onInputChange(max);
       }
-    }
+    };
 
     const handleHalf = () => {
-      const amount = max / 2
-      onInputChange(Number.isInteger(Number(amount)) ? amount : (Number(amount).toFixed(asset?.token.decimals) as any))
-    }
+      const amount = max / 2;
+      onInputChange(Number.isInteger(Number(amount)) ? amount : (Number(amount).toFixed(asset?.token.decimals) as any));
+    };
 
     const onchangeSlider = (value: any) => {
-      const amountSlider = Number((balance * value) / 100)
+      const amountSlider = Number((balance * value) / 100);
       const amount = Number.isInteger(amountSlider)
         ? amountSlider
-        : (amountSlider.toFixed(asset?.token.decimals) as any)
-      onInputChange(Number(amount))
-    }
+        : (amountSlider.toFixed(asset?.token.decimals) as any);
+      onInputChange(Number(amount));
+    };
 
     const assetList = useMemo(() => {
-      return assets && assets.length > 0 ? assets : allAssetsData
-    }, [assets, allAssetsData])
+      return assets && assets.length > 0 ? assets : allAssetsData;
+    }, [assets, allAssetsData]);
 
     return (
       <>
@@ -124,16 +124,16 @@ const InputCurrency = forwardRef<HTMLInputElement, PositiveFloatNumInputProps>(
                 thousandSeparator
                 decimalSeparator={'.'}
                 isAllowed={(values) => {
-                  const { formattedValue, floatValue } = values
-                  return formattedValue === '' || Number(floatValue) <= max
+                  const { formattedValue, floatValue } = values;
+                  return formattedValue === '' || Number(floatValue) <= max;
                 }}
                 onValueChange={(values: any) => {
                   if (Number(values.floatValue) > max) {
-                    onInputChange(max)
+                    onInputChange(max);
                   } else if (Number(values.floatValue) < 0) {
-                    onInputChange(0)
+                    onInputChange(0);
                   } else {
-                    onInputChange(values.floatValue)
+                    onInputChange(values.floatValue);
                   }
                 }}
                 disabled={isDisabled}
@@ -142,7 +142,7 @@ const InputCurrency = forwardRef<HTMLInputElement, PositiveFloatNumInputProps>(
             <Popover
               onVisibleChange={(visible) => {
                 if (!visible) {
-                  setOpen(false)
+                  setOpen(false);
                 }
               }}
               open={open}
@@ -156,10 +156,12 @@ const InputCurrency = forwardRef<HTMLInputElement, PositiveFloatNumInputProps>(
                       return (
                         <div
                           onClick={() => {
-                            setAssetSelected?.(item)
-                            setOpen(false)
+                            setAssetSelected?.(item);
+                            setOpen(false);
                           }}
-                          className={`${asset?.poolAddress === item.poolAddress && 'bg-[#5c80ff0d]'} hover:bg-[#5c80ff0d] flex cursor-pointer justify-between items-center min-w-[170px] p-4`}
+                          className={`${
+                            asset?.poolAddress === item.poolAddress && 'bg-[#5c80ff0d]'
+                          } hover:bg-[#5c80ff0d] flex cursor-pointer justify-between items-center min-w-[170px] p-4`}
                           key={index}
                         >
                           <div className={'flex items-center gap-2'}>
@@ -178,7 +180,7 @@ const InputCurrency = forwardRef<HTMLInputElement, PositiveFloatNumInputProps>(
                             </div>
                           )}
                         </div>
-                      )
+                      );
                     })}
                   </div>
                 </div>
@@ -187,10 +189,12 @@ const InputCurrency = forwardRef<HTMLInputElement, PositiveFloatNumInputProps>(
               <div
                 onClick={() => {
                   if (!disableSelectAssets) {
-                    setOpen(true)
+                    setOpen(true);
                   }
                 }}
-                className={`flex gap-2 bg-[#fff] py-2 ${disableSelectAssets ? 'pl-3' : 'pl-5'} cursor-pointer pr-3 rounded-full items-center`}
+                className={`flex gap-2 bg-[#fff] py-2 ${
+                  disableSelectAssets ? 'pl-3' : 'pl-5'
+                } cursor-pointer pr-3 rounded-full items-center`}
               >
                 <div className={'w-[20px] h-[20px]'}>
                   <img
@@ -253,8 +257,8 @@ const InputCurrency = forwardRef<HTMLInputElement, PositiveFloatNumInputProps>(
           </div>
         )}
       </>
-    )
+    );
   },
-)
+);
 
-export default InputCurrency
+export default InputCurrency;

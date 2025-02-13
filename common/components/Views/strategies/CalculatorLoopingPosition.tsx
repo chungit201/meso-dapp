@@ -1,24 +1,24 @@
-import React from 'react'
-import { Typography } from 'antd'
-import { formatNumberBalance } from '@/utils'
-import { LeftToRightIcon } from '@/common/components/Icons'
-import { useAssets } from '@/common/hooks/assets/useAssets'
-import { useDashboard } from '@/common/hooks/dashboard/useDashboard'
-import { Strategy } from '@/utils/stategies'
+import { LeftToRightIcon } from '@/common/components/Icons';
+import { useAssets } from '@/common/hooks/assets/useAssets';
+import { useDashboard } from '@/common/hooks/dashboard/useDashboard';
+import { formatNumberBalance } from '@/utils';
+import { Strategy } from '@/utils/stategies';
+import { Typography } from 'antd';
+import React from 'react';
 
 interface Props {
-  calculator: any
-  amountDeposit: number
-  pair: Strategy
+  calculator: any;
+  amountDeposit: number;
+  pair: Strategy;
 }
 
 export const CalculatorLoopingPosition: React.FunctionComponent<Props> = ({ calculator, amountDeposit, pair }) => {
-  const { riskFactor } = useAssets()
-  const { netApr } = useDashboard()
+  const { riskFactor } = useAssets();
+  const { netApr } = useDashboard();
 
   const getRiskFactorColor = (riskFactor: number) => {
-    return riskFactor < 80 ? '#7F56D9' : riskFactor > 90 ? '#F04438' : riskFactor >= 80 ? '#DC6803' : ''
-  }
+    return riskFactor < 80 ? '#7F56D9' : riskFactor > 90 ? '#F04438' : riskFactor >= 80 ? '#DC6803' : '';
+  };
 
   return (
     <div className={'mt-8'}>
@@ -77,5 +77,5 @@ export const CalculatorLoopingPosition: React.FunctionComponent<Props> = ({ calc
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

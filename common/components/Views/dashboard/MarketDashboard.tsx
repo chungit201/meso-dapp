@@ -1,39 +1,39 @@
-import React from 'react'
-import { Card, Col, Row, Skeleton, Typography } from 'antd'
-import { formatNumberBalance, nFormatter } from '@/utils'
-import { UpIcon } from '@/common/components/Icons'
-import { useQuery } from '@tanstack/react-query'
-import { getMarketDashboard } from '@/common/services/assets'
+import { UpIcon } from '@/common/components/Icons';
+import { getMarketDashboard } from '@/common/services/assets';
+import { formatNumberBalance, nFormatter } from '@/utils';
+import { useQuery } from '@tanstack/react-query';
+import { Card, Col, Row, Skeleton, Typography } from 'antd';
+import React from 'react';
 
 type MarketInfo = {
   currentMarketSize: {
-    percentage: number
-    total: number
-  }
+    percentage: number;
+    total: number;
+  };
 
   totalValueLocked: {
-    percentage: number
-    total: number
-  }
+    percentage: number;
+    total: number;
+  };
 
   totalBorrowed: {
-    percentage: number
-    total: number
-  }
+    percentage: number;
+    total: number;
+  };
   lendingOut: {
-    percentage: number
-    total: number
-  }
-}
+    percentage: number;
+    total: number;
+  };
+};
 
 export const MarketDashboard: React.FunctionComponent = () => {
   const { data: info = null, isFetching = true } = useQuery({
     queryKey: ['MarketDashboard'],
     queryFn: async () => {
-      const { data } = await getMarketDashboard({ type: 'week' })
-      return data as MarketInfo
+      const { data } = await getMarketDashboard({ type: 'week' });
+      return data as MarketInfo;
     },
-  })
+  });
 
   return (
     <>
@@ -192,6 +192,6 @@ export const MarketDashboard: React.FunctionComponent = () => {
         </Row>
       )}
     </>
-  )
-}
-export default MarketDashboard
+  );
+};
+export default MarketDashboard;

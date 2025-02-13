@@ -1,22 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react'
-import InputCurrency from '@/common/components/InputCurrentcy'
-import { Button } from 'antd'
-import BigNumber from 'bignumber.js'
-import useTransactionCallback from '@/common/hooks/assets/useTransactionCallback'
-import { useAssets } from '@/common/hooks/assets/useAssets'
-import { AssetsContext } from '@/common/context'
-import { MESO_ADDRESS } from '@/common/consts'
-import { CoinType } from '@/common/hooks/useBalanceToken'
-import { InputEntryFunctionData } from '@aptos-labs/ts-sdk'
-import { CalculatorPosition } from '@/common/components/CaculaterPosition'
-import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets'
+import { CalculatorPosition } from '@/common/components/CaculaterPosition';
+import InputCurrency from '@/common/components/InputCurrentcy';
+import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets';
+import { MESO_ADDRESS } from '@/common/consts';
+import { AssetsContext } from '@/common/context';
+import { useAssets } from '@/common/hooks/assets/useAssets';
+import useTransactionCallback from '@/common/hooks/assets/useTransactionCallback';
+import { CoinType } from '@/common/hooks/useBalanceToken';
+import { InputEntryFunctionData } from '@aptos-labs/ts-sdk';
+import { Button } from 'antd';
+import BigNumber from 'bignumber.js';
+import React, { useContext, useEffect, useState } from 'react';
 
 export interface AssetManageProps {
-  asset: PoolAsset
-  handleClose: () => void
-  balance: number
-  refetch: () => void
-  setAssetSelected: (asset: PoolAsset) => void
+  asset: PoolAsset;
+  handleClose: () => void;
+  balance: number;
+  refetch: () => void;
+  setAssetSelected: (asset: PoolAsset) => void;
 }
 
 export const Deposit: React.FunctionComponent<AssetManageProps> = ({
@@ -25,36 +25,36 @@ export const Deposit: React.FunctionComponent<AssetManageProps> = ({
   refetch: refetchBalance,
   setAssetSelected,
 }) => {
-  const { refetchAllAssetData, refetchPoolsData } = useContext(AssetsContext)
-  const [loading, setLoading] = useState(false)
-  const [amount, setAmount] = useState(0)
-  const [error, setError] = useState('')
-  const transactionCallback = useTransactionCallback()
-  const { refetch } = useAssets()
+  const { refetchAllAssetData, refetchPoolsData } = useContext(AssetsContext);
+  const [loading, setLoading] = useState(false);
+  const [amount, setAmount] = useState(0);
+  const [error, setError] = useState('');
+  const transactionCallback = useTransactionCallback();
+  const { refetch } = useAssets();
 
   useEffect(() => {
-    setError('')
-  }, [amount])
+    setError('');
+  }, [amount]);
 
-  useEffect(() => {}, [])
+  useEffect(() => {}, []);
 
   const handleChange = (value: number) => {
-    setAmount(value)
-  }
+    setAmount(value);
+  };
 
   const handleDeposit = async () => {
     if (amount === 0) {
-      setError('The amount must be above zero')
-      return
+      setError('The amount must be above zero');
+      return;
     }
     try {
-      let payload = {}
+      let payload = {};
       if (asset.token.type === CoinType.COIN) {
         payload = {
           function: `${MESO_ADDRESS}::meso::deposit_coin`,
           typeArguments: [asset?.token.address as string],
           functionArguments: [BigNumber(amount).times(BigNumber(10).pow(asset.token.decimals)).toString()],
-        }
+        };
       } else {
         payload = {
           function: `${MESO_ADDRESS}::meso::deposit`,
@@ -63,27 +63,27 @@ export const Deposit: React.FunctionComponent<AssetManageProps> = ({
             asset.token.address,
             BigNumber(amount).times(BigNumber(10).pow(asset.token.decimals)).toString(),
           ],
-        }
+        };
       }
       transactionCallback({
         payload: payload as InputEntryFunctionData,
         onSuccess(hash: string) {
-          console.log('hash', hash)
-          refetch()
-          refetchBalance()
-          refetchAllAssetData()
-          setAmount(0)
+          console.log('hash', hash);
+          refetch();
+          refetchBalance();
+          refetchAllAssetData();
+          setAmount(0);
           setTimeout(() => {
-            refetchPoolsData()
-          }, 3000)
+            refetchPoolsData();
+          }, 3000);
         },
 
         setLoading,
-      })
+      });
     } catch (e) {
-      console.log('e', e)
+      console.log('e', e);
     }
-  }
+  };
 
   return (
     <div className={'mt-2'}>
@@ -125,5 +125,5 @@ export const Deposit: React.FunctionComponent<AssetManageProps> = ({
         Deposit
       </Button>
     </div>
-  )
-}
+  );
+};

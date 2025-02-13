@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const SortIcon = () => (
   <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -11,7 +11,7 @@ export const SortIcon = () => (
       fill="#C0CAED"
     />
   </svg>
-)
+);
 
 export const WalletIcon: React.FunctionComponent<{ className?: string }> = ({ className }) => (
   <svg className={className} width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -59,7 +59,7 @@ export const WalletIcon: React.FunctionComponent<{ className?: string }> = ({ cl
       strokeLinejoin="round"
     />
   </svg>
-)
+);
 
 export const CopyIcon: React.FunctionComponent<{ className?: string; stroke?: string }> = ({
   className,
@@ -81,7 +81,7 @@ export const CopyIcon: React.FunctionComponent<{ className?: string; stroke?: st
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const CloseIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
@@ -107,7 +107,7 @@ export const CloseIcon = () => (
       strokeLinejoin="round"
     />
   </svg>
-)
+);
 
 export const PointReferIcon1 = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
@@ -130,7 +130,7 @@ export const PointReferIcon1 = () => (
       </linearGradient>
     </defs>
   </svg>
-)
+);
 
 export const PointReferIcon2 = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
@@ -153,7 +153,7 @@ export const PointReferIcon2 = () => (
       </linearGradient>
     </defs>
   </svg>
-)
+);
 
 export const PointCopyIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -168,7 +168,7 @@ export const PointCopyIcon = () => (
       fill="white"
     />
   </svg>
-)
+);
 
 export const CheckIcon: React.FunctionComponent<{ fill?: string }> = ({ fill = 'white' }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
@@ -177,7 +177,7 @@ export const CheckIcon: React.FunctionComponent<{ fill?: string }> = ({ fill = '
       fill={fill}
     />
   </svg>
-)
+);
 
 export const ArrowRightIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -190,7 +190,7 @@ export const ArrowRightIcon = () => (
       fill="white"
     />
   </svg>
-)
+);
 
 export const TelegramIcon = () => (
   <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -202,7 +202,7 @@ export const TelegramIcon = () => (
       fill="white"
     />
   </svg>
-)
+);
 
 export const DiscordIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -212,7 +212,7 @@ export const DiscordIcon = () => (
       fill="white"
     />
   </svg>
-)
+);
 
 export const TwitterIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -222,7 +222,7 @@ export const TwitterIcon = () => (
       fill="white"
     />
   </svg>
-)
+);
 
 export const BlueTickIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
@@ -231,7 +231,7 @@ export const BlueTickIcon = () => (
       fill="#1D9BF0"
     />
   </svg>
-)
+);
 
 export const DirectIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
@@ -240,7 +240,7 @@ export const DirectIcon = () => (
       fill="#3845AD"
     />
   </svg>
-)
+);
 
 export const ViewMoreIcon = () => (
   <svg
@@ -254,13 +254,13 @@ export const ViewMoreIcon = () => (
     <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
     <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
   </svg>
-)
+);
 
 export const DownIcon: React.FunctionComponent<{ className?: string }> = ({ className }) => (
   <svg className={className} width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M1 1L7 7L13 1" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
-)
+);
 
 export const DownIcon2: React.FunctionComponent<{ className?: string }> = ({ className }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -272,13 +272,13 @@ export const DownIcon2: React.FunctionComponent<{ className?: string }> = ({ cla
       strokeLinejoin="round"
     />
   </svg>
-)
+);
 
 export const DownBrowIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16" fill="none">
     <path d="M11.06 5.72663L8 8.77996L4.94 5.72663L4 6.66663L8 10.6666L12 6.66663L11.06 5.72663Z" fill="black" />
   </svg>
-)
+);
 
 export const ShareIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -287,7 +287,7 @@ export const ShareIcon = () => (
       fill="#5D6B98"
     />
   </svg>
-)
+);
 
 export const UpIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -298,13 +298,13 @@ export const UpIcon = () => (
       strokeLinejoin="round"
     />
   </svg>
-)
+);
 
 export const LostIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
     <path d="M3 5L6.5 8.5L8.5 6.5L13 11M13 11H9.5M13 11V7.5" stroke="#FF4D4F" />
   </svg>
-)
+);
 
 export const RightIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
@@ -316,7 +316,7 @@ export const RightIcon = () => (
       fill="#7F56D9"
     />
   </svg>
-)
+);
 
 export const CircleInfo: React.FunctionComponent<{ className?: string }> = ({ className }) => (
   <svg className={className} xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 16 17" fill="none">
@@ -328,7 +328,7 @@ export const CircleInfo: React.FunctionComponent<{ className?: string }> = ({ cl
       strokeLinejoin="round"
     />
   </svg>
-)
+);
 
 export const CircleInfoBlue = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -344,7 +344,7 @@ export const CircleInfoBlue = () => (
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const BoostIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -365,7 +365,7 @@ export const BoostIcon = () => (
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const CircleInfoWhite: React.FunctionComponent<{ className?: string }> = ({ className }) => (
   <svg className={className} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -374,7 +374,7 @@ export const CircleInfoWhite: React.FunctionComponent<{ className?: string }> = 
       fill="white"
     />
   </svg>
-)
+);
 
 export const SettingIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -383,7 +383,7 @@ export const SettingIcon = () => (
       fill="#313547"
     />
   </svg>
-)
+);
 
 export const OtterSec: React.FunctionComponent<{ className?: string }> = ({ className }) => (
   <svg
@@ -403,7 +403,7 @@ export const OtterSec: React.FunctionComponent<{ className?: string }> = ({ clas
       fill="#010101"
     />
   </svg>
-)
+);
 
 export const TopIcon: React.FunctionComponent<{ className?: string; fill?: string }> = ({
   className,
@@ -412,7 +412,7 @@ export const TopIcon: React.FunctionComponent<{ className?: string; fill?: strin
   <svg className={className} xmlns="http://www.w3.org/2000/svg" width="10" height="8" viewBox="0 0 8 6" fill="none">
     <path d="M4 0L0 6H8L4 0Z" fill={fill} />
   </svg>
-)
+);
 
 export const BottomIcon: React.FunctionComponent<{ className?: string; fill?: string }> = ({
   className,
@@ -421,7 +421,7 @@ export const BottomIcon: React.FunctionComponent<{ className?: string; fill?: st
   <svg xmlns="http://www.w3.org/2000/svg" width="8" height="6" viewBox="0 0 8 6" fill="none">
     <path d="M4 6L8 0L0 0L4 6Z" fill="#F5222D" />
   </svg>
-)
+);
 
 export const LeftToRightIcon: React.FunctionComponent<{ fill?: string }> = ({ fill = '#DCDFEA' }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" viewBox="0 0 18 16" fill="none">
@@ -430,7 +430,7 @@ export const LeftToRightIcon: React.FunctionComponent<{ fill?: string }> = ({ fi
       fill={fill}
     />
   </svg>
-)
+);
 
 export const ChevronDown = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -441,13 +441,13 @@ export const ChevronDown = () => (
       fill="#7A88B4"
     />
   </svg>
-)
+);
 
 export const MultiplyIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
     <path d="M12 4L4 12M4 4L12 12" stroke="#5D6B98" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
-)
+);
 
 export const ReloadIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -459,7 +459,7 @@ export const ReloadIcon = () => (
       strokeLinejoin="round"
     />
   </svg>
-)
+);
 
 export const PlusIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -471,7 +471,7 @@ export const PlusIcon = () => (
       strokeLinejoin="round"
     />
   </svg>
-)
+);
 
 export const SearchIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -483,7 +483,7 @@ export const SearchIcon = () => (
       strokeLinejoin="round"
     />
   </svg>
-)
+);
 
 export const BarVector: React.FunctionComponent<{ className?: string }> = ({ className }) => (
   <svg
@@ -590,7 +590,7 @@ export const BarVector: React.FunctionComponent<{ className?: string }> = ({ cla
       stroke="#AAB2C5"
     />
   </svg>
-)
+);
 
 export const DocsIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -602,7 +602,7 @@ export const DocsIcon = () => (
       strokeLinejoin="round"
     />
   </svg>
-)
+);
 
 export const UserIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -621,7 +621,7 @@ export const UserIcon = () => (
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const SwapIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -634,7 +634,7 @@ export const SwapIcon = () => (
       fill="#6941C6"
     />
   </svg>
-)
+);
 
 export const Computer = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -652,7 +652,7 @@ export const Computer = () => (
       </clipPath>
     </defs>
   </svg>
-)
+);
 
 export const InviteIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="22" viewBox="0 0 24 22" fill="none">
@@ -662,7 +662,7 @@ export const InviteIcon = () => (
       strokeWidth="1.5"
     />
   </svg>
-)
+);
 
 export const StarVector = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -672,7 +672,7 @@ export const StarVector = () => (
       strokeWidth="1.66667"
     />
   </svg>
-)
+);
 
 export const LeftIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -684,7 +684,7 @@ export const LeftIcon = () => (
       strokeLinejoin="round"
     />
   </svg>
-)
+);
 
 export const RightIcon2 = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -696,7 +696,7 @@ export const RightIcon2 = () => (
       strokeLinejoin="round"
     />
   </svg>
-)
+);
 
 export const TetherIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16" fill="none">
@@ -708,4 +708,4 @@ export const TetherIcon = () => (
       fill="white"
     />
   </svg>
-)
+);

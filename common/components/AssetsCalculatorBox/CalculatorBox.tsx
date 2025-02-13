@@ -1,19 +1,19 @@
-import React, { useEffect, useMemo } from 'react'
-import { Card, Slider, Typography } from 'antd'
-import { InputCustom } from '@/common/components/InputCustom'
-import { SliderMarks } from 'antd/es/slider'
-import { MultiplyIcon } from '@/common/components/Icons'
-import { MAX_BPS } from '@/common/consts'
-import { formatNumberBalance, nFormatter } from '@/utils'
-import cloneDeep from 'lodash.clonedeep'
+import { MultiplyIcon } from '@/common/components/Icons';
+import { InputCustom } from '@/common/components/InputCustom';
+import { MAX_BPS } from '@/common/consts';
+import { formatNumberBalance, nFormatter } from '@/utils';
+import { Card, Slider, Typography } from 'antd';
+import { SliderMarks } from 'antd/es/slider';
+import cloneDeep from 'lodash.clonedeep';
+import React, { useEffect, useMemo } from 'react';
 
 interface Props {
-  asset: PoolAsset
-  setAssets: any
-  assetsSelected: PoolAsset[]
-  userEMode: string
-  tokens: Token[]
-  setTokens: (val: Token[]) => void
+  asset: PoolAsset;
+  setAssets: any;
+  assetsSelected: PoolAsset[];
+  userEMode: string;
+  tokens: Token[];
+  setTokens: (val: Token[]) => void;
 }
 
 export const CalculatorBox: React.FunctionComponent<Props> = ({
@@ -24,30 +24,30 @@ export const CalculatorBox: React.FunctionComponent<Props> = ({
   tokens,
   setTokens,
 }) => {
-  const [amount, setAmount] = React.useState(0)
-  const [price, setPrice] = React.useState(0)
+  const [amount, setAmount] = React.useState(0);
+  const [price, setPrice] = React.useState(0);
 
   useEffect(() => {
-    const token = tokens.find((x) => x.address === asset.token.address)
-    setPrice(token?.priceChange ?? 0)
-  }, [tokens])
+    const token = tokens.find((x) => x.address === asset.token.address);
+    setPrice(token?.priceChange ?? 0);
+  }, [tokens]);
 
   const onchangeSlider = (value: any) => {
     const updatedAmount = tokens.map((x) => {
       if (x.address === asset.token.address) {
-        return { ...x, priceChange: asset.token.price * (value / 100) }
+        return { ...x, priceChange: asset.token.price * (value / 100) };
       } else {
-        return x
+        return x;
       }
-    })
-    const tokensCopy = cloneDeep(updatedAmount)
-    setTokens([...tokensCopy])
-    setPrice((asset.token.price * value) / 100)
-  }
+    });
+    const tokensCopy = cloneDeep(updatedAmount);
+    setTokens([...tokensCopy]);
+    setPrice((asset.token.price * value) / 100);
+  };
 
   const handleRemoveAsset = () => {
-    setAssets((prev: any) => prev.filter((item: any) => item.token.symbol !== asset.token.symbol))
-  }
+    setAssets((prev: any) => prev.filter((item: any) => item.token.symbol !== asset.token.symbol));
+  };
 
   const marks: SliderMarks = useMemo(() => {
     return {
@@ -56,8 +56,8 @@ export const CalculatorBox: React.FunctionComponent<Props> = ({
       100: `${nFormatter((Number(asset.token.price) * 100) / 100)}`,
       150: `${nFormatter((Number(asset.token.price) * 150) / 100)}`,
       200: `${nFormatter((Number(asset.token.price) * 200) / 100)}`,
-    }
-  }, [asset])
+    };
+  }, [asset]);
 
   return (
     <Card
@@ -83,16 +83,16 @@ export const CalculatorBox: React.FunctionComponent<Props> = ({
               max={1000000000}
               inputAmount={asset.amountChange ? Number(asset.amountChange ?? 0).toString() : ''}
               onInputChange={(value) => {
-                setAmount(value)
+                setAmount(value);
                 const updatedAmount = assetsSelected.map((x) => {
                   if (x._id === asset._id) {
-                    return { ...x, amountChange: value ? value : 0 }
+                    return { ...x, amountChange: value ? value : 0 };
                   } else {
-                    return x
+                    return x;
                   }
-                })
-                const assetsCopy = cloneDeep(updatedAmount)
-                setAssets([...assetsCopy])
+                });
+                const assetsCopy = cloneDeep(updatedAmount);
+                setAssets([...assetsCopy]);
               }}
               className={'font-semibold text-xl h-12 text-[#313547] px-0'}
             />
@@ -102,7 +102,9 @@ export const CalculatorBox: React.FunctionComponent<Props> = ({
               <div className={'text-[#515D86] text-sm'}>${nFormatter((amount ?? 0) * asset.token.price)}</div>
               <div className={'w-[1px] h-[12px] bg-[#C0CAED]'}></div>
               <div
-                className={`${userEMode && userEMode === asset.emodeId ? 'text-[#7F56D9]' : 'text-[#515D86]'} text-sm font-medium`}
+                className={`${
+                  userEMode && userEMode === asset.emodeId ? 'text-[#7F56D9]' : 'text-[#515D86]'
+                } text-sm font-medium`}
               >
                 LTV: {((userEMode && userEMode === asset.emodeId ? asset.emodeBps : asset?.normaBps) / MAX_BPS) * 100}%
               </div>
@@ -130,7 +132,7 @@ export const CalculatorBox: React.FunctionComponent<Props> = ({
                   railStyle={{ background: '#DCDFEA' }}
                   tooltip={{
                     formatter: (value) => {
-                      return `$${formatNumberBalance((asset.token.price * Number(value)) / 100, 4)}`
+                      return `$${formatNumberBalance((asset.token.price * Number(value)) / 100, 4)}`;
                     },
                   }}
                   value={Number(price / asset.token.price) * 100}
@@ -168,5 +170,5 @@ export const CalculatorBox: React.FunctionComponent<Props> = ({
         </div>
       </div>
     </Card>
-  )
-}
+  );
+};

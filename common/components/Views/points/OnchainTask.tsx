@@ -1,30 +1,30 @@
-import React, { useMemo } from 'react'
-import { Button, Typography } from 'antd'
-import { CakeIcon, PointMesoIcon, StarIcon } from '@/common/components/Icons/points'
-import { ArrowRightIcon } from '@/common/components/Icons'
+import { ArrowRightIcon } from '@/common/components/Icons';
+import { CakeIcon, PointMesoIcon, StarIcon } from '@/common/components/Icons/points';
+import { Button, Typography } from 'antd';
+import React, { useMemo } from 'react';
 // import CountdownEvent from '@/common/components/Views/points/CountdownEvent'
-import moment from 'moment'
-import { useRouter } from 'next/router'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import appActions from '@/modules/app/actions'
-import { useDispatch } from 'react-redux'
-import { getDiff } from '@/utils'
-import CountdownEvent from '@/common/components/Views/points/CountdownEvent'
-import Image from 'next/image'
+import CountdownEvent from '@/common/components/Views/points/CountdownEvent';
+import appActions from '@/modules/app/actions';
+import { getDiff } from '@/utils';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import moment from 'moment';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
 
 interface Props {
-  onChainTasks: any[]
-  pointEvent: any
-  userInfo: any
-  refetchEvent: any
+  onChainTasks: any[];
+  pointEvent: any;
+  userInfo: any;
+  refetchEvent: any;
 }
 
 export const OnchainTask: React.FunctionComponent<Props> = ({ onChainTasks, pointEvent, refetchEvent }) => {
-  const eventTime = useMemo(() => (pointEvent?.deadline ? moment(pointEvent?.deadline).format('X') : 0), [pointEvent])
-  const router = useRouter()
-  const { connected } = useWallet()
-  const dispatch = useDispatch()
-  const isEnded = getDiff(Number(eventTime) * 1000) < 0
+  const eventTime = useMemo(() => (pointEvent?.deadline ? moment(pointEvent?.deadline).format('X') : 0), [pointEvent]);
+  const router = useRouter();
+  const { connected } = useWallet();
+  const dispatch = useDispatch();
+  const isEnded = getDiff(Number(eventTime) * 1000) < 0;
 
   return (
     <div>
@@ -56,7 +56,7 @@ export const OnchainTask: React.FunctionComponent<Props> = ({ onChainTasks, poin
                 <CountdownEvent
                   endAt={eventTime}
                   onMomentChange={() => {
-                    refetchEvent()
+                    refetchEvent();
                   }}
                 />
               </div>
@@ -134,18 +134,18 @@ export const OnchainTask: React.FunctionComponent<Props> = ({ onChainTasks, poin
                         {task.key === 'SUPPLY_CAKE'
                           ? 'CAKE'
                           : task.name.toLowerCase().includes('other')
-                            ? 'other assets'
-                            : 'stAPT'}{' '}
+                          ? 'other assets'
+                          : 'stAPT'}{' '}
                         {task.name.toLowerCase().includes('borrow') ? 'borrow' : 'supply'}{' '}
                       </div>
                     </div>
                     <Button
                       onClick={async () => {
                         if (!connected) {
-                          dispatch(appActions.SET_SHOW_CONNECT(true))
-                          return
+                          dispatch(appActions.SET_SHOW_CONNECT(true));
+                          return;
                         }
-                        await router.push('/dashboard')
+                        await router.push('/dashboard');
                       }}
                       className={
                         'flex w-fit sm:w-auto items-center gap-3 bg-[#7F56D9] min-w-[102px] justify-center rounded-full text-base text-white h-[42px] px-4'
@@ -157,10 +157,10 @@ export const OnchainTask: React.FunctionComponent<Props> = ({ onChainTasks, poin
                   </div>
                 </div>
               </div>
-            )
+            );
           })}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

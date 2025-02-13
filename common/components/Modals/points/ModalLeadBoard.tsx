@@ -1,41 +1,41 @@
-import React, { useEffect, useState } from 'react'
-import { Card, Col, Modal, Pagination, PaginationProps, Row, Typography } from 'antd'
-import { useQuery } from '@tanstack/react-query'
-import { getDataLeaderBoard } from '@/common/services/points'
-import { ellipseAddress, formatNumberBalance } from '@/utils'
-import { TableLoading } from '@/common/components/Views/points/TableLoaading'
-import { CloseIcon } from '@/common/components/Icons'
-import Image from 'next/image'
-import { StarIcon } from '@/common/components/Icons/points'
+import { CloseIcon } from '@/common/components/Icons';
+import { StarIcon } from '@/common/components/Icons/points';
+import { TableLoading } from '@/common/components/Views/points/TableLoaading';
+import { getDataLeaderBoard } from '@/common/services/points';
+import { ellipseAddress, formatNumberBalance } from '@/utils';
+import { useQuery } from '@tanstack/react-query';
+import { Card, Col, Modal, Pagination, PaginationProps, Row, Typography } from 'antd';
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
 
 interface Props {
-  isModalOpen: boolean
-  handleClose: () => void
-  userInfo: any
+  isModalOpen: boolean;
+  handleClose: () => void;
+  userInfo: any;
 }
 
 export const ModalLeadBoard: React.FunctionComponent<Props> = ({ isModalOpen, handleClose, userInfo }) => {
-  const [current, setCurrent] = useState(1)
-  const [totalItem, setTotalItem] = React.useState(0)
+  const [current, setCurrent] = useState(1);
+  const [totalItem, setTotalItem] = React.useState(0);
 
   const { data: { total = 0, data = [] } = {}, isFetching } = useQuery({
     queryKey: ['leaderboard', current],
     queryFn: async () => {
-      const { data } = await getDataLeaderBoard(current - 1)
-      return { total: data.total, data: data.datas }
+      const { data } = await getDataLeaderBoard(current - 1);
+      return { total: data.total, data: data.datas };
     },
-  })
+  });
 
   useEffect(() => {
     if (total > 0) {
-      setTotalItem(total)
+      setTotalItem(total);
     }
-  }, [total])
+  }, [total]);
 
   const onChange: PaginationProps['onChange'] = (page) => {
-    console.log(page)
-    setCurrent(page)
-  }
+    console.log(page);
+    setCurrent(page);
+  };
 
   return (
     <Modal centered onCancel={handleClose} visible={isModalOpen} footer={false} closable={false} width={600}>
@@ -129,7 +129,9 @@ export const ModalLeadBoard: React.FunctionComponent<Props> = ({ isModalOpen, ha
                       className={'text-xs flex font-semibold text-[#7B8AB1] items-center sm:text-sm px-4'}
                     >
                       <span
-                        className={`${item.rank === 1 && 'text-[#F36617] italic'} ${item.rank === 2 && 'text-[#586F89] italic'} ${item.rank === 3 && 'text-[#D3A561] italic'}`}
+                        className={`${item.rank === 1 && 'text-[#F36617] italic'} ${
+                          item.rank === 2 && 'text-[#586F89] italic'
+                        } ${item.rank === 3 && 'text-[#D3A561] italic'}`}
                       >
                         {ellipseAddress(item.address, 6)}
                       </span>
@@ -145,7 +147,7 @@ export const ModalLeadBoard: React.FunctionComponent<Props> = ({ isModalOpen, ha
                       <StarIcon />
                     </Col>
                   </Row>
-                )
+                );
               })}
             </>
           )}
@@ -161,5 +163,5 @@ export const ModalLeadBoard: React.FunctionComponent<Props> = ({ isModalOpen, ha
         </div>
       </div>
     </Modal>
-  )
-}
+  );
+};

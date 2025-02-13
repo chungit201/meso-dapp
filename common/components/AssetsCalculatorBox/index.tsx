@@ -1,24 +1,24 @@
-import React, { useMemo } from 'react'
-import { Button, Card, Typography } from 'antd'
-import { CalculatorBox } from '@/common/components/AssetsCalculatorBox/CalculatorBox'
-import { BarVector, PlusIcon, ReloadIcon } from '@/common/components/Icons'
-import { ModalSelectAssets } from '@/common/components/Modals/ModalSelectAssets'
-import { useModal } from '@/common/hooks/useModal'
-import { nFormatter } from '@/utils'
-import { ASSETS_MODE } from '@/pages/calculator'
-import { StepCalculator } from '@/common/components/Views/calculators/StepCalculator'
-import { useSelector } from 'react-redux'
+import { CalculatorBox } from '@/common/components/AssetsCalculatorBox/CalculatorBox';
+import { BarVector, PlusIcon, ReloadIcon } from '@/common/components/Icons';
+import { ModalSelectAssets } from '@/common/components/Modals/ModalSelectAssets';
+import { StepCalculator } from '@/common/components/Views/calculators/StepCalculator';
+import { useModal } from '@/common/hooks/useModal';
+import { ASSETS_MODE } from '@/pages/calculator';
+import { nFormatter } from '@/utils';
+import { Button, Card, Typography } from 'antd';
+import React, { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 interface Props {
-  mode?: ASSETS_MODE
-  balanceColor?: string
-  label?: string
-  setAssets: React.Dispatch<PoolAsset[]>
-  assetsSelected: PoolAsset[]
-  descriptionNoAssets?: string
-  userEMode: string
-  tokens: Token[]
-  setTokens: (val: Token[]) => void
+  mode?: ASSETS_MODE;
+  balanceColor?: string;
+  label?: string;
+  setAssets: React.Dispatch<PoolAsset[]>;
+  assetsSelected: PoolAsset[];
+  descriptionNoAssets?: string;
+  userEMode: string;
+  tokens: Token[];
+  setTokens: (val: Token[]) => void;
 }
 
 export const AssetsCalculatorBox: React.FunctionComponent<Props> = ({
@@ -32,22 +32,22 @@ export const AssetsCalculatorBox: React.FunctionComponent<Props> = ({
   tokens,
   setTokens,
 }) => {
-  const { show, setShow, toggle } = useModal()
-  const app = useSelector((state: any) => state.app)
+  const { show, setShow, toggle } = useModal();
+  const app = useSelector((state: any) => state.app);
 
   const handReset = () => {
-    setAssets([])
-  }
+    setAssets([]);
+  };
 
   const totalCollateralBalance = useMemo(() => {
-    let total = 0
+    let total = 0;
 
     for (const item of assetsSelected) {
-      const tokenPrice = tokens.find((x) => x.address === item.token.address)?.priceChange ?? 0
-      total += tokenPrice * (item.amountChange ?? 0)
+      const tokenPrice = tokens.find((x) => x.address === item.token.address)?.priceChange ?? 0;
+      total += tokenPrice * (item.amountChange ?? 0);
     }
-    return total
-  }, [assetsSelected, tokens])
+    return total;
+  }, [assetsSelected, tokens]);
 
   return (
     <Card bordered={false} className={'bg-[#FFF] h-full border border-[#EFF1F5] rounded-[16px]'}>
@@ -95,7 +95,7 @@ export const AssetsCalculatorBox: React.FunctionComponent<Props> = ({
                   tokens={tokens}
                   setTokens={setTokens}
                 />
-              )
+              );
             })}
           </div>
         )}
@@ -110,7 +110,9 @@ export const AssetsCalculatorBox: React.FunctionComponent<Props> = ({
                 boxShadow:
                   app.stepCalculator > 0 ? '0px 1px 2px 0px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px #F2F4F7' : 'none',
               }}
-              className={`text-center bg-[#FFF] relative ${app.stepCalculator === 2 && mode === ASSETS_MODE.BORROW && 'z-[100]'} ${app.stepCalculator === 1 && mode === ASSETS_MODE.SUPPLY && 'z-[100]'} p-4 rounded-[24px]`}
+              className={`text-center bg-[#FFF] relative ${
+                app.stepCalculator === 2 && mode === ASSETS_MODE.BORROW && 'z-[100]'
+              } ${app.stepCalculator === 1 && mode === ASSETS_MODE.SUPPLY && 'z-[100]'} p-4 rounded-[24px]`}
             >
               {app.stepCalculator == 1 && mode === ASSETS_MODE.SUPPLY && (
                 <div className={'absolute right-[-440px] -bottom-14'}>
@@ -149,5 +151,5 @@ export const AssetsCalculatorBox: React.FunctionComponent<Props> = ({
         handleClose={toggle}
       />
     </Card>
-  )
-}
+  );
+};

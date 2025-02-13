@@ -1,33 +1,33 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Col, Row } from 'antd'
-import { AssetInfo } from '@/common/components/Views/asset/AssetInfo'
-import { AssetDetailDashboard } from '@/common/components/Views/asset/AssetDetailDashboard'
-import { YourInfo } from '@/common/components/Views/asset/YourInfo'
-import { useRouter } from 'next/router'
-import { BannerPage } from '@/common/components/Layout/BannerPage'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import { AssetsContext } from '@/common/context'
-import dynamic from 'next/dynamic'
+import { BannerPage } from '@/common/components/Layout/BannerPage';
+import { AssetDetailDashboard } from '@/common/components/Views/asset/AssetDetailDashboard';
+import { AssetInfo } from '@/common/components/Views/asset/AssetInfo';
+import { YourInfo } from '@/common/components/Views/asset/YourInfo';
+import { AssetsContext } from '@/common/context';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { Col, Row } from 'antd';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import React, { useContext, useEffect, useState } from 'react';
 
 const LoadingPage = dynamic(
   () => import('@/common/components/LoadingAssets/LoadingPage').then((mod) => mod.LoadingPage),
   {
     ssr: false,
   },
-)
+);
 
 const Page: React.FunctionComponent = () => {
-  const [asset, setAsset] = useState<PoolAsset | null>(null)
-  const { allAssetsData, isLoading } = useContext(AssetsContext)
-  const router = useRouter()
-  const { account } = useWallet()
+  const [asset, setAsset] = useState<PoolAsset | null>(null);
+  const { allAssetsData, isLoading } = useContext(AssetsContext);
+  const router = useRouter();
+  const { account } = useWallet();
 
   useEffect(() => {
     if (allAssetsData.length > 0 && router.query.poolAddress) {
-      const value = allAssetsData.find((x) => x.poolAddress === router.query.poolAddress)
-      setAsset(value as any)
+      const value = allAssetsData.find((x) => x.poolAddress === router.query.poolAddress);
+      setAsset(value as any);
     }
-  }, [allAssetsData, account, router])
+  }, [allAssetsData, account, router]);
 
   return (
     <div className={'bg-[#fff] min-h-screen'}>
@@ -53,6 +53,6 @@ const Page: React.FunctionComponent = () => {
         </div>
       )}
     </div>
-  )
-}
-export default Page
+  );
+};
+export default Page;

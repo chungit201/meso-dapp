@@ -1,10 +1,10 @@
-import React from 'react'
-import { Skeleton, Table } from 'antd'
+import { Skeleton, Table } from 'antd';
+import React from 'react';
 
 export const AssetsTableLoading: React.FunctionComponent = () => {
   const defaultColumns: (any[number] & {
-    editable?: boolean
-    dataIndex: string
+    editable?: boolean;
+    dataIndex: string;
   })[] = [
     {
       title: 'Assets',
@@ -85,7 +85,7 @@ export const AssetsTableLoading: React.FunctionComponent = () => {
         </div>
       ),
     },
-  ]
+  ];
   return (
     <Table
       showSorterTooltip={false}
@@ -97,5 +97,5 @@ export const AssetsTableLoading: React.FunctionComponent = () => {
       dataSource={Array.from(new Array(10))}
       columns={defaultColumns as any}
     />
-  )
-}
+  );
+};

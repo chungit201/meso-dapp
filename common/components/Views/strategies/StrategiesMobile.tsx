@@ -1,34 +1,34 @@
-import React, { useState } from 'react'
-import { Button, Card, Col, Row, Typography } from 'antd'
-import { PairInfo } from '@/common/components/Views/strategies/PairInfo'
-import { Strategy, StrategyType } from '@/utils/stategies'
-import { Computer } from '@/common/components/Icons'
-import { formatNumberBalance, nFormatter } from '@/utils'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import { useDispatch } from 'react-redux'
-import appActions from '@/modules/app/actions'
-import { useModal } from '@/common/hooks/useModal'
-import { ModalLoop } from '@/common/hooks/strategies/ModalLoop'
+import { Computer } from '@/common/components/Icons';
+import { PairInfo } from '@/common/components/Views/strategies/PairInfo';
+import { ModalLoop } from '@/common/hooks/strategies/ModalLoop';
+import { useModal } from '@/common/hooks/useModal';
+import appActions from '@/modules/app/actions';
+import { formatNumberBalance, nFormatter } from '@/utils';
+import { Strategy, StrategyType } from '@/utils/stategies';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { Button, Card, Col, Row, Typography } from 'antd';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 interface Props {
-  strategies: Strategy[]
+  strategies: Strategy[];
 }
 
 export const StrategiesMobile: React.FunctionComponent<Props> = ({ strategies }) => {
-  const [pairSelected, setPairSelected] = useState<Strategy | null>(null)
-  const { connected } = useWallet()
-  const { show, setShow, toggle } = useModal()
+  const [pairSelected, setPairSelected] = useState<Strategy | null>(null);
+  const { connected } = useWallet();
+  const { show, setShow, toggle } = useModal();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const showModalLoop = (pair: Strategy) => {
     if (!connected) {
-      dispatch(appActions.SET_SHOW_CONNECT(true))
-      return
+      dispatch(appActions.SET_SHOW_CONNECT(true));
+      return;
     }
-    setPairSelected(pair)
-    setShow(true)
-  }
+    setPairSelected(pair);
+    setShow(true);
+  };
   return (
     <Row className={'mt-8 flex md:hidden'} gutter={[16, 16]}>
       {strategies.map((pair, index) => {
@@ -93,9 +93,9 @@ export const StrategiesMobile: React.FunctionComponent<Props> = ({ strategies })
               </div>
             </Card>
           </Col>
-        )
+        );
       })}
       {show && <ModalLoop pair={pairSelected!} isModalOpen={show} handleClose={toggle} />}
     </Row>
-  )
-}
+  );
+};

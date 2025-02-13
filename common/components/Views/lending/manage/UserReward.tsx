@@ -1,20 +1,20 @@
-import React, { useEffect } from 'react'
-import { Card, Typography } from 'antd'
-import Image from 'next/image'
-import { useAssets } from '@/common/hooks/assets/useAssets'
-import { formatNumberBalance } from '@/utils'
+import { useAssets } from '@/common/hooks/assets/useAssets';
+import { formatNumberBalance } from '@/utils';
+import { Card, Typography } from 'antd';
+import Image from 'next/image';
+import React, { useEffect } from 'react';
 
 export const AccountReward: React.FunctionComponent = () => {
-  const [totalValue, setTotalValue] = React.useState(0)
-  const { assetDeposits, isFetching } = useAssets()
-  const rewards: any = []
+  const [totalValue, setTotalValue] = React.useState(0);
+  const { assetDeposits, isFetching } = useAssets();
+  const rewards: any = [];
   useEffect(() => {
-    let total = 0
+    let total = 0;
     for (const item of assetDeposits) {
-      total += item.amountDeposit * Number(item?.token?.price)
+      total += item.amountDeposit * Number(item?.token?.price);
     }
-    setTotalValue(total)
-  }, [assetDeposits])
+    setTotalValue(total);
+  }, [assetDeposits]);
 
   return (
     <Card className={'w-[350px] border-[#19182A] bg-transparent text-[#adb8d8] rounded-[8px]'}>
@@ -44,12 +44,12 @@ export const AccountReward: React.FunctionComponent = () => {
                     <div>${formatNumberBalance(item.amountDeposit * Number(item.price), 2)}</div>
                   </div>
                 </div>
-              )
+              );
             })}
           </>
         )}
         {rewards.length === 0 && <div>No Rewards</div>}
       </div>
     </Card>
-  )
-}
+  );
+};

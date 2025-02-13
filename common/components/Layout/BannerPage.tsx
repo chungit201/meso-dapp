@@ -1,5 +1,5 @@
-import React from 'react'
-import bannerTop from '@/common/assets/images/banner-top.png'
+import bannerTop from '@/common/assets/images/banner-top.png';
+import React from 'react';
 
 export const BannerPage: React.FunctionComponent = () => {
   return (
@@ -13,5 +13,5 @@ export const BannerPage: React.FunctionComponent = () => {
         }}
       ></div>
     </div>
-  )
-}
+  );
+};

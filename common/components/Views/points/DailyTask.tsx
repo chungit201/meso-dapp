@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
-import { useQuery } from '@tanstack/react-query'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import { getAllTasks, linkDiscord, linkTwitter, veryfyTask } from '@/common/services/points'
-import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/react'
-import ModalDoTask from '@/common/components/Modals/points/ModalDoTask'
-import { useModal } from '@/common/hooks/useModal'
-import { SOCIAL_TASKS, SocialTask } from '@/common/components/Views/points/SocialTask'
-import { OnchainTask } from '@/common/components/Views/points/OnchainTask'
-import { notification } from 'antd'
-import { LoadingPage } from '@/common/components/LoadingAssets/LoadingPage'
+import { LoadingPage } from '@/common/components/LoadingAssets/LoadingPage';
+import ModalDoTask from '@/common/components/Modals/points/ModalDoTask';
+import { OnchainTask } from '@/common/components/Views/points/OnchainTask';
+import { SOCIAL_TASKS, SocialTask } from '@/common/components/Views/points/SocialTask';
+import { useModal } from '@/common/hooks/useModal';
+import { getAllTasks, linkDiscord, linkTwitter, veryfyTask } from '@/common/services/points';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { useQuery } from '@tanstack/react-query';
+import { notification } from 'antd';
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 
 interface Props {
-  userInfo: any
-  tasksStatus: any
-  refetchTasksStatus: () => void
-  refetchUserInfo: () => void
+  userInfo: any;
+  tasksStatus: any;
+  refetchTasksStatus: () => void;
+  refetchUserInfo: () => void;
 }
 
 export const DailyTask: React.FunctionComponent<Props> = ({
@@ -25,94 +25,94 @@ export const DailyTask: React.FunctionComponent<Props> = ({
   refetchTasksStatus,
   refetchUserInfo,
 }) => {
-  const [loadingLinkAccount, setLoadingLinkAccount] = useState(false)
-  const [selectedTask, setSelectedTask] = useState<any>()
-  const { show: showDoTask, setShow: setShowDoTask, toggle: toggleShowDoTask } = useModal()
-  const { connected, account } = useWallet()
-  const { data: session, status } = useSession()
-  const router = useRouter()
-  const provider = router.query.provider
-  const token = (session as any)?.access_token
-  const id = (session as any)?.providerAccountId
+  const [loadingLinkAccount, setLoadingLinkAccount] = useState(false);
+  const [selectedTask, setSelectedTask] = useState<any>();
+  const { show: showDoTask, setShow: setShowDoTask, toggle: toggleShowDoTask } = useModal();
+  const { connected, account } = useWallet();
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  const provider = router.query.provider;
+  const token = (session as any)?.access_token;
+  const id = (session as any)?.providerAccountId;
 
   const { data: { tasks = [], pointEvent = null } = {}, refetch: refetchEvent } = useQuery({
     queryKey: ['tasks', account],
     queryFn: async () => {
-      const { data } = await getAllTasks()
-      return { tasks: data.tasks, pointEvent: data.pointEvent }
+      const { data } = await getAllTasks();
+      return { tasks: data.tasks, pointEvent: data.pointEvent };
     },
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     refetchOnReconnect: false,
     refetchIntervalInBackground: false,
-  })
+  });
 
   useEffect(() => {
     if (userInfo && provider) {
-      handleLinkAccount()
+      handleLinkAccount();
     }
-  }, [userInfo, account])
+  }, [userInfo, account]);
 
   useEffect(() => {
     if (!account) {
-      setSelectedTask(null)
+      setSelectedTask(null);
     }
-  }, [account, connected])
+  }, [account, connected]);
 
   const handleLinkAccount = async () => {
-    setLoadingLinkAccount(true)
+    setLoadingLinkAccount(true);
     try {
       if (userInfo && token && id && provider) {
-        let isLinked = false
+        let isLinked = false;
         try {
           if (provider === 'twitter' && (session as any)?.provider === 'twitter') {
             // setLoadingTwitter(true)
             if (!userInfo?.twitterId) {
-              const res = await linkTwitter(id, token)
-              console.log('res', res)
+              const res = await linkTwitter(id, token);
+              console.log('res', res);
               if (res.data) {
-                refetchUserInfo()
-                router.push('/points')
+                refetchUserInfo();
+                router.push('/points');
               }
             }
-            isLinked = true
+            isLinked = true;
           } else if (provider === 'discord' && !userInfo?.discordId && (session as any)?.provider === 'discord') {
             // setLoadingDiscord(true)
-            await linkDiscord(id, token)
+            await linkDiscord(id, token);
 
-            isLinked = true
+            isLinked = true;
           }
           if (isLinked) {
-            return
+            return;
           }
         } catch (e: any) {
-          notification.error({ message: e?.response?.data?.message })
+          notification.error({ message: e?.response?.data?.message });
         }
-        await router.push('/points')
+        await router.push('/points');
       }
-      setLoadingLinkAccount(false)
+      setLoadingLinkAccount(false);
     } catch (e) {
-      setLoadingLinkAccount(false)
-      console.log(e)
+      setLoadingLinkAccount(false);
+      console.log(e);
     } finally {
-      setLoadingLinkAccount(false)
+      setLoadingLinkAccount(false);
     }
-  }
+  };
 
   const handleCompleteTask = async (task: any) => {
-    if (!userInfo) return
-    let isVerified = false
-    const w = 800
-    const h = 800
-    const left = screen.width / 2 - w / 2
-    const top = screen.height / 2 - h / 2
+    if (!userInfo) return;
+    let isVerified = false;
+    const w = 800;
+    const h = 800;
+    const left = screen.width / 2 - w / 2;
+    const top = screen.height / 2 - h / 2;
     switch (task.key) {
       case 'JOIN_DISCORD':
-        isVerified = true
-        window.open(task?.partnerLink, 'newwin', 'height=800,width=800')
-        break
+        isVerified = true;
+        window.open(task?.partnerLink, 'newwin', 'height=800,width=800');
+        break;
       case 'FOLLOW_TWITTER':
-        isVerified = true
+        isVerified = true;
         window.open(
           'https://twitter.com/intent/follow?screen_name=' + task?.partnerId,
           'newwin',
@@ -124,10 +124,10 @@ export const DailyTask: React.FunctionComponent<Props> = ({
             top +
             ', left=' +
             left,
-        )
-        break
+        );
+        break;
       case 'RETWEET_TWITTER':
-        isVerified = true
+        isVerified = true;
         window.open(
           'https://twitter.com/intent/retweet?tweet_id=' + task?.partnerId,
           'newwin',
@@ -139,10 +139,10 @@ export const DailyTask: React.FunctionComponent<Props> = ({
             top +
             ', left=' +
             left,
-        )
-        break
+        );
+        break;
       default:
-        isVerified = true
+        isVerified = true;
         window.open(
           task?.partnerLink,
           'newwin',
@@ -154,11 +154,11 @@ export const DailyTask: React.FunctionComponent<Props> = ({
           //   top +
           //   ', left=' +
           //   left,
-        )
-        break
+        );
+        break;
     }
     if (!isVerified) {
-      return
+      return;
     }
     if (
       (task.key == 'JOIN_DISCORD' && userInfo?.discordId) ||
@@ -167,25 +167,25 @@ export const DailyTask: React.FunctionComponent<Props> = ({
       task.key == SOCIAL_TASKS.JOIN_TELEGRAM_ANNOUNCEMENT ||
       task.key == SOCIAL_TASKS.RETWEET_TWITTER
     ) {
-      await handleVerifyTask(task?._id)
+      await handleVerifyTask(task?._id);
     }
 
     setTimeout(async () => {
-      refetchTasksStatus()
-      refetchUserInfo()
-    }, 3000)
-  }
+      refetchTasksStatus();
+      refetchUserInfo();
+    }, 3000);
+  };
 
   const handleVerifyTask = async (taskId: string) => {
     try {
-      await veryfyTask(taskId)
+      await veryfyTask(taskId);
     } catch (e: any) {
-      console.log('e', e)
+      console.log('e', e);
     }
-  }
+  };
 
-  const onChainTasks = tasks?.filter((task: any) => task?.type == 'ONCHAIN_TASK')
-  const socialTasks = tasks?.filter((task: any) => task?.type == 'SOCIAL_TASK')
+  const onChainTasks = tasks?.filter((task: any) => task?.type == 'ONCHAIN_TASK');
+  const socialTasks = tasks?.filter((task: any) => task?.type == 'SOCIAL_TASK');
 
   return (
     <div className={'w-full text-base px-2'}>
@@ -238,5 +238,5 @@ export const DailyTask: React.FunctionComponent<Props> = ({
         handleCompleteTask={handleCompleteTask}
       />
     </div>
-  )
-}
+  );
+};

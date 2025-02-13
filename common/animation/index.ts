@@ -17628,4 +17628,4 @@ export const animationData = {
     },
   ],
   markers: [],
-}
+};

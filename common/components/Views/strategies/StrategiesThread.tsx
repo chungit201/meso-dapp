@@ -1,5 +1,5 @@
-import React from 'react'
-import { Col, Row } from 'antd'
+import { Col, Row } from 'antd';
+import React from 'react';
 
 export const StrategiesThread: React.FunctionComponent = () => {
   return (
@@ -27,5 +27,5 @@ export const StrategiesThread: React.FunctionComponent = () => {
       </Col>
       <Col className={'p-5 strategies-item'} span={3}></Col>
     </Row>
-  )
-}
+  );
+};

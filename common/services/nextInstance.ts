@@ -1,7 +1,7 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const nextInstance = axios.create({
   baseURL: '',
-})
+});
 
-export default nextInstance
+export default nextInstance;

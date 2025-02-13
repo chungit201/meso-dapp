@@ -1,5 +1,5 @@
-import React from 'react'
-import { Col, Row, Skeleton } from 'antd'
+import { Col, Row, Skeleton } from 'antd';
+import React from 'react';
 
 export const LoadingAssets: React.FunctionComponent = () => {
   return (
@@ -28,8 +28,8 @@ export const LoadingAssets: React.FunctionComponent = () => {
               <Skeleton.Button className={'w-[100px] h-6'} active />
             </Col>
           </Row>
-        )
+        );
       })}
     </>
-  )
-}
+  );
+};

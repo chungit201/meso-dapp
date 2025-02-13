@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { createContext } from 'react';
 
 export enum EMODE_ID {
   APT = 'APT',
@@ -6,16 +6,16 @@ export enum EMODE_ID {
 }
 
 export const AssetsContext = createContext<{
-  refetchUserEmode: () => void
-  allAssetsData: PoolAsset[] | []
-  refetchAllAssetData: () => void
-  assetsMode: PoolAsset[]
-  isLoading: boolean
-  isFetchingDataOnchain: boolean
-  refetchPoolsData: () => void
-}>(null as any)
+  refetchUserEmode: () => void;
+  allAssetsData: PoolAsset[] | [];
+  refetchAllAssetData: () => void;
+  assetsMode: PoolAsset[];
+  isLoading: boolean;
+  isFetchingDataOnchain: boolean;
+  refetchPoolsData: () => void;
+}>(null as any);
 
 export const MesoContext = createContext<{
-  tokens: Token[]
-  isFetchingTokens: boolean
-}>(null as any)
+  tokens: Token[];
+  isFetchingTokens: boolean;
+}>(null as any);

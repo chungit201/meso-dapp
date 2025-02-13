@@ -1,10 +1,10 @@
-import React from 'react'
-import { Typography } from 'antd'
-import { IsolateBox } from '@/common/components/Views/isolate/IsolateBox'
-import { useIsolatePools } from '@/common/hooks/useIsolatePools'
+import { IsolateBox } from '@/common/components/Views/isolate/IsolateBox';
+import { useIsolatePools } from '@/common/hooks/useIsolatePools';
+import { Typography } from 'antd';
+import React from 'react';
 
 export const IsolateDashboard: React.FunctionComponent = () => {
-  const { userPools } = useIsolatePools()
+  const { userPools } = useIsolatePools();
 
   return (
     <div className={'container max-w-[1536px] -mt-20 mx-auto pb-40 px-3'}>
@@ -15,9 +15,9 @@ export const IsolateDashboard: React.FunctionComponent = () => {
             <>
               <IsolateBox pool={item} key={index} />
             </>
-          )
+          );
         })}
       </div>
     </div>
-  )
-}
+  );
+};

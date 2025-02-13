@@ -1,77 +1,77 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Divider, Drawer, Layout, Menu, Popover, Tooltip } from 'antd'
-import Link from 'next/link'
+import { CopyIcon, ViewMoreIcon } from '@/common/components/Icons';
+import { ModalConnectWallet } from '@/common/components/Modals/ModalConnectWallet';
+import { FAUCET_CONTRACT_TESTNET } from '@/common/consts';
+import useTransactionCallback from '@/common/hooks/assets/useTransactionCallback';
+import useClient from '@/common/hooks/useClient';
+import { removeData } from '@/common/hooks/useLocalStoragre';
+import useNetworkConfiguration from '@/common/hooks/useNetwork';
+import appActions from '@/modules/app/actions';
+import { avatarImage, copyToClipboard, ellipseAddress } from '@/utils';
+import { Network } from '@aptos-labs/ts-sdk';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { Button, Divider, Drawer, Layout, Menu, Popover, Tooltip } from 'antd';
+import { default as classNames, default as cx } from 'classnames';
+import { Squash as Hamburger } from 'hamburger-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styles from './Header.module.scss';
+import { routes } from './routers';
 
-const { Header } = Layout
-import styles from './Header.module.scss'
-import { default as classNames, default as cx } from 'classnames'
-import { routes } from './routers'
-import { Squash as Hamburger } from 'hamburger-react'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
-import { ModalConnectWallet } from '@/common/components/Modals/ModalConnectWallet'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import { avatarImage, copyToClipboard, ellipseAddress } from '@/utils'
-import useTransactionCallback from '@/common/hooks/assets/useTransactionCallback'
-import { FAUCET_CONTRACT_TESTNET } from '@/common/consts'
-import { removeData } from '@/common/hooks/useLocalStoragre'
-import appActions from '@/modules/app/actions'
-import { useDispatch, useSelector } from 'react-redux'
-import useClient from '@/common/hooks/useClient'
-import useNetworkConfiguration from '@/common/hooks/useNetwork'
-import { Network } from '@aptos-labs/ts-sdk'
-import { CopyIcon, ViewMoreIcon } from '@/common/components/Icons'
+const { Header } = Layout;
 
 interface ISideMenuProps {
-  currentPageName: any
-  onRouteSelected: () => void
+  currentPageName: any;
+  onRouteSelected: () => void;
 }
 
 export const HeaderPage: React.FunctionComponent = () => {
-  const [pageName, setPageName] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [isOpen, setOpen] = useState(false)
-  const [copyText, setCopyText] = useState('Copy')
+  const [pageName, setPageName] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [isOpen, setOpen] = useState(false);
+  const [copyText, setCopyText] = useState('Copy');
 
-  const { account, disconnect, wallet } = useWallet()
-  const router = useRouter()
-  const transactionCallback = useTransactionCallback()
-  const dispatch = useDispatch()
-  const app = useSelector((state: any) => state.app)
-  const { faucetClient } = useClient()
-  const { networkCfg } = useNetworkConfiguration()
+  const { account, disconnect, wallet } = useWallet();
+  const router = useRouter();
+  const transactionCallback = useTransactionCallback();
+  const dispatch = useDispatch();
+  const app = useSelector((state: any) => state.app);
+  const { faucetClient } = useClient();
+  const { networkCfg } = useNetworkConfiguration();
 
   useEffect(() => {
-    setPageName(router.pathname.replace('/', ''))
-  }, [router])
+    setPageName(router.pathname.replace('/', ''));
+  }, [router]);
 
   const handleDisconnect = async () => {
     try {
-      await removeData('accessToken')
-      dispatch(appActions.SET_IS_LOGIN(false))
-      disconnect()
+      await removeData('accessToken');
+      dispatch(appActions.SET_IS_LOGIN(false));
+      disconnect();
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }
+  };
 
   const handleSwitchAccount = () => {
-    disconnect()
-    dispatch(appActions.SET_SHOW_CONNECT(true))
-  }
+    disconnect();
+    dispatch(appActions.SET_SHOW_CONNECT(true));
+  };
 
   const faucetApt = async () => {
     try {
-      await faucetClient.fundAccount(account?.address as string, 100_000_000)
+      await faucetClient.fundAccount(account?.address as string, 100_000_000);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }
+  };
 
   const handleFaucet = async () => {
     try {
-      setLoading(true)
-      await faucetApt()
+      setLoading(true);
+      await faucetApt();
       transactionCallback({
         payload: {
           function: `${FAUCET_CONTRACT_TESTNET}::coins::faucet`,
@@ -79,26 +79,26 @@ export const HeaderPage: React.FunctionComponent = () => {
           functionArguments: [],
         },
         onSuccess(hash: string) {
-          console.log('hash', hash)
+          console.log('hash', hash);
         },
         setLoading,
-      })
+      });
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }
+  };
 
   const toggleModalConnect = () => {
-    dispatch(appActions.SET_SHOW_CONNECT(!app.showConnect))
-  }
+    dispatch(appActions.SET_SHOW_CONNECT(!app.showConnect));
+  };
 
   const handleCopy = (value: string) => {
-    setCopyText('Copied!')
+    setCopyText('Copied!');
     setTimeout(() => {
-      setCopyText('Copy')
-    }, 1000)
-    copyToClipboard(value)
-  }
+      setCopyText('Copy');
+    }, 1000);
+    copyToClipboard(value);
+  };
 
   const SideMenu = ({ currentPageName, onRouteSelected }: ISideMenuProps) => {
     return (
@@ -106,7 +106,7 @@ export const HeaderPage: React.FunctionComponent = () => {
         {routes
           .filter((r) => r.path !== '*')
           .map(({ name, path }, index) => {
-            const isCurrent = currentPageName === name
+            const isCurrent = currentPageName === name;
             return (
               <>
                 {path === 'bridge' ? (
@@ -123,7 +123,9 @@ export const HeaderPage: React.FunctionComponent = () => {
                     key={`${name}-${index}-${isCurrent}`}
                     onClick={onRouteSelected}
                     className={classNames(
-                      `w-full ${path === 'convert' ? 'text-[#009393] flex items-center gap-2' : 'text-[#000]'} font-semibold dark:text-white menuItem text-base`,
+                      `w-full ${
+                        path === 'convert' ? 'text-[#009393] flex items-center gap-2' : 'text-[#000]'
+                      } font-semibold dark:text-white menuItem text-base`,
                       {
                         'hip-btn-selected': isCurrent,
                       },
@@ -134,7 +136,7 @@ export const HeaderPage: React.FunctionComponent = () => {
                   </Link>
                 )}
               </>
-            )
+            );
           })}
         {account && networkCfg === Network.TESTNET && (
           <Button
@@ -147,8 +149,8 @@ export const HeaderPage: React.FunctionComponent = () => {
           </Button>
         )}
       </div>
-    )
-  }
+    );
+  };
 
   const accountInfo = (
     <div className={'py-3'}>
@@ -192,7 +194,7 @@ export const HeaderPage: React.FunctionComponent = () => {
         </div>
       </div>
     </div>
-  )
+  );
 
   return (
     <Header className="z-20 w-full flex items-center pb-0 bg-[#FFF] h-[60px] sm:h-[65px] mobile:py-2 relative px-3">
@@ -239,7 +241,9 @@ export const HeaderPage: React.FunctionComponent = () => {
                         ) : (
                           <Link
                             href={`/${path}` || '/'}
-                            className={`h6 text-base ${path === 'convert' ? 'text-[#009393] flex items-center gap-2' : 'text-[#000]'} font-medium relative flex items-center h-full`}
+                            className={`h6 text-base ${
+                              path === 'convert' ? 'text-[#009393] flex items-center gap-2' : 'text-[#000]'
+                            } font-medium relative flex items-center h-full`}
                           >
                             {name}
                           </Link>
@@ -250,7 +254,7 @@ export const HeaderPage: React.FunctionComponent = () => {
                         <div className={'w-full absolute bottom-[10px] h-[1px]  nav-line-active'} />
                       )}
                     </Menu.Item>
-                  )
+                  );
                 })}
               </Menu>
             </Menu>
@@ -281,7 +285,7 @@ export const HeaderPage: React.FunctionComponent = () => {
               ) : (
                 <Button
                   onClick={() => {
-                    dispatch(appActions.SET_SHOW_CONNECT(true))
+                    dispatch(appActions.SET_SHOW_CONNECT(true));
                   }}
                   className={'border-0 bg-[#7F56D9] text-white font-bold h-10 rounded-full'}
                 >
@@ -301,5 +305,5 @@ export const HeaderPage: React.FunctionComponent = () => {
       </Drawer>
       <ModalConnectWallet isModalOpen={app.showConnect} handleClose={toggleModalConnect} />
     </Header>
-  )
-}
+  );
+};

@@ -1,15 +1,15 @@
-import { wormholeConnectHosted } from '@wormhole-foundation/wormhole-connect'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import { Card } from 'antd'
+import { wormholeConnectHosted } from '@wormhole-foundation/wormhole-connect';
+import { Card } from 'antd';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 // Existing DOM element where you want to mount Connect
 
 const Page = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
-    const container: any = document.getElementById('bridge-container')
+    const container: any = document.getElementById('bridge-container');
     if (container) {
       wormholeConnectHosted(container, {
         theme: {
@@ -17,9 +17,9 @@ const Page = () => {
           primary: '#7F56D9',
           input: '#F3F5F8',
         },
-      })
+      });
     }
-  }, [router])
+  }, [router]);
 
   return (
     <div className={'flex justify-center w-full pb-20'}>
@@ -29,7 +29,7 @@ const Page = () => {
         </Card>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

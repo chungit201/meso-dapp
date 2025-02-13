@@ -1,6 +1,6 @@
-import React from 'react'
-import Lottie from 'lottie-react'
-import { animationData } from '@/common/animation'
+import { animationData } from '@/common/animation';
+import Lottie from 'lottie-react';
+import React from 'react';
 
 export const LoadingPage: React.FunctionComponent = () => {
   return (
@@ -13,5 +13,5 @@ export const LoadingPage: React.FunctionComponent = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};

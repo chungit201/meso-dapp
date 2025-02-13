@@ -1,27 +1,27 @@
-import React from 'react'
-import { Button, Typography } from 'antd'
-import { LeftToRightIcon } from '@/common/components/Icons'
-import { useDispatch, useSelector } from 'react-redux'
-import appActions from '@/modules/app/actions'
-import { setHiddenTimeTutorialCalculator } from '@/utils'
+import { LeftToRightIcon } from '@/common/components/Icons';
+import appActions from '@/modules/app/actions';
+import { setHiddenTimeTutorialCalculator } from '@/utils';
+import { Button, Typography } from 'antd';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const StepCalculator: React.FunctionComponent = () => {
-  const app = useSelector((state: any) => state.app)
-  const dispatch = useDispatch()
+  const app = useSelector((state: any) => state.app);
+  const dispatch = useDispatch();
 
   const handleSkip = () => {
-    dispatch(appActions.SET_STEP_CALCULATOR(0))
-    setHiddenTimeTutorialCalculator()
-  }
+    dispatch(appActions.SET_STEP_CALCULATOR(0));
+    setHiddenTimeTutorialCalculator();
+  };
 
   const handleNextStep = () => {
     if (app.stepCalculator === 4) {
-      dispatch(appActions.SET_STEP_CALCULATOR(0))
-      setHiddenTimeTutorialCalculator()
+      dispatch(appActions.SET_STEP_CALCULATOR(0));
+      setHiddenTimeTutorialCalculator();
     } else {
-      dispatch(appActions.SET_STEP_CALCULATOR(app.stepCalculator + 1))
+      dispatch(appActions.SET_STEP_CALCULATOR(app.stepCalculator + 1));
     }
-  }
+  };
 
   return (
     <div className={'max-w-[420px] text-start bg-[#fff] border border-[#E4E7EC] rounded-[16px] p-5'}>
@@ -83,5 +83,5 @@ export const StepCalculator: React.FunctionComponent = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};

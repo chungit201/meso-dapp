@@ -1,18 +1,18 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
-import { CircleInfo, CloseIcon } from '@/common/components/Icons'
-import { Button, Modal, Select, Skeleton } from 'antd'
-import { MESO_ADDRESS } from '@/common/consts'
-import { useQuery } from '@tanstack/react-query'
-import useContract from '@/common/hooks/useContract'
-import { EMODE_NAME } from '@/common/components/Modals/ModalEnableEMode'
-import { AssetsContext } from '@/common/context'
-import { setData } from '@/common/hooks/useLocalStoragre'
+import { CircleInfo, CloseIcon } from '@/common/components/Icons';
+import { EMODE_NAME } from '@/common/components/Modals/ModalEnableEMode';
+import { MESO_ADDRESS } from '@/common/consts';
+import { AssetsContext } from '@/common/context';
+import useContract from '@/common/hooks/useContract';
+import { setData } from '@/common/hooks/useLocalStoragre';
+import { useQuery } from '@tanstack/react-query';
+import { Button, Modal, Select, Skeleton } from 'antd';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 interface Props {
-  isModalOpen: boolean
-  handleClose: () => void
-  userEMode?: string
-  setUserEMode: (val: string) => void
+  isModalOpen: boolean;
+  handleClose: () => void;
+  userEMode?: string;
+  setUserEMode: (val: string) => void;
 }
 
 export const ModalCalculatorEmode: React.FunctionComponent<Props> = ({
@@ -21,9 +21,9 @@ export const ModalCalculatorEmode: React.FunctionComponent<Props> = ({
   userEMode = '',
   setUserEMode,
 }) => {
-  const [modeKey, setModeKey] = useState('')
-  const { view } = useContract()
-  const { allAssetsData } = useContext(AssetsContext)
+  const [modeKey, setModeKey] = useState('');
+  const { view } = useContract();
+  const { allAssetsData } = useContext(AssetsContext);
 
   const { data: emodeKeys = [] } = useQuery({
     queryKey: ['emodeKeys', MESO_ADDRESS],
@@ -32,10 +32,10 @@ export const ModalCalculatorEmode: React.FunctionComponent<Props> = ({
         function: `${MESO_ADDRESS}::meso::emode_keys`,
         typeArguments: [],
         functionArguments: [],
-      })
-      return res[0] as string[]
+      });
+      return res[0] as string[];
     },
-  })
+  });
 
   const options = useMemo(() => {
     return emodeKeys.map((key: string) => ({
@@ -43,44 +43,44 @@ export const ModalCalculatorEmode: React.FunctionComponent<Props> = ({
       label: (
         <div className={'py-3'}>{key.includes('0x1::aptos_coin::AptosCoin') ? EMODE_NAME.APT : EMODE_NAME.STABLE}</div>
       ),
-    }))
-  }, [emodeKeys])
+    }));
+  }, [emodeKeys]);
 
   const { data: assetsModeAvailable = [], isFetching } = useQuery({
     queryKey: ['AssetModeAvailable', modeKey, allAssetsData],
     queryFn: async () => {
-      return allAssetsData.filter((x) => x.emodeId === modeKey)
+      return allAssetsData.filter((x) => x.emodeId === modeKey);
     },
     enabled: !!modeKey,
-  })
+  });
 
   useEffect(() => {
     if (emodeKeys.length > 0) {
-      setModeKey(emodeKeys[0])
+      setModeKey(emodeKeys[0]);
     }
-  }, [emodeKeys])
+  }, [emodeKeys]);
 
   const handleChange = (value: EMODE_NAME) => {
-    console.log(`selected ${value}`)
-    setModeKey(value)
-  }
+    console.log(`selected ${value}`);
+    setModeKey(value);
+  };
 
   const handleEnableEMode = () => {
-    setData('emodeCalculator', modeKey)
-    setUserEMode(modeKey)
-    handleClose()
-  }
+    setData('emodeCalculator', modeKey);
+    setUserEMode(modeKey);
+    handleClose();
+  };
 
   const disableEmode = () => {
-    setUserEMode('')
-    setData('emodeCalculator', '')
-  }
+    setUserEMode('');
+    setData('emodeCalculator', '');
+  };
 
   return (
     <Modal
       centered
       onCancel={() => {
-        handleClose()
+        handleClose();
       }}
       closable={false}
       open={isModalOpen}
@@ -166,5 +166,5 @@ export const ModalCalculatorEmode: React.FunctionComponent<Props> = ({
         </div>
       </div>
     </Modal>
-  )
-}
+  );
+};

@@ -1,6 +1,6 @@
-import NextAuth from 'next-auth/next'
-import DiscordProvider from 'next-auth/providers/discord'
-import TwitterProvider from 'next-auth/providers/twitter'
+import NextAuth from 'next-auth/next';
+import DiscordProvider from 'next-auth/providers/discord';
+import TwitterProvider from 'next-auth/providers/twitter';
 
 export const getNextAuthOptions = (req: any) => {
   return {
@@ -26,19 +26,19 @@ export const getNextAuthOptions = (req: any) => {
         return {
           ...token,
           ...account,
-        }
+        };
       },
       async session({ session, token }: any) {
         return {
           ...session,
           ...token,
-        }
+        };
       },
     },
     secret: process.env.SECRET,
-  }
-}
+  };
+};
 
 export default async function auth(req: any, res: any) {
-  return await NextAuth(req, res, getNextAuthOptions(req))
+  return await NextAuth(req, res, getNextAuthOptions(req));
 }

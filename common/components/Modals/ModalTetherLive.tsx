@@ -1,26 +1,26 @@
-import React from 'react'
-import { Button, Modal } from 'antd'
-import Image from 'next/image'
-import { CloseIcon } from '@/common/components/Icons'
-import { useRouter } from 'next/router'
+import { CloseIcon } from '@/common/components/Icons';
+import { Button, Modal } from 'antd';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import React from 'react';
 
 interface Props {
-  isModalOpen: boolean
-  handleClose: () => void
+  isModalOpen: boolean;
+  handleClose: () => void;
 }
 
 export const ModalTetherLive: React.FunctionComponent<Props> = ({ isModalOpen, handleClose }) => {
-  const router = useRouter()
+  const router = useRouter();
   const gotoRedeem = () => {
-    router.push('/convert')
-    handleClose()
-  }
+    router.push('/convert');
+    handleClose();
+  };
 
   return (
     <Modal
       centered
       onCancel={() => {
-        handleClose()
+        handleClose();
       }}
       closable={false}
       open={isModalOpen}
@@ -45,5 +45,5 @@ export const ModalTetherLive: React.FunctionComponent<Props> = ({ isModalOpen, h
         </div>
       </div>
     </Modal>
-  )
-}
+  );
+};

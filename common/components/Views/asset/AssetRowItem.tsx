@@ -1,21 +1,21 @@
-import React from 'react'
-import { Button, Col, Row, Typography } from 'antd'
-import { formatNumberBalance, nFormatter } from '@/utils'
-import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets'
-import { AssetRowType } from '@/common/components/Views/dashboard/YourSupplies'
-import { useRouter } from 'next/router'
-import { PoolSupplyApr } from '@/common/components/Views/asset/PoolSupplyApr'
-import { PoolBorrowApr } from '@/common/components/Views/asset/PoolBorrowApr'
-import useTokens from '@/common/hooks/useTokens'
-import { isMobile } from 'react-device-detect'
+import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets';
+import { PoolBorrowApr } from '@/common/components/Views/asset/PoolBorrowApr';
+import { PoolSupplyApr } from '@/common/components/Views/asset/PoolSupplyApr';
+import { AssetRowType } from '@/common/components/Views/dashboard/YourSupplies';
+import useTokens from '@/common/hooks/useTokens';
+import { formatNumberBalance, nFormatter } from '@/utils';
+import { Button, Col, Row, Typography } from 'antd';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { isMobile } from 'react-device-detect';
 
 interface Props {
-  assetMode: AssetRowType
-  item: PoolAsset
-  assetAmountLabel: string
-  assetAmount: number
-  setMode: (value: ManageAssetMode | AssetRowType) => void
-  setAssetSelected: (value: PoolAsset) => void
+  assetMode: AssetRowType;
+  item: PoolAsset;
+  assetAmountLabel: string;
+  assetAmount: number;
+  setMode: (value: ManageAssetMode | AssetRowType) => void;
+  setAssetSelected: (value: PoolAsset) => void;
 }
 
 export const AssetRowItem: React.FunctionComponent<Props> = ({
@@ -26,10 +26,10 @@ export const AssetRowItem: React.FunctionComponent<Props> = ({
   setAssetSelected,
   assetMode,
 }) => {
-  const isBorrow = assetMode === AssetRowType.BORROW || assetMode === AssetRowType.REPAY
-  const isSupply = assetMode === AssetRowType.WITHDRAW || assetMode === AssetRowType.SUPPLY
-  const router = useRouter()
-  const { getTokenBySymbol } = useTokens()
+  const isBorrow = assetMode === AssetRowType.BORROW || assetMode === AssetRowType.REPAY;
+  const isSupply = assetMode === AssetRowType.WITHDRAW || assetMode === AssetRowType.SUPPLY;
+  const router = useRouter();
+  const { getTokenBySymbol } = useTokens();
   return (
     <div className={'w-full'}>
       <Row
@@ -111,7 +111,7 @@ export const AssetRowItem: React.FunctionComponent<Props> = ({
           <div className={'flex w-full justify-end gap-2'}>
             <Button
               onClick={() => {
-                router.push(`/asset/${item.poolAddress}`)
+                router.push(`/asset/${item.poolAddress}`);
               }}
               className={
                 'bg-transparent h-9 flex sm:hidden flex-1 w-full justify-center items-center border-[#7F56D9] font-medium text-[#7F56D9] rounded-full max-w-full sm:max-w-[110px]'
@@ -121,8 +121,8 @@ export const AssetRowItem: React.FunctionComponent<Props> = ({
             </Button>
             <Button
               onClick={() => {
-                setMode(assetMode)
-                setAssetSelected(item)
+                setMode(assetMode);
+                setAssetSelected(item);
               }}
               className={
                 'bg-transparent h-9 flex flex-1 w-full justify-center items-center border-[#7F56D9] font-medium text-[#7F56D9] rounded-full max-w-full sm:max-w-[110px]'
@@ -140,5 +140,5 @@ export const AssetRowItem: React.FunctionComponent<Props> = ({
         </Col>
       </Row>
     </div>
-  )
-}
+  );
+};

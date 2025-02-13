@@ -1,43 +1,43 @@
-import React, { useEffect, useState } from 'react'
-import { Col, Pagination, Row, Skeleton, Tooltip } from 'antd'
-import { useWallet } from '@aptos-labs/wallet-adapter-react'
-import { useQuery } from '@tanstack/react-query'
-import { getRefInfo } from '@/common/services/points'
-import { copyToClipboard, ellipseAddress, formatNumberBalance } from '@/utils'
-import { CopyIcon } from '@/common/components/Icons'
+import { CopyIcon } from '@/common/components/Icons';
+import { getRefInfo } from '@/common/services/points';
+import { copyToClipboard, ellipseAddress, formatNumberBalance } from '@/utils';
+import { useWallet } from '@aptos-labs/wallet-adapter-react';
+import { useQuery } from '@tanstack/react-query';
+import { Col, Pagination, Row, Skeleton, Tooltip } from 'antd';
+import React, { useEffect, useState } from 'react';
 
 export const TableReferral: React.FunctionComponent = () => {
-  const { account } = useWallet()
-  const [totalItems, setTotalItems] = useState(0)
-  const [page, setPage] = useState(1)
-  const [copyText, setCopyText] = useState('Copy')
+  const { account } = useWallet();
+  const [totalItems, setTotalItems] = useState(0);
+  const [page, setPage] = useState(1);
+  const [copyText, setCopyText] = useState('Copy');
 
   const { data: { items = [], total = 0 } = {}, isFetching } = useQuery({
     queryKey: ['ReferralPoints', page, account],
     queryFn: async () => {
-      const { data } = await getRefInfo(account?.address as string, page)
-      return { items: data.datas, total: data.total }
+      const { data } = await getRefInfo(account?.address as string, page);
+      return { items: data.datas, total: data.total };
     },
     enabled: !!account?.address,
-  })
+  });
 
   useEffect(() => {
     if (total > 0) {
-      setTotalItems(total)
+      setTotalItems(total);
     }
-  }, [total])
+  }, [total]);
 
   const onChange = (pageNum: number, pageSize: number) => {
-    setPage(pageNum)
-  }
+    setPage(pageNum);
+  };
 
   const handleCopy = (value: string) => {
-    setCopyText('Copied!')
+    setCopyText('Copied!');
     setTimeout(() => {
-      setCopyText('Copy')
-    }, 1000)
-    copyToClipboard(value)
-  }
+      setCopyText('Copy');
+    }, 1000);
+    copyToClipboard(value);
+  };
 
   return (
     <>
@@ -73,7 +73,7 @@ export const TableReferral: React.FunctionComponent = () => {
                           <Skeleton.Button />
                         </Col>
                       </Row>
-                    )
+                    );
                   })}
                 </>
               )}
@@ -95,7 +95,7 @@ export const TableReferral: React.FunctionComponent = () => {
                         </Col>
                         <Col span={4}>{formatNumberBalance(item.point, 0)}</Col>
                       </Row>
-                    )
+                    );
                   })}
                 </>
               )}
@@ -114,5 +114,5 @@ export const TableReferral: React.FunctionComponent = () => {
         )}
       </div>
     </>
-  )
-}
+  );
+};

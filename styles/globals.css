@@ -778,15 +778,15 @@ input[type='checkbox']:checked + .customcheckbox {
   box-shadow: 0px 24px 48px -12px rgba(16, 24, 40, 0.18);
 }
 
-.collateral_info{
-    flex: 0 0 232px;
+.collateral_info {
+  flex: 0 0 232px;
 }
 
 @media (max-width: 756px) {
-    .collateral_info{
-        flex: 0 0 140px;
-    }
+  .collateral_info {
+    flex: 0 0 140px;
+  }
 }
-.css-ii2zn4-appContent{
+.css-ii2zn4-appContent {
   margin: 0px !important;
 }

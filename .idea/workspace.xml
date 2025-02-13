@@ -4,415 +4,168 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6e02d724-91ed-4862-bda9-2f72338fe3d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/common/animation/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/APY.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/Frame 1948754825.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/Frame 1948754826.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/Frame 1948754828.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/Frame 1948755226.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/Frame 1948755256.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/Group1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/Group2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/HealthFactor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/Pyth Logotype_Dark 1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/TetherVector.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/USDC-convert.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/USDT.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/USDT_BRIDGED.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/apt-mode.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/banner-top.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/borrow-power.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/btc.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/collateral.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/down.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/flower.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/image 1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/image 11.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/image 9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/logo-black.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/logo-dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/market-size.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/no-item.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/onchain-img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/point-banner.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/points/blur-bg-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/points/blur-bg-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/points/blur-bg-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/points/daily-task-blur-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/points/daily-task-blur-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/points/daily-task-blur-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/points/daily-task-blur-4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/points/daily-task-finished-img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/points/daily-task-img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/points/do-task-img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/points/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/points/meso-logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/points/point-banner.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/points/small-discord-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/rank-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/rank-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/rank-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/switch.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/tether.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/total-available.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/total-borrow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/usd-mode.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/waitting.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/assets/images/zUSDT.jfif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/AssetTable/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/AssetsCalculatorBox/CalculatorBox.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/AssetsCalculatorBox/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/CaculaterPosition/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Icons/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Icons/points.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Icons/social.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/InputCurrentcy.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/InputCustom/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Layout/BannerPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Layout/LayoutPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/LoadingAssets/AssetsLoadingMobile.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/LoadingAssets/AssetsTableLoading.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/LoadingAssets/LoadingPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/LoadingAssets/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/MarketsMobile/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Modals/ModalConnectWallet.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Modals/ModalEnableEMode.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Modals/ModalManageAssets.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Modals/ModalSelectAssets.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Modals/ModalTetherLive.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Modals/ModalWrongNetwork.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Modals/points/MesoPointLeaderboard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Modals/points/ModalCalculatorEmode.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Modals/points/ModalDoTask.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Modals/points/ModalLeadBoard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Modals/points/ModalPromationCode.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/BannerTether.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/asset/AssetDetailDashboard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/asset/AssetInfo.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/asset/AssetMoreInformation.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/asset/AssetRowItem.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/asset/InterestRate.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/asset/PoolBorrowApr.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/asset/PoolSupplyApr.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/asset/UtilizationChart.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/asset/YourInfo.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/calculators/CalculatorPositionBox.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/calculators/LiquidatePositionChart.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/calculators/StepCalculator.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/dashboard/AccountDashboard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/dashboard/AssetsBorrow.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/dashboard/AssetsSupply.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/dashboard/BorrowingPowerProgress.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/dashboard/MarketDashboard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/dashboard/RiskFactorProgress.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/dashboard/UserDashBoard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/dashboard/YourBorrows.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/dashboard/YourSupplies.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/isolate/IsolateBox.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/isolate/IsolateCollateral.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/isolate/IsolateDashboard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/isolate/IsolateLiability.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/isolate/IsolatePools.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/isolate/modals/ModalAddCollateral.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/isolate/modals/ModalBorrowPosition.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/isolate/modals/ModalRemoveCollateral.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/isolate/modals/ModalRepayPosition.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/isolate/modals/ModalSupplyPosition.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/isolate/modals/ModalWithdrawPosition.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/lending/AssetRewards.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/lending/AssetsTable.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/lending/BorrowCollapse.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/lending/DepositCollapse.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/lending/manage/Borrow.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/lending/manage/Deposit.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/lending/manage/Repay.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/lending/manage/UserReward.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/lending/manage/Withdraw.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/points/CountdownEvent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/points/DailyTask.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/points/OnchainTask.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/points/PointRefer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/points/PointsInfo.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/points/ReferralInfo.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/points/SocialTask.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/points/TableLoaading.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/points/TableReferral.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/strategies/CalculatorLoopingPosition.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/strategies/DepositLoop.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/strategies/IncreaseLoop.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/strategies/PairInfo.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/strategies/StrategiesMobile.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/strategies/StrategiesRowItem.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/strategies/StrategiesThread.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/components/Views/strategies/WithdrawLoop.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/consts/google.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/context/AssetContextProvider.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/context/MesoContextProvider.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/context/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/hooks/assets/useAssets.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/hooks/assets/useRewards.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/hooks/assets/useTransactionCallback.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/hooks/dashboard/useDashboard.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/hooks/modules/poxy.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/hooks/strategies/ModalLoop.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/hooks/strategies/useStrategies.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/hooks/useBalanceToken.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/hooks/useClient.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/hooks/useIsolatePools.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/hooks/useModal.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/hooks/useNetwork.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/hooks/useRewardComponent.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/hooks/useTokens.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/hooks/useUser.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/services/assets/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/services/google/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/services/nextInstance.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/services/points/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/services/pools/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/types/common.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/configs/aptosConstants.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/configs/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/configs/queryClient.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/auth/[...nextauth].ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/backup.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/pool/backup.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/submit-error.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/asset/[poolAddress]/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/calculator/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/convert/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/dashboard/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/markets/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/points/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/strategies/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/assets.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/calculator.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/stategies.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/warning.ts" afterDir="false" />
+    <list default="true" id="6e02d724-91ed-4862-bda9-2f72338fe3d2" name="Changes" comment="fix">
+      <change beforePath="$PROJECT_DIR$/.babelrc" beforeDir="false" afterPath="$PROJECT_DIR$/.babelrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/meso-app.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.prettierrc" beforeDir="false" afterPath="$PROJECT_DIR$/.prettierrc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/animation/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/animation/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/AssetTable/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/AssetTable/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/AssetsCalculatorBox/CalculatorBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/AssetsCalculatorBox/CalculatorBox.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/AssetsCalculatorBox/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/AssetsCalculatorBox/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/CaculaterPosition/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/CaculaterPosition/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Footer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Footer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Header/Header.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Header/Header.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Header/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Header/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Header/routers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Header/routers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Icons/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Icons/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Icons/points.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Icons/points.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Icons/social.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Icons/social.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/InputCurrentcy.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/InputCurrentcy.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/InputCustom/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/InputCustom/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Layout/BannerPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Layout/BannerPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Layout/LayoutPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Layout/LayoutPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/LoadingAssets/AssetsLoadingMobile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/LoadingAssets/AssetsLoadingMobile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/LoadingAssets/AssetsTableLoading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/LoadingAssets/AssetsTableLoading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/LoadingAssets/LoadingPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/LoadingAssets/LoadingPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/LoadingAssets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/LoadingAssets/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/MarketsMobile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/MarketsMobile/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Modals/ModalConnectWallet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Modals/ModalConnectWallet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Modals/ModalEnableEMode.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Modals/ModalEnableEMode.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Modals/ModalManageAssets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Modals/ModalManageAssets.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Modals/ModalSelectAssets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Modals/ModalSelectAssets.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Modals/ModalTetherLive.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Modals/ModalTetherLive.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Modals/ModalWrongNetwork.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Modals/ModalWrongNetwork.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Modals/points/MesoPointLeaderboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Modals/points/MesoPointLeaderboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Modals/points/ModalCalculatorEmode.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Modals/points/ModalCalculatorEmode.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Modals/points/ModalDoTask.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Modals/points/ModalDoTask.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Modals/points/ModalLeadBoard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Modals/points/ModalLeadBoard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Modals/points/ModalPromationCode.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Modals/points/ModalPromationCode.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/BannerTether.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/BannerTether.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/asset/AssetDetailDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/asset/AssetDetailDashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/asset/AssetInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/asset/AssetInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/asset/AssetMoreInformation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/asset/AssetMoreInformation.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/asset/AssetRowItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/asset/AssetRowItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/asset/InterestRate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/asset/InterestRate.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/asset/PoolBorrowApr.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/asset/PoolBorrowApr.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/asset/PoolSupplyApr.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/asset/PoolSupplyApr.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/asset/UtilizationChart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/asset/UtilizationChart.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/asset/YourInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/asset/YourInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/calculators/CalculatorPositionBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/calculators/CalculatorPositionBox.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/calculators/LiquidatePositionChart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/calculators/LiquidatePositionChart.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/calculators/StepCalculator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/calculators/StepCalculator.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/dashboard/AccountDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/dashboard/AccountDashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/dashboard/AssetsBorrow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/dashboard/AssetsBorrow.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/dashboard/AssetsSupply.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/dashboard/AssetsSupply.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/dashboard/BorrowingPowerProgress.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/dashboard/BorrowingPowerProgress.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/dashboard/MarketDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/dashboard/MarketDashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/dashboard/RiskFactorProgress.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/dashboard/RiskFactorProgress.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/dashboard/UserDashBoard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/dashboard/UserDashBoard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/dashboard/YourBorrows.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/dashboard/YourBorrows.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/dashboard/YourSupplies.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/dashboard/YourSupplies.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/isolate/IsolateBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/isolate/IsolateBox.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/isolate/IsolateCollateral.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/isolate/IsolateCollateral.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/isolate/IsolateDashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/isolate/IsolateDashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/isolate/IsolateLiability.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/isolate/IsolateLiability.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/isolate/IsolatePools.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/isolate/IsolatePools.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/isolate/modals/ModalAddCollateral.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/isolate/modals/ModalAddCollateral.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/isolate/modals/ModalBorrowPosition.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/isolate/modals/ModalBorrowPosition.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/isolate/modals/ModalRemoveCollateral.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/isolate/modals/ModalRemoveCollateral.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/isolate/modals/ModalRepayPosition.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/isolate/modals/ModalRepayPosition.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/isolate/modals/ModalSupplyPosition.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/isolate/modals/ModalSupplyPosition.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/isolate/modals/ModalWithdrawPosition.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/isolate/modals/ModalWithdrawPosition.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/lending/AssetRewards.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/lending/AssetRewards.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/lending/AssetsTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/lending/AssetsTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/lending/BorrowCollapse.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/lending/BorrowCollapse.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/lending/DepositCollapse.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/lending/DepositCollapse.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/lending/manage/Borrow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/lending/manage/Borrow.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/lending/manage/Deposit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/lending/manage/Deposit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/lending/manage/Repay.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/lending/manage/Repay.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/lending/manage/UserReward.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/lending/manage/UserReward.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/lending/manage/Withdraw.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/lending/manage/Withdraw.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/points/CountdownEvent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/points/CountdownEvent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/points/DailyTask.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/points/DailyTask.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/points/OnchainTask.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/points/OnchainTask.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/points/PointRefer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/points/PointRefer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/points/PointsInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/points/PointsInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/points/ReferralInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/points/ReferralInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/points/SocialTask.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/points/SocialTask.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/points/TableLoaading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/points/TableLoaading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/points/TableReferral.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/points/TableReferral.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/strategies/CalculatorLoopingPosition.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/strategies/CalculatorLoopingPosition.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/strategies/DepositLoop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/strategies/DepositLoop.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/strategies/IncreaseLoop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/strategies/IncreaseLoop.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/strategies/PairInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/strategies/PairInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/strategies/StrategiesMobile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/strategies/StrategiesMobile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/strategies/StrategiesRowItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/strategies/StrategiesRowItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/strategies/StrategiesThread.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/strategies/StrategiesThread.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/components/Views/strategies/WithdrawLoop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/components/Views/strategies/WithdrawLoop.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/consts/google.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/consts/google.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/consts/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/consts/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/context/AssetContextProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/context/AssetContextProvider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/context/MesoContextProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/context/MesoContextProvider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/context/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/context/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/hooks/assets/useAssets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/hooks/assets/useAssets.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/hooks/assets/useRewards.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/hooks/assets/useRewards.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/hooks/assets/useTransactionCallback.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/hooks/assets/useTransactionCallback.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/hooks/dashboard/useDashboard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/hooks/dashboard/useDashboard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/hooks/modules/poxy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/hooks/modules/poxy.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/hooks/strategies/ModalLoop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/hooks/strategies/ModalLoop.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/hooks/strategies/useStrategies.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/hooks/strategies/useStrategies.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/hooks/useBalanceToken.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/hooks/useBalanceToken.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/hooks/useClient.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/hooks/useClient.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/hooks/useContract.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/hooks/useContract.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/hooks/useIsolatePools.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/hooks/useIsolatePools.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/hooks/useLocalStoragre.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/hooks/useLocalStoragre.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/hooks/useModal.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/hooks/useModal.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/hooks/useNetwork.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/hooks/useNetwork.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/hooks/useRewardComponent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/hooks/useRewardComponent.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/hooks/useTokens.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/hooks/useTokens.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/hooks/useUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/hooks/useUser.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/services/assets/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/services/assets/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/services/google/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/services/google/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/services/instance.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/services/instance.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/services/nextInstance.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/services/nextInstance.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/services/points/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/common/services/points/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/services/pools/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/services/pools/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/types/common.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/common/types/common.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/aptosConstants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/configs/aptosConstants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/queryClient.ts" beforeDir="false" afterPath="$PROJECT_DIR$/configs/queryClient.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/app/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/app/actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/app/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/app/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/app/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/app/reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/rootReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/modules/rootReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_document.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_document.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/auth/[...nextauth].ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/auth/[...nextauth].ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/backup.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/backup.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/hello.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/hello.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/pool/backup.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/pool/backup.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/submit-error.ts" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/submit-error.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/asset/[poolAddress]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/asset/[poolAddress]/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/bridge/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/bridge/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/calculator/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/calculator/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/convert/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/convert/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/dashboard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/dashboard/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/markets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/markets/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/points/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/points/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/strategies/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/strategies/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/postcss.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/postcss.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/animation/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/APY.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/Frame 1948754825.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/Frame 1948754826.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/Frame 1948754828.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/Frame 1948755226.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/Frame 1948755256.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/Group1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/Group2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/HealthFactor.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/Pyth Logotype_Dark 1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/TetherVector.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/USDC-convert.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/USDT.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/USDT_BRIDGED.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/apt-mode.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/banner-top.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/borrow-power.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/btc.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/collateral.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/down.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/flower.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/image 1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/image 11.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/image 9.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/logo-black.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/logo-dark.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/logo-dark.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/market-size.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/no-item.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/onchain-img.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/point-banner.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/points/blur-bg-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/points/blur-bg-2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/points/blur-bg-3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/points/daily-task-blur-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/points/daily-task-blur-2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/points/daily-task-blur-3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/points/daily-task-blur-4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/points/daily-task-finished-img.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/points/daily-task-img.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/points/do-task-img.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/points/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/points/meso-logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/points/point-banner.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/points/small-discord-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/rank-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/rank-2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/rank-3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/switch.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/tether.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/total-available.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/total-borrow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/up.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/usd-mode.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/waitting.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/assets/images/zUSDT.jfif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/AssetTable/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/AssetsCalculatorBox/CalculatorBox.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/AssetsCalculatorBox/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/CaculaterPosition/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Footer/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Header/Header.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Header/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Header/routers.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Icons/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Icons/points.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Icons/social.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/InputCurrentcy.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/InputCustom/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Layout/BannerPage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Layout/LayoutPage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/LoadingAssets/AssetsLoadingMobile.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/LoadingAssets/AssetsTableLoading.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/LoadingAssets/LoadingPage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/LoadingAssets/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/MarketsMobile/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Modals/ModalConnectWallet.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Modals/ModalEnableEMode.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Modals/ModalManageAssets.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Modals/ModalSelectAssets.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Modals/ModalTetherLive.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Modals/ModalWrongNetwork.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Modals/points/MesoPointLeaderboard.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Modals/points/ModalCalculatorEmode.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Modals/points/ModalDoTask.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Modals/points/ModalLeadBoard.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Modals/points/ModalPromationCode.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/BannerTether.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/asset/AssetDetailDashboard.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/asset/AssetInfo.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/asset/AssetMoreInformation.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/asset/AssetRowItem.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/asset/InterestRate.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/asset/PoolBorrowApr.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/asset/PoolSupplyApr.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/asset/UtilizationChart.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/asset/YourInfo.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/calculators/CalculatorPositionBox.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/calculators/LiquidatePositionChart.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/calculators/StepCalculator.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/dashboard/AccountDashboard.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/dashboard/AssetsBorrow.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/dashboard/AssetsSupply.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/dashboard/BorrowingPowerProgress.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/dashboard/MarketDashboard.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/dashboard/RiskFactorProgress.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/dashboard/UserDashBoard.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/dashboard/YourBorrows.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/dashboard/YourSupplies.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/isolate/IsolateBox.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/isolate/IsolateCollateral.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/isolate/IsolateDashboard.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/isolate/IsolateLiability.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/isolate/IsolatePools.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/isolate/modals/ModalAddCollateral.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/isolate/modals/ModalBorrowPosition.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/isolate/modals/ModalRemoveCollateral.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/isolate/modals/ModalRepayPosition.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/isolate/modals/ModalSupplyPosition.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/isolate/modals/ModalWithdrawPosition.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/lending/AssetRewards.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/lending/AssetsTable.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/lending/BorrowCollapse.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/lending/DepositCollapse.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/lending/manage/Borrow.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/lending/manage/Deposit.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/lending/manage/Repay.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/lending/manage/UserReward.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/lending/manage/Withdraw.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/points/CountdownEvent.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/points/DailyTask.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/points/OnchainTask.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/points/PointRefer.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/points/PointsInfo.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/points/ReferralInfo.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/points/SocialTask.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/points/TableLoaading.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/points/TableReferral.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/strategies/CalculatorLoopingPosition.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/strategies/DepositLoop.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/strategies/IncreaseLoop.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/strategies/PairInfo.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/strategies/StrategiesMobile.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/strategies/StrategiesRowItem.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/strategies/StrategiesThread.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/Views/strategies/WithdrawLoop.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/consts/google.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/consts/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/context/AssetContextProvider.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/context/MesoContextProvider.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/context/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/hooks/assets/useAssets.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/hooks/assets/useRewards.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/hooks/assets/useTransactionCallback.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/hooks/dashboard/useDashboard.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/hooks/modules/poxy.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/hooks/strategies/ModalLoop.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/hooks/strategies/useStrategies.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/hooks/useBalanceToken.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/hooks/useClient.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/hooks/useContract.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/hooks/useIsolatePools.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/hooks/useLocalStoragre.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/hooks/useModal.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/hooks/useNetwork.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/hooks/useRewardComponent.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/hooks/useTokens.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/hooks/useUser.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/services/assets/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/services/google/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/services/instance.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/services/nextInstance.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/services/points/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/services/pools/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/types/common.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/configs/aptosConstants.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/configs/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/configs/queryClient.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/app/actions.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/app/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/app/reducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modules/rootReducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/_document.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/api/auth/[...nextauth].ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/api/backup.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/api/hello.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/api/pool/backup.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/api/submit-error.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/asset/[poolAddress]/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/bridge/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/calculator/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/convert/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/dashboard/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/markets/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/points/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/strategies/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/globals.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/assets.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/calculator.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/network.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/stategies.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/warning.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailwind.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/assets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/assets.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/calculator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/calculator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/network.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/network.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/stategies.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/stategies.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/warning.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/warning.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -434,24 +187,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Node.js.next.config.js.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "E:/projects/meso/meso-app",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.dev.executor": "Run",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2024.1.2\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Node.js.next.config.js.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/projects/meso/meso-app&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;E:\\projects\\meso\\meso-app\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager">
+}</component>
+  <component name="RunManager" selected="npm.build">
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -464,6 +228,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
       </list>
     </recent_temporary>
@@ -486,8 +251,17 @@
       <workItem from="1737221831082" duration="1304000" />
       <workItem from="1739471466095" duration="2913000" />
       <workItem from="1739479640645" duration="2502000" />
-      <workItem from="1739483435550" duration="1103000" />
+      <workItem from="1739483435550" duration="2334000" />
     </task>
+    <task id="LOCAL-00001" summary="fix">
+      <option name="closed" value="true" />
+      <created>1739485002999</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739485002999</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -495,5 +269,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
 </project>

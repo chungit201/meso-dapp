@@ -1,11 +1,11 @@
-import React from 'react'
-import { Card, Col, Row } from 'antd'
-import { InviteIcon, StarVector } from '@/common/components/Icons'
-import { TableReferral } from '@/common/components/Views/points/TableReferral'
-import { formatNumberBalance } from '@/utils'
+import { InviteIcon, StarVector } from '@/common/components/Icons';
+import { TableReferral } from '@/common/components/Views/points/TableReferral';
+import { formatNumberBalance } from '@/utils';
+import { Card, Col, Row } from 'antd';
+import React from 'react';
 
 interface Props {
-  userInfo: any
+  userInfo: any;
 }
 
 export const ReferralInfo: React.FunctionComponent<Props> = ({ userInfo }) => {
@@ -44,5 +44,5 @@ export const ReferralInfo: React.FunctionComponent<Props> = ({ userInfo }) => {
       </Row>
       <TableReferral />
     </div>
-  )
-}
+  );
+};

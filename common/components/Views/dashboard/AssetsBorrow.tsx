@@ -1,32 +1,32 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
-import { Card, Col, Pagination, PaginationProps, Row, Typography } from 'antd'
-import { AssetsContext } from '@/common/context'
-import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets'
-import { AssetRowItem } from '@/common/components/Views/asset/AssetRowItem'
-import { AssetRowType } from '@/common/components/Views/dashboard/YourSupplies'
-import { LoadingAssets } from '@/common/components/LoadingAssets'
-import { paginate } from '@/utils'
+import { LoadingAssets } from '@/common/components/LoadingAssets';
+import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets';
+import { AssetRowItem } from '@/common/components/Views/asset/AssetRowItem';
+import { AssetRowType } from '@/common/components/Views/dashboard/YourSupplies';
+import { AssetsContext } from '@/common/context';
+import { paginate } from '@/utils';
+import { Card, Col, Pagination, PaginationProps, Row, Typography } from 'antd';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 interface Props {
-  setAssetSelected: (value: PoolAsset) => void
-  setMode: (value: ManageAssetMode | AssetRowType) => void
+  setAssetSelected: (value: PoolAsset) => void;
+  setMode: (value: ManageAssetMode | AssetRowType) => void;
 }
 
 export const AssetsBorrow: React.FunctionComponent<Props> = ({ setAssetSelected, setMode }) => {
-  const { assetsMode, isLoading } = useContext(AssetsContext)
-  const [current, setCurrent] = useState(1)
+  const { assetsMode, isLoading } = useContext(AssetsContext);
+  const [current, setCurrent] = useState(1);
 
   const onChange: PaginationProps['onChange'] = (page) => {
-    setCurrent(page)
-  }
+    setCurrent(page);
+  };
 
   useEffect(() => {
     if (assetsMode.length < 10) {
-      setCurrent(1)
+      setCurrent(1);
     }
-  }, [assetsMode])
+  }, [assetsMode]);
 
-  const assets = useMemo(() => paginate(assetsMode, current, 10), [assetsMode, current])
+  const assets = useMemo(() => paginate(assetsMode, current, 10), [assetsMode, current]);
 
   return (
     <Col xs={24} xl={12}>
@@ -65,7 +65,7 @@ export const AssetsBorrow: React.FunctionComponent<Props> = ({ setAssetSelected,
                       setMode={setMode}
                       setAssetSelected={setAssetSelected}
                     />
-                  )
+                  );
                 })}
               </>
             )}
@@ -86,5 +86,5 @@ export const AssetsBorrow: React.FunctionComponent<Props> = ({ setAssetSelected,
         </div>
       </Card>
     </Col>
-  )
-}
+  );
+};

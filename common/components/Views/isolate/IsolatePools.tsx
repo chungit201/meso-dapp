@@ -1,18 +1,18 @@
-import React, { useContext, useMemo } from 'react'
-import { MAX_BPS } from '@/common/consts'
-import { Card, Table } from 'antd'
-import { formatNumberBalance, nFormatter } from '@/utils'
-import BigNumber from 'bignumber.js'
-import { MesoContext } from '@/common/context'
-import useToken from '@/common/hooks/useTokens'
-import { useIsolatePools } from '@/common/hooks/useIsolatePools'
-const PAGE_SIZE_OPTIONS = ['5', '10', '20', '50']
+import { MAX_BPS } from '@/common/consts';
+import { MesoContext } from '@/common/context';
+import { useIsolatePools } from '@/common/hooks/useIsolatePools';
+import useToken from '@/common/hooks/useTokens';
+import { formatNumberBalance, nFormatter } from '@/utils';
+import { Card, Table } from 'antd';
+import BigNumber from 'bignumber.js';
+import React, { useContext, useMemo } from 'react';
+const PAGE_SIZE_OPTIONS = ['5', '10', '20', '50'];
 
 export const IsolatePools: React.FunctionComponent = () => {
-  const { tokens } = useContext(MesoContext)
-  const { isolatePools } = useIsolatePools()
+  const { tokens } = useContext(MesoContext);
+  const { isolatePools } = useIsolatePools();
 
-  const { getTokenByAddress } = useToken()
+  const { getTokenByAddress } = useToken();
 
   const defaultColumns = useMemo(() => {
     return [
@@ -37,7 +37,7 @@ export const IsolatePools: React.FunctionComponent = () => {
                     </div>
                     <div className={'font-medium'}>{item.token.symbol}</div>
                   </div>
-                )
+                );
               })}{' '}
               -
               {row.liability.map((item, index) => {
@@ -52,10 +52,10 @@ export const IsolatePools: React.FunctionComponent = () => {
                     </div>
                     <div className={'font-medium'}>{item.token.symbol}</div>
                   </div>
-                )
+                );
               })}
             </div>
-          )
+          );
         },
       },
       {
@@ -146,7 +146,7 @@ export const IsolatePools: React.FunctionComponent = () => {
                 )}
               </div>
             </div>
-          )
+          );
         },
       },
       {
@@ -183,7 +183,7 @@ export const IsolatePools: React.FunctionComponent = () => {
         render: (record: any, row: IsolatePools) => {
           return (
             <div className={'text-sm text-[#475467] font-medium'}>{(row.collateral[0].normaBps / MAX_BPS) * 100}%</div>
-          )
+          );
         },
       },
       {
@@ -192,12 +192,12 @@ export const IsolatePools: React.FunctionComponent = () => {
         align: 'right',
         width: 140,
         render: (record: any, row: IsolatePools) => {
-          const token = getTokenByAddress(row.collateral[0].tokenAddress)
+          const token = getTokenByAddress(row.collateral[0].tokenAddress);
           return (
             <div>
               <div className={'text-[#475467] font-medium'}>${formatNumberBalance(token?.price, 4)}</div>
             </div>
-          )
+          );
         },
       },
       {
@@ -206,12 +206,12 @@ export const IsolatePools: React.FunctionComponent = () => {
         align: 'right',
         width: 140,
         render: (record: any, row: IsolatePools) => {
-          const token = getTokenByAddress(row.liability[0].tokenAddress)
-          return <div className={'text-[#475467] font-medium'}>${formatNumberBalance(token?.price)}</div>
+          const token = getTokenByAddress(row.liability[0].tokenAddress);
+          return <div className={'text-[#475467] font-medium'}>${formatNumberBalance(token?.price)}</div>;
         },
       },
-    ]
-  }, [tokens])
+    ];
+  }, [tokens]);
 
   const locale = {
     emptyText: (
@@ -219,7 +219,7 @@ export const IsolatePools: React.FunctionComponent = () => {
         <div className={'py-20 text-[#000] dark:text-white'}>No data</div>
       </React.Fragment>
     ),
-  }
+  };
 
   return (
     <div className={'mt-20'}>
@@ -242,7 +242,7 @@ export const IsolatePools: React.FunctionComponent = () => {
                 <>
                   Show {range[0]} - {range[1]} / Total {total}
                 </>
-              )
+              );
             },
           }}
           onChange={() => {}}
@@ -251,5 +251,5 @@ export const IsolatePools: React.FunctionComponent = () => {
         />
       </Card>
     </div>
-  )
-}
+  );
+};

@@ -1,13 +1,13 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { Card, Col, Pagination, PaginationProps, Row, Typography } from 'antd'
-import { useAssets } from '@/common/hooks/assets/useAssets'
-import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets'
-import { formatNumberBalance, paginate } from '@/utils'
-import { AssetRowItem } from '@/common/components/Views/asset/AssetRowItem'
+import { ManageAssetMode } from '@/common/components/Modals/ModalManageAssets';
+import { AssetRowItem } from '@/common/components/Views/asset/AssetRowItem';
+import { useAssets } from '@/common/hooks/assets/useAssets';
+import { formatNumberBalance, paginate } from '@/utils';
+import { Card, Col, Pagination, PaginationProps, Row, Typography } from 'antd';
+import React, { useEffect, useMemo, useState } from 'react';
 
 interface Props {
-  setAssetSelected: (value: PoolAsset) => void
-  setMode: (value: ManageAssetMode | AssetRowType) => void
+  setAssetSelected: (value: PoolAsset) => void;
+  setMode: (value: ManageAssetMode | AssetRowType) => void;
 }
 
 export enum AssetRowType {
@@ -18,27 +18,28 @@ export enum AssetRowType {
 }
 
 export const YourSupplies: React.FunctionComponent<Props> = ({ setAssetSelected, setMode }) => {
-  const { assetDeposits } = useAssets()
-  const [totalSupply, setTotalSupply] = useState(0)
-  const [totalSupplyApr, setTotalSupplyApr] = useState(0)
-  const [current, setCurrent] = useState(1)
+  const { assetDeposits } = useAssets();
+  const [totalSupply, setTotalSupply] = useState(0);
+  const [totalSupplyApr, setTotalSupplyApr] = useState(0);
+  const [current, setCurrent] = useState(1);
 
   useEffect(() => {
-    let totalSl = 0
-    let totalApr = 0
+    let totalSl = 0;
+    let totalApr = 0;
     for (const item of assetDeposits) {
-      totalSl += item.amountDeposit * item?.token?.price
-      totalApr += (item.supplyApy + item.stakingApr + item.incentiveSupplyApy) * item.amountDeposit * item?.token?.price
+      totalSl += item.amountDeposit * item?.token?.price;
+      totalApr +=
+        (item.supplyApy + item.stakingApr + item.incentiveSupplyApy) * item.amountDeposit * item?.token?.price;
     }
-    setTotalSupplyApr(totalApr / totalSl)
-    setTotalSupply(totalSl)
-  }, [assetDeposits])
+    setTotalSupplyApr(totalApr / totalSl);
+    setTotalSupply(totalSl);
+  }, [assetDeposits]);
 
-  const assets = useMemo(() => paginate(assetDeposits, current, 10), [assetDeposits, current])
+  const assets = useMemo(() => paginate(assetDeposits, current, 10), [assetDeposits, current]);
 
   const onChange: PaginationProps['onChange'] = (page) => {
-    setCurrent(page)
-  }
+    setCurrent(page);
+  };
 
   return (
     <Col xs={24} xl={12}>
@@ -96,7 +97,7 @@ export const YourSupplies: React.FunctionComponent<Props> = ({ setAssetSelected,
                     setMode={setMode}
                     setAssetSelected={setAssetSelected}
                   />
-                )
+                );
               })}
             </div>
           )}
@@ -116,5 +117,5 @@ export const YourSupplies: React.FunctionComponent<Props> = ({ setAssetSelected,
         </div>
       </Card>
     </Col>
-  )
-}
+  );
+};

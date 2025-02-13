@@ -10,5 +10,5 @@ export const handlePushErrorToGoogleSheet = (wallet: string, error: string) => {
       url: window.location.href,
       error,
     }),
-  }).catch(console.log)
-}
+  }).catch(console.log);
+};

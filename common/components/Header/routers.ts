@@ -27,4 +27,4 @@ export const routes = [
     path: 'bridge',
     name: 'Bridge',
   },
-]
+];

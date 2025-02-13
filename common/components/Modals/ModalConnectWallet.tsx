@@ -1,22 +1,22 @@
-import React, { useMemo } from 'react'
-import { Button, Divider, Modal, notification } from 'antd'
-import { useWallet, Wallet } from '@aptos-labs/wallet-adapter-react'
-import { isMobile } from 'react-device-detect'
-import { deepLinkMobile } from '@/utils'
-import { PetraWalletName } from 'petra-plugin-wallet-adapter'
-import { OKXWalletName } from '@okwallet/aptos-wallet-adapter'
-import { MSafeWalletName } from '@msafe/aptos-wallet-adapter'
-import { MartianWalletName } from '@martianwallet/aptos-wallet-adapter'
-import { FewchaWalletName } from 'fewcha-plugin-wallet-adapter'
-import { RimoWalletName } from 'rimosafe-plugin-wallet-adapter'
+import { deepLinkMobile } from '@/utils';
+import { Wallet, useWallet } from '@aptos-labs/wallet-adapter-react';
+import { MartianWalletName } from '@martianwallet/aptos-wallet-adapter';
+import { MSafeWalletName } from '@msafe/aptos-wallet-adapter';
+import { OKXWalletName } from '@okwallet/aptos-wallet-adapter';
+import { Button, Divider, Modal, notification } from 'antd';
+import { FewchaWalletName } from 'fewcha-plugin-wallet-adapter';
+import { PetraWalletName } from 'petra-plugin-wallet-adapter';
+import React, { useMemo } from 'react';
+import { isMobile } from 'react-device-detect';
+import { RimoWalletName } from 'rimosafe-plugin-wallet-adapter';
 
 interface Props {
-  isModalOpen: boolean
-  handleClose: () => void
+  isModalOpen: boolean;
+  handleClose: () => void;
 }
 
 export const ModalConnectWallet: React.FunctionComponent<Props> = ({ isModalOpen, handleClose }) => {
-  const { wallets, connect, connected } = useWallet()
+  const { wallets, connect, connected } = useWallet();
 
   const sorting = [
     PetraWalletName,
@@ -26,56 +26,56 @@ export const ModalConnectWallet: React.FunctionComponent<Props> = ({ isModalOpen
     MSafeWalletName,
     MartianWalletName,
     FewchaWalletName,
-  ]
+  ];
 
   const comparator = (a: any, b: any) => {
-    const indexInA = sorting.findIndex((value) => a.name === value)
-    const indexInB = sorting.findIndex((value) => b.name === value)
+    const indexInA = sorting.findIndex((value) => a.name === value);
+    const indexInB = sorting.findIndex((value) => b.name === value);
     if (indexInA >= 0 && indexInB >= 0) {
-      return indexInA - indexInB
+      return indexInA - indexInB;
     } else if (indexInA >= 0) {
-      return -1
+      return -1;
     } else if (indexInB >= 0) {
-      return 1
+      return 1;
     }
-    return 0
-  }
+    return 0;
+  };
 
   const googleWallet = useMemo(() => {
-    return wallets?.find((item: any) => item.name === 'Continue with Google')
-  }, [wallets])
+    return wallets?.find((item: any) => item.name === 'Continue with Google');
+  }, [wallets]);
 
   const walletList = useMemo(() => {
     if (wallets) {
-      const petraWallet = wallets.find((item) => item.name === 'Petra')
+      const petraWallet = wallets.find((item) => item.name === 'Petra');
       let list = wallets.filter(
         (item) => item.name !== 'Petra' && item.name !== 'Continue with Google' && item.name !== 'Dev T wallet',
-      )
+      );
       const bybitWalletInstalled = wallets.find(
         (item) => item.name === 'Bybit Wallet' && item.readyState === 'Installed',
-      )
+      );
       const bybitWalletNotInstalled = wallets.find(
         (item) => item.name === 'Bybit Wallet' && item.readyState === 'NotDetected',
-      )
+      );
       if (bybitWalletInstalled && bybitWalletNotInstalled) {
-        const idx = list.indexOf(bybitWalletNotInstalled)
-        if (idx !== -1) list = list.splice(idx, 1)
+        const idx = list.indexOf(bybitWalletNotInstalled);
+        if (idx !== -1) list = list.splice(idx, 1);
       }
-      const _arr = petraWallet ? [petraWallet, ...list] : list
-      return _arr.sort(comparator)
-    } else return []
-  }, [wallets])
+      const _arr = petraWallet ? [petraWallet, ...list] : list;
+      return _arr.sort(comparator);
+    } else return [];
+  }, [wallets]);
 
   const handleConnect = async (wallet: Wallet) => {
     try {
       if (wallet.readyState === 'Installed') {
-        await connect(wallet?.name)
-        handleClose()
+        await connect(wallet?.name);
+        handleClose();
       } else {
         if (!isMobile) {
-          window.open(wallet.url, '_blank')
+          window.open(wallet.url, '_blank');
         } else {
-          deepLinkMobile(wallet)
+          deepLinkMobile(wallet);
         }
       }
     } catch (e: any) {
@@ -88,10 +88,10 @@ export const ModalConnectWallet: React.FunctionComponent<Props> = ({ isModalOpen
           </div>
         ),
         placement: 'bottomRight',
-      })
-      console.log(e)
+      });
+      console.log(e);
     }
-  }
+  };
 
   return (
     <Modal centered visible={isModalOpen} footer={false} title={''} onCancel={handleClose} width={453} closable={true}>
@@ -157,12 +157,12 @@ export const ModalConnectWallet: React.FunctionComponent<Props> = ({ isModalOpen
                       </div>
                     </div>
                   </Button>
-                )
+                );
               })}
             </div>
           </div>
         </div>
       </React.Fragment>
     </Modal>
-  )
-}
+  );
+};
