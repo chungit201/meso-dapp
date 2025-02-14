@@ -13,7 +13,12 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 
-const LoadingPage = dynamic(() => import('../../../components/LoadingAssets/LoadingPage'), { ssr: false })
+const LoadingPage = dynamic(
+  () => import('@/common/components/LoadingAssets/LoadingPage').then((mod) => mod.LoadingPage),
+  {
+    ssr: false,
+  },
+);
 
 interface Props {
   userInfo: any;

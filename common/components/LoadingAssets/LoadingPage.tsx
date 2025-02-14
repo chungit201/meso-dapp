@@ -2,7 +2,7 @@ import { animationData } from '@/common/animation';
 import Lottie from 'lottie-react';
 import React from 'react';
 
- const LoadingPage: React.FunctionComponent = () => {
+export const LoadingPage: React.FunctionComponent = () => {
   return (
     <>
       <div className={'loading-mask h-screen'}>
@@ -15,5 +15,3 @@ import React from 'react';
     </>
   );
 };
-
- export default LoadingPage;
