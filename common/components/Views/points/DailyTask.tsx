@@ -1,4 +1,4 @@
-import { LoadingPage } from '@/common/components/LoadingAssets/LoadingPage';
+// import { LoadingPage } from '@/common/components/LoadingAssets/LoadingPage';
 import ModalDoTask from '@/common/components/Modals/points/ModalDoTask';
 import { OnchainTask } from '@/common/components/Views/points/OnchainTask';
 import { SOCIAL_TASKS, SocialTask } from '@/common/components/Views/points/SocialTask';
@@ -11,6 +11,9 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+
+const LoadingPage = dynamic(() => import('../../../components/LoadingAssets/LoadingPage'), { ssr: false })
 
 interface Props {
   userInfo: any;
