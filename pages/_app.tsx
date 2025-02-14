@@ -30,7 +30,7 @@ import { OKXWallet } from '@okwallet/aptos-wallet-adapter';
 import { gtag, install } from 'ga-gtag';
 import { GateWallet } from 'gate-plugin-wallet-adapter';
 import { useEffect } from 'react';
-import { RimoWallet } from 'rimosafe-plugin-wallet-adapter';
+// import { RimoWallet } from 'rimosafe-plugin-wallet-adapter';
 
 const isDevelopmentMode = process.env.NODE_ENV === 'development';
 
@@ -64,7 +64,7 @@ export default function App({ Component, pageProps }: AppProps) {
     new OKXWallet(),
     new MSafeWalletAdapter(),
     new GateWallet(),
-    new RimoWallet(),
+    // new RimoWallet(),
     new MartianWallet(),
     new TrustWallet(),
     new FewchaWallet(),

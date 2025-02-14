@@ -8,7 +8,7 @@ import { FewchaWalletName } from 'fewcha-plugin-wallet-adapter';
 import { PetraWalletName } from 'petra-plugin-wallet-adapter';
 import React, { useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
-import { RimoWalletName } from 'rimosafe-plugin-wallet-adapter';
+// import { RimoWalletName } from 'rimosafe-plugin-wallet-adapter';
 
 interface Props {
   isModalOpen: boolean;
@@ -22,7 +22,7 @@ export const ModalConnectWallet: React.FunctionComponent<Props> = ({ isModalOpen
     PetraWalletName,
     'Pontem Wallet',
     OKXWalletName,
-    RimoWalletName,
+    // RimoWalletName,
     MSafeWalletName,
     MartianWalletName,
     FewchaWalletName,

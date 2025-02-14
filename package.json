@@ -71,7 +71,6 @@
     "react-responsive": "^9.0.2",
     "react-slick": "^0.29.0",
     "recharts": "^2.7.2",
-    "rimosafe-plugin-wallet-adapter": "^0.0.4",
     "sass": "^1.63.6",
     "superstruct": "^1.0.3",
     "swr": "^2.2.0",
